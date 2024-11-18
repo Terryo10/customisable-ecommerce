@@ -298,7 +298,7 @@
                                 <div class="product-quantity">
                                     <input type="text" value="0">
                                 </div>
-                                <button class="add-to-cart">add to cart</button>
+                                <button class="add-to-cart">Place Order</button>
                             </div>
                             <!-- Usefull Link -->
                             <ul class="usefull-link section">

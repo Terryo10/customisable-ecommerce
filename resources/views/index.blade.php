@@ -127,7 +127,7 @@
                             <div class="action-btn fix">
                                 <!-- <a href="#" data-bs-toggle="modal"  data-bs-target="#" title="Quick View"></a> -->
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="pe-7s-look"></i>Quick view</a>
-                                <a href="#" title="Add to Cart"><i class="pe-7s-cart"></i>add to cart</a>
+                                <a href="#" title="Add to Cart"><i class="pe-7s-cart"></i>Add To Cart</a>
                             </div>
                         </div>
                         <!-- Portfolio Info -->

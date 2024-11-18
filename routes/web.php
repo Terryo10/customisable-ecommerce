@@ -9,5 +9,6 @@ Route::get('/', function () {
     return view('index');
 });
 Route::any('/orders', [OrdersController::class, 'index']);
+Route::any('/order', [OrdersController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index']);
 Route::get('/register', [RegisterController::class, 'index']);
