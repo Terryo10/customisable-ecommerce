@@ -42,7 +42,7 @@
                 <div class="col-auto">
                     <!-- logo -->
                     <div class="header-logo">
-                        <a href="index.html"><img src="template/outside/img/logo.png" alt="main logo"></a>
+                        <a href="/"><img src="template/outside/img/logo.png" alt="main logo"></a>
                     </div>
                 </div>
                 <div class="col-auto d-flex">
