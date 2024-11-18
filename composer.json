@@ -6,6 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "encore/laravel-admin": "1.*",
+        "jxlwqq/file-manager": "^1.0",
+        "laravel-admin-ext/ckeditor": "^1.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9"
     },
