@@ -4,6 +4,8 @@ namespace App\Orchid\Resources;
 
 use Orchid\Crud\Resource;
 use Orchid\Screen\TD;
+use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Sight;
 
 class SlidersResource extends Resource
 {
@@ -21,7 +23,30 @@ class SlidersResource extends Resource
      */
     public function fields(): array
     {
-        return [];
+        return [
+            \Orchid\Screen\Fields\Input::make('title')
+                ->title('Title')
+                ->required(),
+
+            \Orchid\Screen\Fields\Quill::make('description')
+                ->title('Description')
+                ->rows(5)
+                ->required(),
+
+            \Orchid\Screen\Fields\Picture::make('image')
+                ->title('Picture')
+                ->placeholder('Upload a picture')
+                ->acceptedFiles('image/*')
+                ->storage('public')
+                ->maxFiles(1)
+                ->required(),
+
+                \Orchid\Screen\Fields\Group::make([
+                    Button::make('Create Slide')
+                        ->method('save')
+                        ->icon('check'),
+                ]),
+        ];
     }
 
     /**
@@ -32,7 +57,9 @@ class SlidersResource extends Resource
     public function columns(): array
     {
         return [
-            TD::make('id'),
+            TD::make('image')->render(function ($model) {
+                return '<img src="' . $model->image . '" alt="Picture" width="50px" />';
+            }),
 
             TD::make('created_at', 'Date of creation')
                 ->render(function ($model) {
@@ -53,7 +80,14 @@ class SlidersResource extends Resource
      */
     public function legend(): array
     {
-        return [];
+        return [
+            Sight::make('id'),
+            Sight::make('title'),
+            Sight::make('description'),
+            Sight::make('image'),
+            Sight::make('created_at'),
+            Sight::make('updated_at'),
+        ];
     }
 
     /**
