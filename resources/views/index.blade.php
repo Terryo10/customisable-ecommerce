@@ -15,7 +15,7 @@
                     <div class="hero-slider-content col-sm-8 col-xs-12">
                         <h1 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">Awesome Dsr Chair</h1>
                         <p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, </p>
-                        <a href="product-details.html" class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.5s">shop now</a>
+                        <a href="#shop" class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.5s">View Shop</a>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                     <div class="hero-slider-content col-sm-8 col-xs-12">
                         <h1 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">Arc Floor Lamp</h1>
                         <p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, </p>
-                        <a href="product-details.html" class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.5s">shop now</a>
+                        <a href="#shop" class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.5s">View Shop</a>
                     </div>
                 </div>
             </div>
