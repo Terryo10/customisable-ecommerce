@@ -120,7 +120,7 @@
                         <!-- Product Image -->
                         <div class="product-img">
                             <!-- Image -->
-                            <a class="image" href="/product-details"><img src="template/outside/img/product/1.jpg" alt=""/></a>
+                            <a class="image" href="#"><img src="template/outside/img/product/1.jpg" alt=""/></a>
                             <!-- Wishlist Button -->
                             <a class="wishlist" href="#" title="Wishlist"><i class="pe-7s-like"></i></a>
                             <!-- Action Button -->
