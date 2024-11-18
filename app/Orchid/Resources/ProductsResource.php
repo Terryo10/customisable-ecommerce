@@ -3,6 +3,7 @@
 namespace App\Orchid\Resources;
 
 use Orchid\Crud\Resource;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\TD;
 
 class ProductsResource extends Resource
@@ -21,7 +22,49 @@ class ProductsResource extends Resource
      */
     public function fields(): array
     {
-        return [];
+        return [
+            \Orchid\Screen\Fields\Input::make('name')
+                ->title('Title')
+                ->required(),
+
+            \Orchid\Screen\Fields\Input::make('quantity')
+                ->title('Quantity')
+                ->type('number')
+                ->required(),
+
+            \Orchid\Screen\Fields\Quill::make('location')
+                ->title('Description')
+                ->rows(2),
+            \Orchid\Screen\Fields\Quill::make('short_description')
+                ->title('Short Description')
+                ->rows(2)
+                ->required(),
+
+            \Orchid\Screen\Fields\Quill::make('description')
+                ->title('Description')
+                ->rows(5)
+                ->required(),
+
+            \Orchid\Screen\Fields\Picture::make('feature_image')
+                ->title('Picture')
+                ->placeholder('Upload a picture')
+                ->acceptedFiles('image/*')
+                ->storage('public')
+                ->maxFiles(1)
+
+                ->required(),
+            \Orchid\Screen\Fields\Picture::make('images')
+                ->acceptedFiles('image/*')
+                ->storage('public')
+                ->maxFiles(6)
+                ->required(),
+
+            \Orchid\Screen\Fields\Group::make([
+                Button::make('Create Slide')
+                    ->method('save')
+                    ->icon('check'),
+            ]),
+        ];
     }
 
     /**
@@ -32,7 +75,9 @@ class ProductsResource extends Resource
     public function columns(): array
     {
         return [
-            TD::make('id'),
+            TD::make('feature_image')->render(function ($model) {
+                return '<img src="' . $model->feature_image . '" alt="Picture" width="50px" />';
+            }),
 
             TD::make('created_at', 'Date of creation')
                 ->render(function ($model) {
