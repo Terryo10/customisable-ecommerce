@@ -59,11 +59,11 @@ class ProductsResource extends Resource
                 ->maxFiles(6)
                 ->required(),
 
-            \Orchid\Screen\Fields\Group::make([
-                Button::make('Create Slide')
-                    ->method('save')
-                    ->icon('check'),
-            ]),
+            // \Orchid\Screen\Fields\Group::make([
+            //     Button::make('Save Product')
+            //         ->method('save')
+            //         ->icon('check'),
+            // ]),
         ];
     }
 

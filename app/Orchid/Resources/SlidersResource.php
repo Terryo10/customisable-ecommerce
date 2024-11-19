@@ -41,11 +41,11 @@ class SlidersResource extends Resource
                 ->maxFiles(1)
                 ->required(),
 
-                \Orchid\Screen\Fields\Group::make([
-                    Button::make('Create Slide')
-                        ->method('save')
-                        ->icon('check'),
-                ]),
+            // \Orchid\Screen\Fields\Group::make([
+            //     Button::make('Create Slide')
+            //         ->method('save')
+            //         ->icon('check'),
+            // ]),
         ];
     }
 
