@@ -51,6 +51,7 @@
                         <ul>
                             <li><a href="/">Home</a>
                             @if(Auth::check())
+                             <li><a href="/order">Orders</a></li>
                             <li><a href="/logout">LogOut</a>
                             @else
                                 <!-- User is not logged in -->
