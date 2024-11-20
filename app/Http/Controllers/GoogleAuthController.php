@@ -24,15 +24,15 @@ class GoogleAuthController extends Controller
         try {
             $user = Socialite::driver('google')->user();
             $create_user = User::updateOrCreate([
+                'email' => $user->getEmail(),
                 'google_id' => $user->getId()
             ], [
                 'name' => $user->getName(),
-                'email' => $user->getEmail(),
                 'avatar' => $user->getAvatar(),
                 'password' => Hash::make($user->getName() . '#' . $user->getId())
             ]);
             Auth::loginUsingId($create_user->id);
-            $token = $create_user->createToken('apiToken')->plainTextToken;
+            $token = "nfjnfou";
             return redirect("/home/$token");
         } catch (\Throwable $th) {
             throw $th;
