@@ -18,10 +18,10 @@ Route::get('/register', [RegisterController::class, 'index']);
 Route::get('/login-google', [GoogleAuthController::class, 'loginUsingGoogle']);
 Route::get('/google-callback', [GoogleAuthController::class, 'callbackFromGoogle']);
 Route::get('/check-user', [GoogleAuthController::class, 'checkUser']);
-Route::get('/logout', [GoogleAuthController::class, 'logOut']);
+// Route::get('/logout', [GoogleAuthController::class, 'logOut']);
 
 Route::middleware('auth')->group(function () {
-    Route::post('/logout', function () {
+    Route::get('/logout', function () {
         Auth::logout();
         return redirect('/');
     })->name('logout');
