@@ -53,7 +53,7 @@ class ProductsResource extends Resource
                 ->maxFiles(1)
 
                 ->required(),
-            \Orchid\Screen\Fields\Picture::make('images')
+            \Orchid\Screen\Fields\Upload::make('images')
                 ->acceptedFiles('image/*')
                 ->storage('public')
                 ->maxFiles(6)
