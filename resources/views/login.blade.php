@@ -22,7 +22,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6 col-md-10 col-12 mx-auto">
-                             <form>
+                             <form method="GET" action="/login-google">
                                 @csrf
                             
                                            <button
@@ -32,7 +32,7 @@
                                                 style="color:white;"
                                         >Login with google</button>
                                            </form>
-                             <form style="margin-top:10px">
+                             <form style="margin-top:10px" method="GET" action="/login-google">
                                 @csrf
                             
                                             <button
