@@ -7,8 +7,9 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.9",
+        "laravel/socialite": "^5.12",
         "laravel/tinker": "^2.9",
-        "orchid/crud": "^4.3",
+        "orchid/crud": "^4.3", 
         "orchid/platform": "^14.43"
     },
     "require-dev": {

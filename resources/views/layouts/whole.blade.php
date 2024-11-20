@@ -50,15 +50,15 @@
                     <nav class="main-menu">
                         <ul>
                             <li><a href="/">Home</a>
+                            <li><a href="/login">Login</a>
                             
                             </li>
-                            <li><a href="/shop">links</a>
+                            {{-- <li><a href="/shop">links</a>
                                 <ul class="sub-menu">
                                     <li><a href="/order">Orders</a></li>
                                     <li><a href="/login">Login</a></li>
-                                    <li><a href="/register">Register</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                            
                             <li><a href="/contact">Contact</a></li>
                         </ul>
@@ -66,7 +66,7 @@
                     <!-- header-search & total-cart -->
                     <div class="header-option-btns d-flex">
                         <!-- header-search -->
-                        <div class="header-search">
+                        {{-- <div class="header-search">
                             <button class="search-toggle"><i class="pe-7s-search"></i></button>
                             <div class="header-search-form">
                                 <form action="#">
@@ -74,9 +74,9 @@
                                     <button><i class="fa fa-long-arrow-right"></i></button>
                                 </form>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- header Account -->
-                        <div class="header-account">
+                        {{-- <div class="header-account">
                             <ul>
                                 <li><a href="#" class="account-toggle"><i class="pe-7s-config"></i></a>
                                     <ul class="account-menu">
@@ -87,7 +87,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                        </div>
+                        </div> --}}
                         <!-- Header Cart -->
                         <div class="header-cart">
                             <!-- Cart Toggle -->
