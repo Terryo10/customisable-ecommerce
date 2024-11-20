@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-Route::any('/orders', [OrdersController::class, 'index']);
-Route::any('/order', [OrdersController::class, 'index']);
+Route::any('/orders', [OrdersController::class, 'index'])->middleware('auth');
+Route::any('/order', [OrdersController::class, 'index'])->middleware('auth');
 Route::get('/login', [LoginController::class, 'index']);
 Route::get('/register', [RegisterController::class, 'index']);
 
