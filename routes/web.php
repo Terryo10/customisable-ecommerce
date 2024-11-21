@@ -14,8 +14,8 @@ Route::get('/', function () {
 });
 Route::any('/orders', [OrdersController::class, 'index'])->middleware('auth');
 Route::any('/order', [OrdersController::class, 'index'])->middleware('auth');
-Route::get('/login', [LoginController::class, 'index']);
-Route::get('/register', [RegisterController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
 
 Route::get('/login-google', [GoogleAuthController::class, 'loginUsingGoogle']);
 Route::get('/google-callback', [GoogleAuthController::class, 'callbackFromGoogle']);
