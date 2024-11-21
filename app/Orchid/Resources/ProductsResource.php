@@ -4,6 +4,9 @@ namespace App\Orchid\Resources;
 
 use Orchid\Crud\Resource;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Fields\Group;
+use Orchid\Screen\Fields\Input;
+use Orchid\Support\Facades\Layout;
 use Orchid\Screen\TD;
 
 class ProductsResource extends Resource
@@ -20,6 +23,17 @@ class ProductsResource extends Resource
      *
      * @return array
      */
+    public function screen(): array
+    {
+        return [
+            // Include the form fields
+            Layout::rows($this->fields()),
+
+            // Include your custom JavaScript
+            Layout::view('layouts.script'),
+        ];
+    }
+
     public function fields(): array
     {
         return [
@@ -50,20 +64,44 @@ class ProductsResource extends Resource
                 ->placeholder('Upload a picture')
                 ->acceptedFiles('image/*')
                 ->storage('public')
-                ->maxFiles(1)
+                ->maxFiles(1),
+                // ->required(),
 
-                ->required(),
             \Orchid\Screen\Fields\Upload::make('images')
                 ->acceptedFiles('image/*')
                 ->storage('public')
-                ->maxFiles(6)
-                ->required(),
+                ->maxFiles(6),
+                // ->required(),
 
             // \Orchid\Screen\Fields\Group::make([
             //     Button::make('Save Product')
             //         ->method('save')
             //         ->icon('check'),
             // ]),
+
+            // Fields for adding dynamic custom fields
+            Input::make('custom_fields')
+                ->type('hidden')
+                ->id('custom_fields_data') // Hidden field to store JSON data of custom fields
+                ->value('[]'),
+
+            Group::make([
+                Input::make('new_field_name')
+                    ->title('Field Name')
+                    ->placeholder('Enter field name'),
+
+                Input::make('new_field_value')
+                    ->title('Field Value')
+                    ->placeholder('Enter field value'),
+
+                Button::make('Add Field')
+                    ->icon('plus')
+                    ->method('customSubmit')
+                    ->parameters(['custom_param' => 'value'])
+                    ->icon('arrow-right-circle')
+                    ->id('add_field_button'), // Triggers dynamic input addition via JS
+            ])->alignEnd(),
+
         ];
     }
 
@@ -109,5 +147,22 @@ class ProductsResource extends Resource
     public function filters(): array
     {
         return [];
+    }
+
+    /**
+     * Custom method to handle form submission.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function customSubmit(\Illuminate\Http\Request $request)
+    {
+        // Perform custom actions, e.g., send data to another API or process it
+        $customFieldValue = $request->get('custom_field');
+
+        dd($customFieldValue);
+
+        // Example: Redirect to another route after processing
+        return redirect()->route('custom.route.name')->with('success', 'Data submitted successfully!');
     }
 }
