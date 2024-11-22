@@ -1,5 +1,5 @@
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
     const addFieldButton = document.getElementById('add_field_button');
     const customFieldsData = document.getElementById('custom_fields_data');
     const fieldContainer = document.createElement('div');
