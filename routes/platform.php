@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\ProductsController;
 use App\Orchid\Screens\Examples\ExampleActionsScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
@@ -32,6 +33,7 @@ use Tabuna\Breadcrumbs\Trail;
 */
 
 // Main
+Route::post('/add-product-fields', [ProductsController::class, 'addProductFields'])->name('add-product-fields');
 Route::screen('/main', PlatformScreen::class)
     ->name('platform.main');
 

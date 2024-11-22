@@ -23,6 +23,7 @@ Route::get('/google-callback', [GoogleAuthController::class, 'callbackFromGoogle
 Route::get('/check-user', [GoogleAuthController::class, 'checkUser']);
 // Route::get('/logout', [GoogleAuthController::class, 'logOut']);
 Route::post('/custom-submit', [ProductsController::class, 'handleCustomSubmit'])->name('custom.route.name');
+Route::post('/add-product-fields', [ProductsController::class, 'addProductFields'])->name('add-product-field');
 
 Route::middleware('auth')->group(function () {
     Route::get('/logout', function () {

@@ -46,9 +46,8 @@ class ProductsResource extends Resource
                 ->type('number')
                 ->required(),
 
-            \Orchid\Screen\Fields\Quill::make('location')
-                ->title('Description')
-                ->rows(2),
+            \Orchid\Screen\Fields\Input::make('location')
+                ->title('Product Location'),
             \Orchid\Screen\Fields\Quill::make('short_description')
                 ->title('Short Description')
                 ->rows(2)
@@ -67,7 +66,7 @@ class ProductsResource extends Resource
                 ->maxFiles(1),
             // ->required(),
 
-            \Orchid\Screen\Fields\Upload::make('images')
+            \Orchid\Screen\Fields\Picture::make('images')
                 ->acceptedFiles('image/*')
                 ->storage('public')
                 ->maxFiles(6),
@@ -93,6 +92,11 @@ class ProductsResource extends Resource
             TD::make('feature_image')->render(function ($model) {
                 return '<img src="' . $model->feature_image . '" alt="Picture" width="50px" />';
             }),
+
+            TD::make('name', 'Product Name')
+                ->render(function ($model) {
+                    return $model->name;
+                }),
 
             TD::make('created_at', 'Date of creation')
                 ->render(function ($model) {

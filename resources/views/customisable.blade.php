@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="{{ asset('template/outside/css/select2.min.css') }}" />
-<form>
+<form method="POST" action="{{ route('add-product-fields')}}" id="custom-fields-form">
+    @csrf
     <div class="col-md-12">
         <a href="/admin/crud/list/products-resources">Add Products</a>
         <div class="col-md-12">
@@ -11,8 +12,7 @@
                     <option></option>
                     @foreach($products as $product)
                     <option value="{{ $product->id }}">
-                        {{ $product->name }} ({{ $product->id }})
-                        {{ $product->id }}
+                        {{ $product->name }} ({{ $product->quantity }})
                     </option>
                     @endforeach
                 </select>
@@ -43,7 +43,7 @@
     </div>
     <div style="display:flex;">
         <button class="btn btn-warning" type="button" style="margin: 0px 10px" id="add_field_button">Add Field</button>
-        <button class="btn btn-success">Save Fields</button>
+        <button class="btn btn-success" id="save-fields-btn" type="submit">Save Fields</button>
     </div>
 </form>
 
@@ -52,11 +52,19 @@
 <script src="{{ asset('template/outside/js/select2.min.js') }}"></script>
 
 <script>
+    const form = document.getElementById('custom-fields-form');
     $(document).ready(function () {
         $("#products").select2({
             placeholder: "Select products",
             allowClear: true,
         });
+    });
+
+    document.getElementById('save-fields-btn').addEventListener('click', function (e) {
+    e.preventDefault();
+    // Your logic here
+
+    form.submit();
     });
    
 </script>
