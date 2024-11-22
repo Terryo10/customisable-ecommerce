@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="{{ asset('template/outside/css/select2.min.css') }}" />
-<form method="POST" action="{{ route('add-product-fields')}}" id="custom-fields-form">
+<form method="POST" action="{{ route('add-product-fields') }}" id="custom-fields-form">
     @csrf
     <div class="col-md-12">
         <a href="/admin/crud/list/products-resources">Add Products</a>
@@ -52,19 +52,12 @@
 <script src="{{ asset('template/outside/js/select2.min.js') }}"></script>
 
 <script>
-    const form = document.getElementById('custom-fields-form');
+    
     $(document).ready(function () {
         $("#products").select2({
             placeholder: "Select products",
             allowClear: true,
         });
-    });
-
-    document.getElementById('save-fields-btn').addEventListener('click', function (e) {
-    e.preventDefault();
-    // Your logic here
-
-    form.submit();
     });
    
 </script>
