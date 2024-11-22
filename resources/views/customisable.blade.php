@@ -12,12 +12,12 @@
                                 >Search and select products to add customised fields
                                 </label
                             >
-                            <div class="col-sm-9">
+                            <div class="col-md-6">
                                 <select
                                     id="products"
                                     name="products[]"
                                     multiple="multiple"
-                                    style="width: 100%"
+                                    class="form-control"
                                 >
                                     <option></option>
                                     @foreach($products as $product)
