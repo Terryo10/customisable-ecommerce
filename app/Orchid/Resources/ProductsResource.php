@@ -65,42 +65,19 @@ class ProductsResource extends Resource
                 ->acceptedFiles('image/*')
                 ->storage('public')
                 ->maxFiles(1),
-                // ->required(),
+            // ->required(),
 
             \Orchid\Screen\Fields\Upload::make('images')
                 ->acceptedFiles('image/*')
                 ->storage('public')
                 ->maxFiles(6),
-                // ->required(),
+            // ->required(),
 
             // \Orchid\Screen\Fields\Group::make([
             //     Button::make('Save Product')
             //         ->method('save')
             //         ->icon('check'),
             // ]),
-
-            // Fields for adding dynamic custom fields
-            Input::make('custom_fields')
-                ->type('hidden')
-                ->id('custom_fields_data') // Hidden field to store JSON data of custom fields
-                ->value('[]'),
-
-            Group::make([
-                Input::make('new_field_name')
-                    ->title('Field Name')
-                    ->placeholder('Enter field name'),
-
-                Input::make('new_field_value')
-                    ->title('Field Value')
-                    ->placeholder('Enter field value'),
-
-                Button::make('Add Field')
-                    ->icon('plus')
-                    ->method('customSubmit')
-                    ->parameters(['custom_param' => 'value'])
-                    ->icon('arrow-right-circle')
-                    ->id('add_field_button'), // Triggers dynamic input addition via JS
-            ])->alignEnd(),
 
         ];
     }
