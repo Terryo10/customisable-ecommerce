@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens;
 
+use App\Models\Products;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 
@@ -53,6 +54,7 @@ class PlatformScreen extends Screen
     public function layout(): iterable
     {
         return [
+            Layout::view('customisable', ['products' => Products::get()]),
             // Layout::view('platform::partials.update-assets'),
             // Layout::view('platform::partials.welcome'),
         ];
