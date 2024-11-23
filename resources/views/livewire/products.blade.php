@@ -154,7 +154,7 @@
 
                                                         <label>Quantity</label>
                                                         <input style="display: none;" type="text" wire:model="order.fields" name="fields"
-                                                            id="addedFields" />
+                                                            id="addedFields" value="[]" />
                                                         <div class="quantity-cart section">
                                                             <div class="product-quantity">
                                                                 <input wire:model="order.quantity" name="quantity"
