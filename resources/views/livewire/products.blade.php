@@ -107,7 +107,7 @@
                                                             <span> (01 Customer Review)</span>
                                                         </span>
                                                     </div>
-                                                    <form wire:submit.prevent="placeOrder">
+                                                    <form method="POST" action="{{ route('placeOrder') }}">
 
                                                         @csrf
                                                         <div>

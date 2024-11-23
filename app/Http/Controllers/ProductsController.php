@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Orders;
 use App\Models\Products;
 use App\Models\Sliders;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
@@ -21,20 +23,27 @@ class ProductsController extends Controller
         return $this->jsonSuccess(200, "Request Successfully!!", Sliders::get(), "sliders");
     }
 
-    public function addProductFields(Request $request)
+    public function placeOrder(Request $request)
     {
 
-        // Validate input
-        $validatedData = $request->validate([
-            'products' => 'required|array',
+        $product_id = $request->product_id;
+        $user_id = Auth::user()->id;
+        $fields = $request->fields;
+        $quantity = $request->quantity;
+
+        $product = Products::where('id', $product_id)->first();
+
+        $total = $product->price * $quantity;
+
+        Orders::create([
+            'product_id' => $product_id,
+            'fields' =>  json_encode($fields),
+            'user_id' => $user_id,
+            'total' => $total,
+            'status' => 'pending',
+
         ]);
 
-        // Process the data
-        // Example: Attach custom fields to products
-        foreach ($validatedData['products'] as $productId) {
-            // Save or update the fields as needed
-        }
-
-        return redirect()->back();
+        return redirect()->to('/orders');
     }
 }
