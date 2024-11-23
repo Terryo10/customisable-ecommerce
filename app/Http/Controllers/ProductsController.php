@@ -40,8 +40,8 @@ class ProductsController extends Controller
             'fields' =>  json_encode($fields),
             'user_id' => $user_id,
             'total' => $total,
+            'quantity' => $quantity,
             'status' => 'pending',
-
         ]);
 
         return redirect()->to('/orders');

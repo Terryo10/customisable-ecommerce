@@ -15,7 +15,7 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th class="pro-remove">ID</th>
+                                            <th class="pro-remove">Quantity</th>
                                             <th class="pro-thumbnail">Image</th>
                                             <th class="pro-title">Product</th>
                                             <th class="pro-price">Unit Price</th>
@@ -27,7 +27,7 @@
                                         @foreach ($orders as $order)
                                         <tr>
                                             <td class="pro-remove">
-                                                <a href="#">×</a>
+                                                <a href="#">× {{$order->quantity}}</a>
                                             </td>
                                             <td class="pro-thumbnail">
 
