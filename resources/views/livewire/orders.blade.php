@@ -46,8 +46,9 @@
                                             <td>
                                                 <a href="#">
                                                     @php
-                                                    $data = json_decode($order->fields);
-                                                    $data = json_decode($data);
+
+                                                    $data = json_decode($order->fields ?? "[]");
+                                                    $data = json_decode($data ?? "[]");
                                                     @endphp
                                                     @foreach ($data as $fild)
 
