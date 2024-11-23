@@ -61,7 +61,7 @@
                                                 <div class="tab-content mb-10">
                                                     <div class="pro-large-img tab-pane active"
                                                         id={{"pro-large-img-$product->id"}}>
-                                                        <img src="{{"/storage/$product->feature_image"}}" alt="">
+                                                        <img src="{{" /storage/$product->feature_image"}}" alt="">
                                                     </div>
 
                                                     @foreach ($product->images as $img)
@@ -79,7 +79,7 @@
                                                     <div>
                                                         <a href={{"#pro-large-img-$product->id"}}
                                                             data-bs-toggle="tab">
-                                                            <img src="{{"/storage/$img"}}" alt="" />
+                                                            <img src="{{" /storage/$img"}}" alt="" />
                                                         </a>
                                                     </div>
                                                     @endforeach
@@ -107,51 +107,65 @@
                                                             <span> (01 Customer Review)</span>
                                                         </span>
                                                     </div>
+                                                    <form wire:submit.prevent="placeOrder">
 
-                                                    <div class="short-desc section">
-                                                        <h5 class="pd-sub-title">
-                                                            Quick Overview
-                                                        </h5>
-                                                        <p>{{$product->description}}</p>
-                                                    </div>
-                                                    @php
-                                                    $productsFields = is_string($product->fields) ?
-                                                    json_decode($product->fields,
-                                                    true) : $product->fields;
-
-                                                    @endphp
-                                                    @foreach ($productsFields as $field)
-                                                    @php
-                                                    $fieldFields = json_decode($field);
-                                                    $fieldFields = json_decode($fieldFields->fields);
-                                                    $fieldFields = json_decode($fieldFields);
-                                                    @endphp
-                                                    @foreach ($fieldFields as $fild)
-
-                                                    <div class="short-desc section">
-                                                        <h5 class="pd-sub-title">
-                                                            {{$fild->name}}
-                                                        </h5>
-                                                        <p>
-                                                            <input type="text" name="{{$fild->value}}"
-                                                                class="addedFields form-control" required />
-                                                        </p>
-                                                    </div>
-
-                                                    @endforeach
-                                                    @endforeach
-
-
-
-                                                    <label>Quantity</label>
-                                                    <div class="quantity-cart section">
-                                                        <div class="product-quantity">
-                                                            <input type="text" value="0" />
+                                                        @csrf
+                                                        <div>
+                                                            @if (session()->has('message'))
+                                                            <div class="alert alert-success">
+                                                                {{ session('message') }}
+                                                            </div>
+                                                            @endif
                                                         </div>
-                                                        <button class="add-to-cart">
-                                                            Place Order
-                                                        </button>
-                                                    </div>
+                                                        <div class="short-desc section">
+                                                            <h5 class="pd-sub-title">
+                                                                Quick Overview
+                                                            </h5>
+                                                            <p>{{$product->description}}</p>
+                                                        </div>
+                                                        @php
+                                                        $productsFields = is_string($product->fields) ?
+                                                        json_decode($product->fields,
+                                                        true) : $product->fields;
+
+                                                        @endphp
+                                                        @foreach ($productsFields as $field)
+                                                        @php
+                                                        $fieldFields = json_decode($field);
+                                                        $fieldFields = json_decode($fieldFields->fields);
+                                                        $fieldFields = json_decode($fieldFields);
+                                                        @endphp
+                                                        @foreach ($fieldFields as $fild)
+
+                                                        <div class="short-desc section">
+                                                            <h5 class="pd-sub-title">
+                                                                {{$fild->name}}
+                                                            </h5>
+                                                            <p>
+                                                                <input type="text" name="{{$fild->value}}"
+                                                                    class="addedFields form-control" required />
+                                                            </p>
+                                                        </div>
+
+                                                        @endforeach
+                                                        @endforeach
+
+
+
+                                                        <label>Quantity</label>
+                                                        <input type="text" wire:model="order.fields" name="fields"
+                                                            id="addedFields" />
+                                                        <div class="quantity-cart section">
+                                                            <div class="product-quantity">
+                                                                <input wire:model="order.quantity" name="quantity"
+                                                                    type="text" value="0" />
+                                                            </div>
+                                                            <button type="submit" class="add-to-cart">
+                                                                Place Order
+                                                            </button>
+                                                        </div>
+
+                                                    </form>
 
                                                     <ul class="usefull-link section">
                                                         <li>
@@ -160,12 +174,7 @@
                                                                 to a Friend
                                                             </a>
                                                         </li>
-                                                        <li>
-                                                            <a href="#">
-                                                                <i class="pe-7s-like"></i>
-                                                                Wishlist
-                                                            </a>
-                                                        </li>
+
                                                         <li>
                                                             <a href="#">
                                                                 <i class="pe-7s-print"></i> print
@@ -212,3 +221,35 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.querySelectorAll('#addedFields').forEach((addedFieldsElement) => {
+        const currentData = JSON.parse(addedFieldsElement.value || '[]');
+        let fieldName = "";
+        let fieldValue = "";
+    
+        document.querySelectorAll('.addedFields').forEach((field) => {
+            field.addEventListener('change', (e) => {
+                fieldValue = `${e.target.value}`;
+                fieldName = `${e.target.name}`;
+    
+                if (addedFieldsElement) {
+                    // Check if the fieldName already exists in currentData
+                    const existingField = currentData.find(item => item.name === fieldName);
+    
+                    if (existingField) {
+                        // Update the value if the fieldName already exists
+                        existingField.value = fieldValue;
+                    } else {
+                        // Add a new object if the fieldName does not exist
+                        currentData.push({ name: fieldName, value: fieldValue });
+                    }
+    
+                    // Update the addedFieldsElement value
+                    addedFieldsElement.value = JSON.stringify(currentData);
+                }
+            });
+        });
+    });
+    </script>
+    
