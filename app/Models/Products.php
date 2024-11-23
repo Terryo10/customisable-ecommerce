@@ -14,9 +14,14 @@ class Products extends Model
         'images' => 'array',
     ];
 
-    protected $with = ['fields'];
+    protected $with = ['fields', 'fieldss'];
 
     public function fields()
+    {
+        return $this->hasMany(CustomizableFields::class, 'product_id', 'id');
+    }
+
+    public function fieldss()
     {
         return $this->hasMany(CustomizableFields::class, 'product_id', 'id');
     }

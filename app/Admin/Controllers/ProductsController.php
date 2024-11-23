@@ -29,7 +29,9 @@ class ProductsController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('feature_image', __('Feature image'))->image();
         $grid->column('name', __('Name'));
-        $grid->column('images', __('Images'));
+        $grid->column('images', __('Images'))->display(function ($value) {
+            return json_encode($value);
+        });
         $grid->column('description', __('Description'));
         $grid->column('short_description', __('Short description'));
         $grid->column('location', __('Location'));
@@ -54,7 +56,9 @@ class ProductsController extends AdminController
         $show->field('id', __('Id'));
         $show->field('feature_image', __('Feature image'))->image();
         $show->field('name', __('Name'));
-        $show->field('images', __('Images'));
+        // $show->field('images', __('Images'))->display(function ($value) {
+        //     return json_encode($value);
+        // });
         $show->field('description', __('Description'));
         $show->field('short_description', __('Short description'));
         $show->field('location', __('Location'));
@@ -62,6 +66,16 @@ class ProductsController extends AdminController
         $show->field('price', __('Price'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
+
+        $show->fieldss('Product Fields', function ($fields) {
+
+            $fields->resource('/admin/fields');
+            $fields->id();
+            $fields->fields();
+            $fields->created_at();
+            $fields->updated_at();
+        });
+
 
         return $show;
     }
