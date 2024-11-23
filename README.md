@@ -1,4 +1,4 @@
-# Gene Piki Laravel + React Music App
+# SlimRiff App
 
 Back-end 
 - [x] Laravel 10 + PHP 8
