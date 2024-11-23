@@ -153,8 +153,12 @@
 
 
                                                         <label>Quantity</label>
-                                                        <input style="display: none;" type="text" wire:model="order.fields" name="fields"
-                                                            id="addedFields" value="[]" />
+                                                        <input style="display: none;" type="text"
+                                                            wire:model="order.product_id" name="product_id"
+                                                            value={{"$product->id"}} />
+                                                        <input style="display: none;" type="text"
+                                                            wire:model="order.fields" name="fields" id="addedFields"
+                                                            value="[]" />
                                                         <div class="quantity-cart section">
                                                             <div class="product-quantity">
                                                                 <input wire:model="order.quantity" name="quantity"
@@ -251,5 +255,4 @@
             });
         });
     });
-    </script>
-    
+</script>
