@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Orders as ModelsOrders;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Orders extends Component
@@ -11,6 +12,7 @@ class Orders extends Component
 
     public function render()
     {
-        return view('livewire.orders', ['title' => 'Orders', 'orders' => ModelsOrders::get()])->extends('app');
+        $user_id = Auth::user()->id;
+        return view('livewire.orders', ['title' => 'Orders', 'orders' => ModelsOrders::where('user_id', $user_id)->get()])->extends('app');
     }
 }

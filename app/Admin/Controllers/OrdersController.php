@@ -71,7 +71,14 @@ class OrdersController extends AdminController
 
         $form->number('quantity', __('Quantity'));
         $form->number('total', __('Total'));
-        $form->text('status', __('Status'))->default('pending');
+        $form->select('status', __('Status'))->options([
+            'pending' => 'Pending',
+            'processed' => 'Processed',
+            'shipped' => 'Shipped',
+            'paid' => 'Product Is Paid',
+            'delivered' => 'Delivered',
+            'cancelled' => 'Cancelled',
+        ])->default('pending');
         $form->number('product_id', __('Product id'));
         $form->number('user_id', __('User id'));
 
