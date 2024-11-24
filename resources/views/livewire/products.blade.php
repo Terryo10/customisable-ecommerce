@@ -47,7 +47,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="block relative" id={{"content_$product->id"}}>
+                    <div class="block relative">
                         <div class="modal fade" id={{"quickViewModal$product->id"}} tabindex="-1">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
@@ -55,7 +55,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" id={{"content_$product->id"}}>
                                         <div class="row">
                                             <div class="col-xl-5 col-md-6 col-12 mb-40">
                                                 <div class="tab-content mb-10">
@@ -257,30 +257,28 @@
     });
 </script>
 
-<!-- Include jsPDF -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <!-- Include html2canvas -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
 
 <script>
     document.querySelectorAll('#download').forEach((btn)=>{
 btn.addEventListener('click', async () => {
    let productId = btn.getAttribute('data-target');
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF();
 
-            // Get the content of the div
-            const content = document.getElementById(`#content${productId}`);
 
-            // Use the library's html method to add the content 
-            await pdf.html(content, {
-                callback: (doc) => {
-                    // Save the PDF
-                    doc.save('content.pdf');
-                },
-                x: 10,
-                y: 10,
-            });
+   var doc = new jsPDF(); 
+var specialElementHandlers = { 
+    '#editor': function (element, renderer) { 
+        return true; 
+    } 
+};
+ 
+    doc.fromHTML($(`#content_${productId}`).html(), 15, 15, { 
+        'width': 190, 
+            'elementHandlers': specialElementHandlers 
+    }); 
+    doc.save('sample-page.pdf'); 
+
         });
     })
 </script>
