@@ -47,7 +47,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="block relative">
+                    <div class="block relative" id={{"content_$product->id"}}>
                         <div class="modal fade" id={{"quickViewModal$product->id"}} tabindex="-1">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
@@ -179,7 +179,7 @@
                                                             </a>
                                                         </li>
 
-                                                        <li>
+                                                        <li id="download" data-target="{{$product->id}}">
                                                             <a href="#">
                                                                 <i class="pe-7s-print"></i> print
                                                             </a>
@@ -255,4 +255,32 @@
             });
         });
     });
+</script>
+
+<!-- Include jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- Include html2canvas -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+    document.querySelectorAll('#download').forEach((btn)=>{
+btn.addEventListener('click', async () => {
+   let productId = btn.getAttribute('data-target');
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+
+            // Get the content of the div
+            const content = document.getElementById(`#content${productId}`);
+
+            // Use the library's html method to add the content 
+            await pdf.html(content, {
+                callback: (doc) => {
+                    // Save the PDF
+                    doc.save('content.pdf');
+                },
+                x: 10,
+                y: 10,
+            });
+        });
+    })
 </script>
