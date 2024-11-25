@@ -62,26 +62,23 @@
                                         <div class="row">
                                             <div class="col-xl-5 col-md-6 col-12 mb-40">
                                                 <div class="tab-content mb-10">
-                                                    <div class="pro-large-img tab-pane active"
-                                                        id={{"pro-large-img-$product->id"}}>
+                                                    <div class="pro-large-img tab-pane active" id={{"pro-large-img-1"}}>
                                                         <img src="{{" /storage/$product->feature_image"}}" alt="">
                                                     </div>
 
-                                                    @foreach ($product->images as $img)
-                                                    <div class="pro-large-img tab-pane" id={{"pro-large-img-$product->
-                                                        id"}}>
+                                                    @foreach ($product->images as $key => $img)
+                                                    <div class="pro-large-img tab-pane" id="{{" pro-large-img-$key"}}">
                                                         <img src={{"/storage/$img"}} alt="" />
                                                     </div>
                                                     @endforeach
                                                 </div>
 
                                                 <div class="pro-thumb-img-slider nav">
-                                                    @foreach ($product->images as $img)
+                                                    @foreach ($product->images as $key => $img)
 
 
                                                     <div>
-                                                        <a href={{"#pro-large-img-$product->id"}}
-                                                            data-bs-toggle="tab">
+                                                        <a href={{"#pro-large-img-$key"}} data-bs-toggle="tab">
                                                             <img src="{{" /storage/$img"}}" alt="" />
                                                         </a>
                                                     </div>
