@@ -52,10 +52,15 @@ class GoogleAuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
-        return response()->json([
-            'status' => 200,
-            'message' => 'Successfully logged out',
-        ]);
+        Auth::logout();
+        return redirect()->back();
     }
+    // public function logout(Request $request)
+    // {
+    //     $request->user()->tokens()->delete();
+    //     return response()->json([
+    //         'status' => 200,
+    //         'message' => 'Successfully logged out',
+    //     ]);
+    // }
 }

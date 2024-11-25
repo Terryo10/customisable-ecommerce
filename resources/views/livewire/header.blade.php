@@ -18,7 +18,8 @@
                             <li><a href="/logout">LogOut</a>
                                 @else
                                 <!-- User is not logged in -->
-                            <li><a href="/login-google">Login with Google</a>
+                            <li><a href="#login" data-bs-toggle="modal"
+                                data-bs-target={{"#quickViewModalLogin"}}>Login with Google</a>
                                 @endif
 
 
@@ -36,4 +37,5 @@
         </div>
     </header>
     <livewire:contact-modal>
+    <livewire:login-modal>
 </div>

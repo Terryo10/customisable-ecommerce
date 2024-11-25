@@ -16,6 +16,8 @@
   <!-- All CSS Files -->
   <!-- Bootstrap css -->
   <link rel="stylesheet" href="{{ asset('template/outside/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('template/outside/css/bootstrap.bundle.min.js') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('template/outside/css/bootstrap.min.css') }}"> --}}
   <!-- Icon Font -->
   <link rel="stylesheet" href="{{ asset('template/outside/css/font-awesome.min.css') }}">
   <link rel="stylesheet" href="{{ asset('template/outside/css/pe-icon-7-stroke.css') }}">

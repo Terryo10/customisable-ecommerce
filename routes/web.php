@@ -22,6 +22,7 @@ Route::get('/product/{id}', HomePage::class);
 Route::get('/orders', Orders::class)->middleware('auth');
 Route::post('/place-order', [ProductsController::class, 'placeOrder'])->middleware('auth')->name('placeOrder');
 Route::get('/login-google', [GoogleAuthController::class, 'loginUsingGoogle'])->name('login');
+Route::get('/logout', [GoogleAuthController::class, 'logout'])->middleware('auth')->name('logout');
 Route::get('/google-callback', [GoogleAuthController::class, 'callbackFromGoogle']);
 Route::get('/check-user', [GoogleAuthController::class, 'checkUser']);
 Route::get('/{any}',  HomePage::class)->where('any', '^(?!api).*');
