@@ -5,12 +5,12 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3>Contact US</h3>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="
-                            margin-right: 10px;">
-                            Close
-                        </button>
+                        <span type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="
+                                margin-right: 10px;">
+
+                            X</span>
                     </div>
-                    <div class="modal-body"> 
+                    <div class="modal-body">
                         <div>
                             @if (session()->has('message'))
                             <div class="alert alert-success">

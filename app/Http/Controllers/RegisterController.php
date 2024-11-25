@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subscriptions;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,9 +32,21 @@ class RegisterController extends Controller
         ]);
 
         Auth::loginUsingId($create_user->id);
-        
+
         session()->flash('message', "Account created successfull");
 
+        return redirect()->back();
+    }
+    public function subscribe(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|min:6',
+        ]);
+        $subscribe_user = Subscriptions::create([
+            'email' => $request->email,
+        ]);
+
+        session()->flash('message', "Your email have been subscribed successfull");
         return redirect()->back();
     }
 }

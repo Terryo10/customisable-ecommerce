@@ -30,11 +30,12 @@
                 <!-- Footer Widget -->
                 <div class="footer-widget col-lg-3 col-md-6 col-12 mb-40">
                     <h5 class="widget-title">SIGN UP FOR OUR AWESOME NEWS</h5>
-                    <form action="/" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
-                        class="sunscribe-form validate" target="_blank" novalidate>
+                    <form action="/subscribe" method="post" name="mc-embedded-subscribe-form"
+                        class="sunscribe-form validate">
+                        @csrf
                         <div id="mc_embed_signup_scroll">
                             <label for="mce-EMAIL" class="d-lg-none">Subscribe to our mailing list</label>
-                            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL"
+                            <input type="email" value="" name="email" class="email" id="mce-EMAIL"
                                 placeholder="Email Address" required>
                             <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                             <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"

@@ -19,4 +19,5 @@ Route::group([
     $router->resource('orders', OrdersController::class);
     $router->resource('sliders', SlidersController::class);
     $router->resource('transactions', TransactionsController::class);
+    $router->resource('subscriptions', SubscriptionsController::class);
 });

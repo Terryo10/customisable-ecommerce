@@ -29,6 +29,7 @@ Route::post('/place-order', [ProductsController::class, 'placeOrder'])->middlewa
 Route::get('/login-google', [GoogleAuthController::class, 'loginUsingGoogle'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register']);
+Route::post('/subscribe', [RegisterController::class, 'subscribe']);
 Route::get('/logout', [GoogleAuthController::class, 'logout'])->middleware('auth')->name('logout');
 Route::get('/google-callback', [GoogleAuthController::class, 'callbackFromGoogle']);
 Route::get('/check-user', [GoogleAuthController::class, 'checkUser']);

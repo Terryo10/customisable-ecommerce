@@ -52,8 +52,10 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close">Close</button>
+                                        <span type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="
+                                        margin-right: 10px;">
+        
+                                        X</span>
                                     </div>
                                     <div class="modal-body" id={{"content_$product->id"}}>
                                         <div class="row">

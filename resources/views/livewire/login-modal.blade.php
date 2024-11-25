@@ -16,10 +16,10 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h3>SlimRiff</h3>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="
+                            <span type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="
                                 margin-right: 10px;">
 
-                                Close</button>
+                                X</span>
                         </div>
                         <div class="modal-body" style="overflow: hidden scroll;">
 
@@ -41,16 +41,16 @@
                                         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                                             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                                 <li class="nav-item" role="presentation">
-                                                    <button class="nav-link active" id="pills-home-tab"
+                                                    <span class="nav-link active" id="pills-home-tab"
                                                         data-bs-toggle="pill" data-bs-target="#pills-home" type="button"
                                                         role="tab" aria-controls="pills-home" aria-selected="true">Sign
-                                                        In</button>
+                                                        In</span>
                                                 </li>
                                                 <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="pills-profile-tab"
+                                                    <span class="nav-link" id="pills-profile-tab"
                                                         data-bs-toggle="pill" data-bs-target="#pills-profile"
                                                         type="button" role="tab" aria-controls="pills-profile"
-                                                        aria-selected="false">Sign Up</button>
+                                                        aria-selected="false">Register now</span>
                                                 </li>
 
                                             </ul>
