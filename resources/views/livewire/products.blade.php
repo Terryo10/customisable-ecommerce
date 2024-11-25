@@ -125,7 +125,7 @@
                                                         </div>
                                                         @php
                                                         $productsFields = is_string($product->fields) ?
-                                                        json_decode($product->fields,
+                                                        json_decode($product->fields == "null" ? "[]": $product->fields,
                                                         true) : $product->fields;
 
                                                         @endphp
@@ -133,9 +133,11 @@
                                                         @php
                                                         $fieldFields = json_decode($field);
                                                         $fieldFields = json_decode($fieldFields->fields);
-                                                        $fieldFields = json_decode($fieldFields);
+                                                        $fieldFields = json_decode($fieldFields == "null" ? "[]":
+                                                        $fieldFields);
+                                                        $newFieldsSet = $fieldFields == null ? [] : $fieldFields;
                                                         @endphp
-                                                        @foreach ($fieldFields as $fild)
+                                                        @foreach ($newFieldsSet as $fild)
 
                                                         <div class="short-desc section">
                                                             <h5 class="pd-sub-title">

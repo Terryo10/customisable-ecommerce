@@ -3,8 +3,8 @@
     @csrf
     <div class="col-md-12">
         <a href="/admin/products/create">Add Products</a>
-        <div class="col-md-12">
-            <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
                 <label for="inputPassword3" class="col-sm-12 control-label">Search and select products to add customised
                     fields
                 </label>
@@ -35,15 +35,15 @@
 
             <div id="custom_fields_data" class="col-md-12" style="margin: 10px 0px">
 
-                <input type="text" class="form-control" id="customAddedFields" name="fields" placeholder="Added Fields"
-                    disabled />
+                <input type="text" class="form-control" id="customAddedFields" name="fields"
+                    placeholder="Added Fields" />
             </div>
 
         </div>
     </div>
     <div style="display:flex;" class="col-md-12">
         <button class="btn btn-warning" type="button" style="margin: 0px 10px" id="add_field_button">Add Field</button>
-        <button class="btn btn-success" id="save-fields-btn" type="submit">Save Fields</button>
+        <button class="btn btn-success" id="save-fields-btn" type="submit">Submit Fields</button>
     </div>
 </form>
 
