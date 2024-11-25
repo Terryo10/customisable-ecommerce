@@ -20,7 +20,7 @@ background: #eee;
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="
                                 margin-right: 10px;">
 
-                            </button>
+                            Close</button>
                         </div>
                         <div class="modal-body">
                            
