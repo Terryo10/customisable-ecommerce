@@ -60,7 +60,7 @@ class LoginController extends Controller
 
             return redirect()->back();
         } else {
-            return redirect()->back();
+            return redirect()->to('/login');
         }
     }
 }

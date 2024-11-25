@@ -52,10 +52,11 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <span type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="
+                                        <span type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                            style="
                                         margin-right: 10px;">
-        
-                                        X</span>
+
+                                            X</span>
                                     </div>
                                     <div class="modal-body" id={{"content_$product->id"}}>
                                         <div class="row">
@@ -265,6 +266,24 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
 
 <script>
+    if(window.location.pathname.includes('login')){
+        window.document.addEventListener('DOMContentLoaded', ()=>{
+
+        document.querySelectorAll(`.loginModal`).forEach((btn)=>{
+                btn.click();
+            });
+
+        });
+    }
+    if(window.location.pathname.includes('register')){
+        window.document.addEventListener('DOMContentLoaded', ()=>{
+
+        document.querySelectorAll(`.loginModal`).forEach((btn)=>{
+                btn.click();
+            });
+
+        });
+    }
     if(window.location.pathname.includes('product')){
         let url = window.location.pathname;
         const param_id = url.substring(url.lastIndexOf("/") + 1);
