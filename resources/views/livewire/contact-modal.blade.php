@@ -7,10 +7,74 @@
                         <h3>Contact US</h3>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="
                             margin-right: 10px;">
-
+                            Close
                         </button>
                     </div>
-                    <div class="modal-body"></div>
+                    <div class="modal-body">
+                        <div>
+                            @if (session()->has('message'))
+                            <div class="alert alert-success">
+                                {{ session('message') }}
+                            </div>
+                            @endif
+                        </div>
+
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+
+                        <section class="vh-100">
+                            <div class="container py-5 h-100">
+                                <div class="row d-flex align-items-center justify-content-center h-100">
+                                    <div class="col-md-8 col-lg-7 col-xl-6">
+                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                                            class="img-fluid" alt="Phone image">
+                                    </div>
+                                    <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                                        <form method="POST" action="/login">
+                                            @csrf
+                                            <!-- Email input -->
+                                            <div data-mdb-input-init class="form-outline mb-4">
+                                                <input type="text" id="form1Example13" name="subject"
+                                                    class="form-control form-control-lg" />
+                                                <label class="form-label" for="form1Example13">Email subject</label>
+                                            </div>
+
+                                            <div data-mdb-input-init class="form-outline mb-4">
+                                                <input type="email" id="form1Example13" name="email"
+                                                    class="form-control form-control-lg" />
+                                                <label class="form-label" for="form1Example13">Email address</label>
+                                            </div>
+
+                                            <div data-mdb-input-init class="form-outline mb-4">
+                                                <input type="password" id="form1Example23" name="password"
+                                                    class="form-control form-control-lg" />
+                                                <label class="form-label" for="form1Example23">Phone Number</label>
+                                            </div>
+                                            <div data-mdb-input-init class="form-outline mb-4">
+                                                <textarea id="form1Example23" name="message" rows="4"
+                                                    placeholder="Enter your message"
+                                                    class="form-control form-control-lg"></textarea>
+                                                <label class="form-label" for="form1Example23">Message</label>
+                                            </div>
+
+                                            <!-- Submit button -->
+                                            <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                                                class="btn btn-primary btn-lg btn-block">Send Us Message</button>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
                 </div>
             </div>
         </div>
