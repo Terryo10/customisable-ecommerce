@@ -23,10 +23,10 @@
                             <!-- Wishlist Button -->
                             <a class="wishlist" href="#" title="Wishlist"><i class="pe-7s-like"></i></a>
                             <!-- Action Button -->
-                            <div class="action-btn fix">
+                            <div class="{{" action-btn fix"}}">
                                 <!-- <a href="#" data-bs-toggle="modal"  data-bs-target="#" title="Quick View"></a> -->
                                 <a href="#" data-bs-toggle="modal" data-bs-target={{"#quickViewModal$product->id"}}><i
-                                        class="pe-7s-look"></i>Quick view</a>
+                                        class="{{" pe-7s-look product-btn-$product->id"}}"></i>Quick view</a>
 
                             </div>
                         </div>
@@ -263,27 +263,37 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
 
 <script>
+    if(window.location.pathname.includes('product')){
+        let url = window.location.pathname;
+        const param_id = url.substring(url.lastIndexOf("/") + 1);
+        window.document.addEventListener('DOMContentLoaded', ()=>{
+            document.querySelectorAll(`.product-btn-${param_id}`).forEach((btn)=>{
+                btn.click();
+            });
+        })
+        
+    }
     document.querySelectorAll('#share-btn').forEach((btn)=>{
         btn.addEventListener('click', async () => {
    let productId = btn.getAttribute('data-target');
          let location = window.location + `product/${productId}`;
 
 
-let ptext = window.document.createElement('p');
-ptext.innerHTML = location;
-document.body.appendChild(ptext);
+        let ptext = window.document.createElement('p');
+        ptext.innerHTML = location;
+        document.body.appendChild(ptext);
 
 
-window.getSelection().selectAllChildren(ptext);
-  document.execCommand("copy");
-  alert(`Copied! ✅${location}`);
-  setTimeout(() => {
-      ptext.remove();
-  }, 1000);
+        window.getSelection().selectAllChildren(ptext);
+        document.execCommand("copy");
+        alert(`Copied! ✅${location}`);
+        setTimeout(() => {
+            ptext.remove();
+        }, 1000);
 
-        });
+                });
 
-    });
+            });
     document.querySelectorAll('#download').forEach((btn)=>{
 btn.addEventListener('click', async () => {
    let productId = btn.getAttribute('data-target');
