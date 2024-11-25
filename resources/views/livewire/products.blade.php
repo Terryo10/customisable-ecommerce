@@ -174,15 +174,15 @@
                                                     </form>
 
                                                     <ul class="usefull-link section">
-                                                        <li>
-                                                            <a href="#">
-                                                                <i class="pe-7s-mail"></i> Email
+                                                        <li id="share-btn" data-target="{{$product->id}}">
+                                                            <a href="#email">
+                                                                <i class="pe-7s-mail"></i> Share
                                                                 to a Friend
                                                             </a>
                                                         </li>
 
                                                         <li id="download" data-target="{{$product->id}}">
-                                                            <a href="#">
+                                                            <a href="#print">
                                                                 <i class="pe-7s-print"></i> print
                                                             </a>
                                                         </li>
@@ -190,16 +190,16 @@
 
                                                     <div class="share-icons section">
                                                         <span>share :</span>
-                                                        <a href="#">
+                                                        <a href="#product">
                                                             <i class="fa fa-facebook"></i>
                                                         </a>
-                                                        <a href="#">
+                                                        <a href="#product">
                                                             <i class="fa fa-twitter"></i>
                                                         </a>
-                                                        <a href="#">
+                                                        <a href="#product">
                                                             <i class="fa fa-instagram"></i>
                                                         </a>
-                                                        <a href="#">
+                                                        <a href="#product">
                                                             <i class="fa fa-pinterest"></i>
                                                         </a>
                                                     </div>
@@ -263,6 +263,27 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
 
 <script>
+    document.querySelectorAll('#share-btn').forEach((btn)=>{
+        btn.addEventListener('click', async () => {
+   let productId = btn.getAttribute('data-target');
+         let location = window.location + `product/${productId}`;
+
+
+let ptext = window.document.createElement('p');
+ptext.innerHTML = location;
+document.body.appendChild(ptext);
+
+
+window.getSelection().selectAllChildren(ptext);
+  document.execCommand("copy");
+  alert(`Copied! ✅${location}`);
+  setTimeout(() => {
+      ptext.remove();
+  }, 1000);
+
+        });
+
+    });
     document.querySelectorAll('#download').forEach((btn)=>{
 btn.addEventListener('click', async () => {
    let productId = btn.getAttribute('data-target');

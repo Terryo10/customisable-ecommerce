@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomePage::class);
+Route::get('/product/{id}', HomePage::class);
+Route::get('/{any}',  HomePage::class)->where('any', '^(?!api).*');
 Route::get('/orders', Orders::class)->middleware('auth');
 Route::post('/place-order', [ProductsController::class, 'placeOrder'])->middleware('auth')->name('placeOrder');
 Route::get('/login-google', [GoogleAuthController::class, 'loginUsingGoogle'])->name('login');
