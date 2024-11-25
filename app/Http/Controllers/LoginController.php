@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -44,16 +45,22 @@ class LoginController extends Controller
     }
 
 
-    public function register(Request $request)
+    public function login(Request $request)
     {
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'first_name' => 'required|min:3',
-                'email' => 'required|min:6',
-                'password' => 'required|min:3',
-                'confirm_password' => 'required|same:password',
-            ]
-        );
+        $request->validate([
+            'email' => 'required|min:6',
+            'password' => 'required|min:3',
+        ]);
+
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            session()->flash('message', "Login was successfull");
+
+            return redirect()->back();
+        } else {
+            return redirect()->back();
+        }
     }
 }
