@@ -66,7 +66,7 @@ background: #eee;
                                           Continue with Facebook
                                           {{-- <i class="fab fa-facebook-f me-2"></i>Continue with Facebook --}}
                                         </a>
-                                        <a data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!"
+                                        <a data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="/login-google"
                                           role="button">
                                           Continue with Google</a>
                               
