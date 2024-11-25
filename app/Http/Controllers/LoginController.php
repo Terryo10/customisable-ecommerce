@@ -32,8 +32,6 @@ class LoginController extends Controller
             'created_at' => Carbon::now()
         ]);
 
-        // dd($token);
-
         Mail::send('emails.forgotPassword', ['token' => $token, 'email' => $request->email], function ($message) use ($request) {
             $message->to($request->email);
             $message->subject('Reset Password');
