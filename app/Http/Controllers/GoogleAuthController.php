@@ -22,7 +22,10 @@ class GoogleAuthController extends Controller
     public function callbackFromGoogle(Request $request)
     {
         try {
-            $user = Socialite::driver('google')->stateless()->user();
+            $user = Socialite::driver('google')
+                ->stateless()
+                ->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))
+                ->user();
             $create_user = User::updateOrCreate([
                 'google_id' => $user->getId()
             ], [
@@ -55,12 +58,4 @@ class GoogleAuthController extends Controller
         Auth::logout();
         return redirect()->back();
     }
-    // public function logout(Request $request)
-    // {
-    //     $request->user()->tokens()->delete();
-    //     return response()->json([
-    //         'status' => 200,
-    //         'message' => 'Successfully logged out',
-    //     ]);
-    // }
 }
