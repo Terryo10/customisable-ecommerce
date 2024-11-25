@@ -181,11 +181,11 @@
                                                             </a>
                                                         </li>
 
-                                                        <li id="download" data-target="{{$product->id}}">
+                                                        {{-- <li id="download" data-target="{{$product->id}}">
                                                             <a href="#print">
                                                                 <i class="pe-7s-print"></i> print
                                                             </a>
-                                                        </li>
+                                                        </li> --}}
                                                     </ul>
 
                                                     <div class="share-icons section">
@@ -199,9 +199,7 @@
                                                         <a href="#product">
                                                             <i class="fa fa-instagram"></i>
                                                         </a>
-                                                        <a href="#product">
-                                                            <i class="fa fa-pinterest"></i>
-                                                        </a>
+
                                                     </div>
                                                 </div>
                                             </div>
