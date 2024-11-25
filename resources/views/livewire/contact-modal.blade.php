@@ -10,7 +10,7 @@
                             Close
                         </button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body"> 
                         <div>
                             @if (session()->has('message'))
                             <div class="alert alert-success">
