@@ -30,7 +30,7 @@
                 <!-- Footer Widget -->
                 <div class="footer-widget col-lg-3 col-md-6 col-12 mb-40">
                     <h5 class="widget-title">SIGN UP FOR OUR AWESOME NEWS</h5>
-                    <form action="/subscribe" method="post" name="mc-embedded-subscribe-form"
+                    <form action="/subscribe" method="POST" name="mc-embedded-subscribe-form"
                         class="sunscribe-form validate">
                         @csrf
                         <div id="mc_embed_signup_scroll">
