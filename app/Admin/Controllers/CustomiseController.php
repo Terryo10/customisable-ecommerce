@@ -7,6 +7,7 @@ use App\Models\CustomizableFields;
 use App\Models\Products;
 use App\Models\User;
 use Carbon\Carbon;
+use Encore\Admin\Admin;
 use Encore\Admin\Controllers\Dashboard;
 
 use Encore\Admin\Layout\Column;
@@ -28,6 +29,7 @@ class CustomiseController extends Controller
                     // Assuming you have a Blade view at resources/views/admin/messenger.blade.php
                     $column->append(view('customisable', ['products' => $products]));
                 });
+                Admin::js(asset('template/outside/js/custom.js'));
             });
     }
 
