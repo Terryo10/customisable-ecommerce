@@ -29,12 +29,13 @@ class ProductsController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('feature_image', __('Feature image'))->image();
         $grid->column('name', __('Name'));
-        $grid->column('images', __('Images'))->display(function ($value) {
-            return json_encode($value);
-        });
+        $grid->column('images', __('Images'));
+        // $grid->column('images', __('Images'))->display(function ($value) {
+        //     return json_encode($value);
+        // });
         $grid->column('description', __('Description'));
-        $grid->column('short_description', __('Short description'));
-        $grid->column('location', __('Location'));
+        // $grid->column('short_description', __('Short description'));
+        // $grid->column('location', __('Location'));
         $grid->column('quantity', __('Quantity'));
         $grid->column('price', __('Price'));
         $grid->column('created_at', __('Created at'));
@@ -60,8 +61,8 @@ class ProductsController extends AdminController
         //     return json_encode($value);
         // });
         $show->field('description', __('Description'));
-        $show->field('short_description', __('Short description'));
-        $show->field('location', __('Location'));
+        // $show->field('short_description', __('Short description'));
+        // $show->field('location', __('Location'));
         $show->field('quantity', __('Quantity'));
         $show->field('price', __('Price'));
         $show->field('created_at', __('Created at'));
@@ -89,14 +90,14 @@ class ProductsController extends AdminController
     {
         $form = new Form(new Products());
 
-        $form->image('feature_image', __('Feature image'));
-        $form->textarea('name', __('Name'));
-        $form->multipleImage('images', __('Images'));
-        $form->textarea('description', __('Description'));
-        $form->textarea('short_description', __('Short description'));
-        $form->textarea('location', __('Location'));
-        $form->number('quantity', __('Quantity'));
-        $form->number('price', __('Price'));
+        $form->image('feature_image', __('Feature image'))->required();
+        $form->textarea('name', __('Name'))->required();
+        $form->multipleImage('images', __('Images'))->required();
+        $form->textarea('description', __('Description'))->required();
+        // $form->textarea('short_description', __('Short description'));
+        // $form->textarea('location', __('Location'));
+        $form->number('quantity', __('Quantity'))->required();
+        $form->number('price', __('Price'))->required();
 
         return $form;
     }

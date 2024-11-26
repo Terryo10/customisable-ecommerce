@@ -18,14 +18,17 @@
                     <div class="product-item text-center">
                         <!-- Product Image -->
                         <div class="product-img">
-                            <!-- Image -->
-                            <a class="image" href="#"><img src="/storage/{{$product->feature_image}}" alt="" /></a>
+                            <a href="#!" data-bs-toggle="modal" data-bs-target={{"#quickViewModal$product->id"}}>
+                                    <!-- Image -->
+                                    <img src="/storage/{{$product->feature_image}}" alt="{{" $product->description"}}"
+                                    />
+                            </a>
                             <!-- Wishlist Button -->
-                            <a class="wishlist" href="#" title="Wishlist"><i class="pe-7s-like"></i></a>
+                            {{-- <a class="wishlist" href="#!" title="Wishlist"><i class="pe-7s-like"></i></a> --}}
                             <!-- Action Button -->
                             <div class="{{" action-btn fix"}}">
                                 <!-- <a href="#" data-bs-toggle="modal"  data-bs-target="#" title="Quick View"></a> -->
-                                <a href="#" data-bs-toggle="modal" data-bs-target={{"#quickViewModal$product->id"}}><i
+                                <a href="#!" data-bs-toggle="modal" data-bs-target={{"#quickViewModal$product->id"}}><i
                                         class="{{" pe-7s-look product-btn-$product->id"}}"></i>Quick view</a>
 
                             </div>

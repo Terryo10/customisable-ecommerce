@@ -65,9 +65,9 @@ class SlidersController extends AdminController
     {
         $form = new Form(new Sliders());
 
-        $form->image('image', __('Image'));
-        $form->textarea('title', __('Title'));
-        $form->textarea('description', __('Description'));
+        $form->image('image', __('Image'))->required();
+        $form->textarea('title', __('Title'))->required();
+        $form->textarea('description', __('Description'))->required();
 
         return $form;
     }
