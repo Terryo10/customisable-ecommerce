@@ -29,6 +29,11 @@ class ProductReviewController extends Controller
      */
     public function store(Request $request, $product_id)
     {
+        $request->validate([
+            'rating' => 'required',
+            'review' => 'required|min:6',
+        ]);
+
         ProductReviews::create([
             'user_id' => Auth::user()->id,
             'review' => $request->review,
