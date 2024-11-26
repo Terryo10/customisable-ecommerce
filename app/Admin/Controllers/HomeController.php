@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Orders;
+use Encore\Admin\Admin;
 use Encore\Admin\Controllers\Dashboard;
 use Encore\Admin\Layout\Column;
 use Encore\Admin\Layout\Content;
@@ -26,7 +27,54 @@ class HomeController extends Controller
                     foreach ($data as $key => $value) {
                         $orders[$value->month - 1] = $value->count;
                     }
-                    $column->append(view('admin.chart')->with('orders', $orders));
+                    $column->append(view('admin.chart', ['title'=> 'Orders'])->with('orders', $orders));
+                    Admin::js(asset('template/outside/js/chart.js'));
+                    Admin::script("
+    const labels = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+    ];
+    
+    var array = " . json_encode($orders) . ";
+    
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Orders',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: array,
+        }]
+    };
+    
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+    
+    const myChart = new Chart(
+        document.getElementById('myChart2'),
+        config
+    );
+");
+
                 });
             });
     }

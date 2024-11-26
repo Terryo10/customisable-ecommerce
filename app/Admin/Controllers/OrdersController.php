@@ -69,8 +69,8 @@ class OrdersController extends AdminController
     {
         $form = new Form(new Orders());
 
-        $form->number('quantity', __('Quantity'));
-        $form->number('total', __('Total'));
+        $form->number('quantity', __('Quantity'))->readonly();
+        $form->number('total', __('Total'))->readonly();
         $form->select('status', __('Status'))->options([
             'pending' => 'Pending',
             'processed' => 'Processed',
@@ -79,8 +79,8 @@ class OrdersController extends AdminController
             'delivered' => 'Delivered',
             'cancelled' => 'Cancelled',
         ])->default('pending');
-        $form->number('product_id', __('Product id'));
-        $form->number('user_id', __('User id'));
+        $form->number('product_id', __('Product id'))->readonly();
+        $form->number('user_id', __('User id'))->readonly();
 
         return $form;
     }
