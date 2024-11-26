@@ -41,7 +41,7 @@ class ProductReviewController extends Controller
             'product_id' => $product_id
         ]);
         session()->flash('message', 'Review added successfully!!');
-        return redirect()->back();
+        return redirect()->to("/product/$product_id");
     }
 
     /**

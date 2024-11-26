@@ -41,11 +41,23 @@
                             <div class="price-ratting fix">
                                 <span class="price float-start"><span class="new">${{ $product->price }}</span></span>
                                 <span class="ratting float-end">
+                                    @if ($product->reviews->count() > 0)
+                                    @php
+                                    $newArray = array_fill(0, $product->reviews[0]->rating,
+                                    null);
+                                    @endphp
+                                    @foreach ($newArray as $item)
                                     <i class="fa fa-star active"></i>
-                                    <i class="fa fa-star active"></i>
-                                    <i class="fa fa-star active"></i>
-                                    <i class="fa fa-star active"></i>
-                                    <i class="fa fa-star active"></i>
+                                    @endforeach
+
+                                    @else
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    @endif
+
                                 </span>
                             </div>
                         </div>
@@ -102,12 +114,20 @@
                                                         </span>
 
                                                         <span class="ratting">
+                                                            @if ($product->reviews->count() > 0)
+                                                            @php
+                                                            $newArray = array_fill(0, $product->reviews[0]->rating,
+                                                            null);
+                                                            @endphp
+                                                            @foreach ($newArray as $item)
                                                             <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star active"></i>
-                                                            <i class="fa fa-star active"></i>
-                                                            <span> (01 Customer Review)</span>
+                                                            @endforeach
+
+                                                            @endif
+
+
+                                                            <span> (({{$product->reviews->count()}}) Customer
+                                                                Review)</span>
                                                         </span>
                                                     </div>
                                                     <form method="POST" action="{{ route('placeOrder') }}">
@@ -207,7 +227,7 @@
 
                                                     <div class="">
                                                         @php
-                                                            $review_product = $product;
+                                                        $review_product = $product;
                                                         @endphp
                                                         <livewire:products-reviews :product="$review_product">
                                                     </div>
@@ -237,7 +257,7 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", () => {
     const stars = document.querySelectorAll(".star");
     const reviewText = document.getElementById("reviewText");
     const reviewsList = document.getElementById("reviewsList");
@@ -256,6 +276,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       star.addEventListener("click", () => {
         selectedRating = star.dataset.value;
+        let createdInput = document.createElement('input');
+        createdInput.name = "rating";
+        createdInput.value = selectedRating;
+        createdInput.classList.add('form-control');
+        createdInput.style.display = "none";
+        star.parentElement.appendChild(createdInput);
         highlightStars(selectedRating);
       });
     });
