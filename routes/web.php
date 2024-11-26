@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RegisterController;
 use App\Livewire\ForgotPasswordPage;
@@ -30,6 +31,8 @@ Route::get('/login-google', [GoogleAuthController::class, 'loginUsingGoogle'])->
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/subscribe', [RegisterController::class, 'subscribe']);
+Route::post('/review/{product_id}', [ProductReviewController::class, 'store'])->middleware('auth');
+Route::delete('/review/{product_id}', [ProductReviewController::class, 'destroy'])->middleware('auth');
 Route::get('/logout', [GoogleAuthController::class, 'logout'])->middleware('auth')->name('logout');
 Route::get('/google-callback', [GoogleAuthController::class, 'callbackFromGoogle']);
 Route::get('/check-user', [GoogleAuthController::class, 'checkUser']);

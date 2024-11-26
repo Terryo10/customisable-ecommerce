@@ -14,7 +14,7 @@ class Products extends Model
         'images' => 'array',
     ];
 
-    protected $with = ['fields', 'fieldss'];
+    protected $with = ['fields', 'fieldss', 'reviews'];
 
     public function fields()
     {
@@ -24,5 +24,10 @@ class Products extends Model
     public function fieldss()
     {
         return $this->hasMany(CustomizableFields::class, 'product_id', 'id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(ProductReviews::class, 'product_id', 'id');
     }
 }

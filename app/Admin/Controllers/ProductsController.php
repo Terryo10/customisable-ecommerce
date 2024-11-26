@@ -76,6 +76,15 @@ class ProductsController extends AdminController
             $fields->created_at();
             $fields->updated_at();
         });
+        $show->reviews('Product Reviews', function ($fields) {
+
+            $fields->resource('/admin/product-reviews');
+            $fields->id();
+            $fields->rating();
+            $fields->review();
+            $fields->created_at();
+            $fields->updated_at();
+        });
 
 
         return $show;

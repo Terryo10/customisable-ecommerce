@@ -19,9 +19,9 @@
                         <!-- Product Image -->
                         <div class="product-img">
                             <a href="#!" data-bs-toggle="modal" data-bs-target={{"#quickViewModal$product->id"}}>
-                                    <!-- Image -->
-                                    <img src="/storage/{{$product->feature_image}}" alt="{{" $product->description"}}"
-                                    />
+                                <!-- Image -->
+                                <img src="/storage/{{$product->feature_image}}" alt="{{" $product->description"}}"
+                                />
                             </a>
                             <!-- Wishlist Button -->
                             {{-- <a class="wishlist" href="#!" title="Wishlist"><i class="pe-7s-like"></i></a> --}}
@@ -65,7 +65,8 @@
                                         <div class="row">
                                             <div class="col-xl-5 col-md-6 col-12 mb-40">
                                                 <div class="tab-content mb-10">
-                                                    <div class="pro-large-img tab-pane active" id={{"pro-large-img-1"}}>
+                                                    <div class="pro-large-img tab-pane active" id="{{"
+                                                        pro-large-img-1"}}">
                                                         <img src="{{" /storage/$product->feature_image"}}" alt="">
                                                     </div>
 
@@ -79,9 +80,8 @@
                                                 <div class="pro-thumb-img-slider nav">
                                                     @foreach ($product->images as $key => $img)
 
-
                                                     <div>
-                                                        <a href={{"#pro-large-img-$key"}} data-bs-toggle="tab">
+                                                        <a href="{{" #pro-large-img-$key"}}" data-bs-toggle="tab">
                                                             <img src="{{" /storage/$img"}}" alt="" />
                                                         </a>
                                                     </div>
