@@ -198,7 +198,7 @@
 
                                                     <ul class="usefull-link section">
                                                         <li id="share-btn" data-target="{{$product->id}}">
-                                                            <a href="#email">
+                                                            <a href="#!">
                                                                 <i class="pe-7s-mail"></i> Share
                                                                 to a Friend
                                                             </a>
@@ -213,13 +213,13 @@
 
                                                     <div class="share-icons section">
                                                         <span>share :</span>
-                                                        <a href="#product">
+                                                        <a href="#!">
                                                             <i class="fa fa-facebook"></i>
                                                         </a>
-                                                        <a href="#product">
+                                                        <a href="#!">
                                                             <i class="fa fa-twitter"></i>
                                                         </a>
-                                                        <a href="#product">
+                                                        <a href="#!">
                                                             <i class="fa fa-instagram"></i>
                                                         </a>
 
