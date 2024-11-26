@@ -204,6 +204,13 @@
                                                         </a>
 
                                                     </div>
+
+                                                    <div class="">
+                                                        @php
+                                                            $review_product = $product;
+                                                        @endphp
+                                                        <livewire:products-reviews :product="$review_product">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -230,6 +237,42 @@
 </div>
 
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const stars = document.querySelectorAll(".star");
+    const reviewText = document.getElementById("reviewText");
+    const reviewsList = document.getElementById("reviewsList");
+    const submitButton = document.getElementById("submitReview");
+    let selectedRating = 0;
+
+    // Star rating hover and click events
+    stars.forEach(star => {
+      star.addEventListener("mouseover", () => {
+        highlightStars(star.dataset.value);
+      });
+
+      star.addEventListener("mouseout", () => {
+        highlightStars(selectedRating);
+      });
+
+      star.addEventListener("click", () => {
+        selectedRating = star.dataset.value;
+        highlightStars(selectedRating);
+      });
+    });
+
+    function highlightStars(rating) {
+      stars.forEach(star => {
+        if (star.dataset.value <= rating) {
+          star.classList.add("selected");
+        } else {
+          star.classList.remove("selected");
+        }
+      });
+    }
+
+
+  });
+
     document.querySelectorAll('#addedFields').forEach((addedFieldsElement) => {
         const currentData = JSON.parse(addedFieldsElement.value || '[]');
         let fieldName = "";
