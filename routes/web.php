@@ -8,6 +8,7 @@ use App\Http\Controllers\RegisterController;
 use App\Livewire\ForgotPasswordPage;
 use App\Livewire\HomePage;
 use App\Livewire\Orders;
+use App\Livewire\ResetPasswordForm;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,9 @@ Route::get('/', HomePage::class);
 Route::get('/product/{id}', HomePage::class);
 Route::get('/forgot-password', ForgotPasswordPage::class);
 Route::post('/forgot-password', [LoginController::class, 'forgotPassword']);
+Route::post('/reset-password', [LoginController::class, 'submitResetPasswordForm'])->name('update.password');
+// Route::get('reset-password/{token}', [LoginController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::get('reset-password/{token}', ResetPasswordForm::class)->name('reset.password.get');
 Route::get('/orders', Orders::class)->middleware('auth');
 Route::post('/place-order', [ProductsController::class, 'placeOrder'])->middleware('auth')->name('placeOrder');
 Route::get('/login-google', [GoogleAuthController::class, 'loginUsingGoogle'])->name('login');

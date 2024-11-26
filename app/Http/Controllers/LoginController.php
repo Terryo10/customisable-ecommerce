@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -16,6 +18,31 @@ class LoginController extends Controller
     {
 
         return view('login');
+    }
+
+    public function submitResetPasswordForm(Request $request)
+    {
+        // $request->validate([
+        //     'password' => 'required|string|min:6|confirmed',
+        //     'password_confirmation' => 'required'
+        // ]);
+
+        $updatePassword = DB::table('password_resets')
+            ->where([
+                'token' => $request->email_token
+            ])
+            ->first();
+
+        if (!$updatePassword) {
+            return back()->withInput()->with('error', 'Invalid token!');
+        }
+
+        $user = User::where('email', $updatePassword->email)
+            ->update(['password' => Hash::make($request->password)]);
+
+        DB::table('password_resets')->where(['token' => $request->token])->delete();
+
+        return redirect()->back()->with('message', 'Your password has been changed!');
     }
 
     public function forgotPassword(Request $request)
@@ -62,5 +89,10 @@ class LoginController extends Controller
         } else {
             return redirect()->to('/login');
         }
+    }
+
+    public function showResetPasswordForm($token)
+    {
+        return view('livewire.reset-password-form', ['token' => $token]);
     }
 }
