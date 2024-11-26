@@ -22,10 +22,10 @@ class LoginController extends Controller
 
     public function submitResetPasswordForm(Request $request)
     {
-        // $request->validate([
-        //     'password' => 'required|string|min:6|confirmed',
-        //     'password_confirmation' => 'required'
-        // ]);
+        $request->validate([
+            'password' => 'required|min:3',
+            'confirm_password' => 'required|same:password',
+        ]);
 
         $updatePassword = DB::table('password_resets')
             ->where([
