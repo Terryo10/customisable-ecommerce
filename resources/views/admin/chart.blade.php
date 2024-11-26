@@ -1,7 +1,8 @@
 <div>
     <canvas id="myChart2" width="400" height="400"></canvas>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
+<script src="{{ asset('template/outside/js/chart.js') }}"></script>
 
 <script>
     const labels = [
