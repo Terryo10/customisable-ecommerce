@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductReviewController;
@@ -26,6 +27,7 @@ Route::get('/', HomePage::class);
 Route::get('/product/{id}', HomePage::class);
 Route::get('/forgot-password', ForgotPasswordPage::class);
 Route::post('/forgot-password', [LoginController::class, 'forgotPassword']);
+Route::post('/contact', [ContactFormController::class, 'create'])->name('contact.create');
 Route::post('/reset-password', [LoginController::class, 'submitResetPasswordForm'])->name('update.password');
 // Route::get('reset-password/{token}', [LoginController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::get('reset-password/{token}', ResetPasswordForm::class)->name('reset.password.get');

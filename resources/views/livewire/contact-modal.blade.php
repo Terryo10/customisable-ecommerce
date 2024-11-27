@@ -37,13 +37,13 @@
                                             class="img-fluid" alt="Phone image">
                                     </div>
                                     <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                                        <form method="POST" action="/login">
+                                        <form method="POST" action="/contact">
                                             @csrf
                                             <!-- Email input -->
                                             <div data-mdb-input-init class="form-outline mb-4">
                                                 <input type="text" id="form1Example13" name="subject"
                                                     class="form-control form-control-lg" />
-                                                <label class="form-label" for="form1Example13">Email subject</label>
+                                                <label class="form-label" for="form1Example13">Subject</label>
                                             </div>
 
                                             <div data-mdb-input-init class="form-outline mb-4">
@@ -53,7 +53,7 @@
                                             </div>
 
                                             <div data-mdb-input-init class="form-outline mb-4">
-                                                <input type="password" id="form1Example23" name="password"
+                                                <input type="phone" id="form1Example23" name="phone"
                                                     class="form-control form-control-lg" />
                                                 <label class="form-label" for="form1Example23">Phone Number</label>
                                             </div>

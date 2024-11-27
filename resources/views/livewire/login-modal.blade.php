@@ -29,6 +29,16 @@
                                     {{ session('message') }}
                                 </div>
                                 @endif
+
+                                @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endif
                             </div>
 
                             <section class="vh-100">
@@ -47,10 +57,10 @@
                                                         In</span>
                                                 </li>
                                                 <li class="nav-item" role="presentation">
-                                                    <span class="nav-link" id="pills-profile-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#pills-profile"
-                                                        type="button" role="tab" aria-controls="pills-profile"
-                                                        aria-selected="false">Register now</span>
+                                                    <span class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                                        data-bs-target="#pills-profile" type="button" role="tab"
+                                                        aria-controls="pills-profile" aria-selected="false">Register
+                                                        now</span>
                                                 </li>
 
                                             </ul>

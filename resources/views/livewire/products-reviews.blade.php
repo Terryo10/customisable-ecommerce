@@ -24,7 +24,7 @@
             </div>
             <div class="mt-3">
                 <textarea name="review" id="reviewText" class="form-control" rows="4"
-                    placeholder="Write your review here..."></textarea>
+                    placeholder="Write your review here..." required></textarea>
             </div>
             <button id="submitReview" class="btn btn-primary mt-3">Submit</button>
         </form>

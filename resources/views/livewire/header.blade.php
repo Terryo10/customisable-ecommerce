@@ -26,8 +26,8 @@
                             </li>
 
 
-                            <li><a href="#!" data-bs-toggle="modal"
-                                    data-bs-target={{"#quickViewModalContact"}}>Contact</a></li>
+                            <li><a href="#!" data-bs-toggle="modal" data-bs-target="{{" #quickViewModalContact"}}"
+                                    class="contactModal">Contact</a></li>
                         </ul>
                     </nav>
 

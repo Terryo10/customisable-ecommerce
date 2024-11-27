@@ -351,6 +351,15 @@
 
         });
     }
+    if(window.location.pathname.includes('contact')){
+        window.document.addEventListener('DOMContentLoaded', ()=>{
+
+        document.querySelectorAll(`.contactModal`).forEach((btn)=>{
+                btn.click();
+            });
+
+        });
+    }
     if(window.location.pathname.includes('product')){
         let url = window.location.pathname;
         const param_id = url.substring(url.lastIndexOf("/") + 1);
