@@ -257,7 +257,7 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    // document.addEventListener("DOMContentLoaded", () => {
     const stars = document.querySelectorAll(".star");
     const reviewText = document.getElementById("reviewText");
     const reviewsList = document.getElementById("reviewsList");
@@ -297,7 +297,7 @@
     }
 
 
-  });
+//   });
 
     document.querySelectorAll('#addedFields').forEach((addedFieldsElement) => {
         const currentData = JSON.parse(addedFieldsElement.value || '[]');

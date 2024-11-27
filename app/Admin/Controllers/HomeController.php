@@ -25,7 +25,7 @@ class HomeController extends Controller
                     $orders = array_fill(0, 12, 0);
                     $data = Orders::selectRaw('COUNT(*) as count, YEAR(created_at) year, MONTH(created_at) month')->groupBy('year', 'month')->get();
                     foreach ($data as $key => $value) {
-                        $orders[$value->month - 1] = $value->count;
+                        $orders[$value->month - 1] = $value->sum('total');
                     }
                     $column->append(view('admin.chart', ['title'=> 'Orders'])->with('orders', $orders));
                     Admin::js(asset('template/outside/js/chart.js'));
@@ -50,7 +50,7 @@ class HomeController extends Controller
     const data = {
         labels: labels,
         datasets: [{
-            label: 'Orders',
+            label: 'Orders Total Income per each month ($)',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: array,
