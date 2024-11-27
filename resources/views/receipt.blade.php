@@ -142,7 +142,7 @@
                 $app_title = env('APP_NAME') ?? "N/A";
                 @endphp
                 <h1>{{$app_title}}</h1>
-                <h1>Invoice</h1>
+                <h1>Receipt</h1>
             </div>
 
             <div class="list">
