@@ -93,7 +93,17 @@
             border-collapse: collapse;
             /* Collapses borders between cells */
             margin: 0px auto;
-            /* Centers the table and adds margin */
+            /* Centers the table */
+            border: 3px double #e74c3c;
+            /* Double red border around the table */
+            border-radius: 10px;
+            /* Rounded corners */
+            overflow: hidden;
+            /* Ensures rounded corners are applied to the table */
+            table-layout: fixed;
+            /* Ensures cells do not expand beyond their width */
+            width: 100%;
+            /* Optional: Define a fixed width for the table */
         }
 
         th,
@@ -102,6 +112,14 @@
             /* Blue solid border */
             padding: 10px;
             text-align: left;
+            width: 70px;
+            /* Adjust as needed */
+            word-break: break-word;
+            /* Break words if they are too long */
+            overflow-wrap: break-word;
+            /* Modern browsers prefer this */
+            hyphens: auto;
+            /* Enables hyphenation when supported */
         }
 
         th {
@@ -113,15 +131,6 @@
             background-color: #f9f9f9;
             /* Alternating row colors */
         }
-
-        table {
-            border: 3px double #e74c3c;
-            /* Double red border around the table */
-            border-radius: 10px;
-            /* Rounded corners */
-            overflow: hidden;
-            /* Ensures rounded corners are applied to the table */
-        }
     </style>
 </head>
 
@@ -129,13 +138,16 @@
     <div class="container">
         <div class="main">
             <div class="header">
-                <h1>SlimRiff</h1>
+                @php
+                $app_title = env('APP_NAME') ?? "N/A";
+                @endphp
+                <h1>{{$app_title}}</h1>
                 <h1>Invoice</h1>
             </div>
 
             <div class="list">
                 <ul>
-                    <li>Total Money : {{ $order->total ?? "0" }}</li>
+                    <li>Total Money : ${{ $order->total ?? "0" }}</li>
 
                 </ul>
                 <h2>Invoice Information</h2>
@@ -148,10 +160,28 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ "" }}</td>
-                            <td>{{ "" }}</td>
-                            <td>{{ "" }}</td>
-                            <td>{{ "" }}</td>
+                            <td>{{ $order->product->name ?? "" }}</td>
+                            <td>{{ $order->status ?? "N/A" }}</td>
+                            <td>{{ $order->quantity ?? "" }}</td>
+                            <td>
+                                @php
+
+                                $data = json_decode($order->fields ?? "[]");
+                                $data = json_decode($data ?? "[]");
+                                @endphp
+                                @foreach ($data as $fild)
+
+                                <div class="short-desc section">
+                                    <h5 class="pd-sub-title">
+                                        Additional Option Name : {{$fild->name}}
+                                    </h5>
+                                    <p>
+                                        Additional Option Value : {{$fild->value}}
+                                    </p>
+                                </div>
+
+                                @endforeach
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -175,7 +205,7 @@
         </div>
         <div class="aside">
             <div class="brand">
-                <img width="100" height="30" src="assets/assets/img/website.png" />
+                <img width="100" height="30" src="/logo.png" />
             </div>
         </div>
     </div>

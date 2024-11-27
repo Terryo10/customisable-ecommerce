@@ -42,6 +42,18 @@
                                             </td>
                                             <td class="pro-stock-stauts">
                                                 <span class="out-stock">{{$order->status}}</span>
+                                                <span>
+                                                    @if ($order->status === "paid")
+                                                    <a class="btn btn-success text-white" href="{{" /download-receipt/"
+                                                        . $order->id}}">Download
+                                                        Receipt</a>
+                                                    @else
+                                                    <a class="btn btn-warning text-white" href="{{" /download-invoice/"
+                                                        . $order->id}}">Download
+                                                        Invoice</a>
+                                                    @endif
+
+                                                </span>
                                             </td>
                                             <td>
                                                 <a href="#">
