@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomePage::class);
 Route::get('/product/{id}', HomePage::class);
+Route::get('/download-invoice/{order_id}', [ProductReviewController::class, 'downInvoiceAsPDF']);
+Route::get('/download-receipt/{order_id}', [ProductReviewController::class, 'downReceiptAsPDF']);
 Route::get('/forgot-password', ForgotPasswordPage::class);
 Route::post('/forgot-password', [LoginController::class, 'forgotPassword']);
 Route::post('/contact', [ContactFormController::class, 'create'])->name('contact.create');

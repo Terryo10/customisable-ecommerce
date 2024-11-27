@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Orders;
 use App\Models\ProductReviews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +43,31 @@ class ProductReviewController extends Controller
         ]);
         session()->flash('message', 'Review added successfully!!');
         return redirect()->to("/product/$product_id");
+    }
+
+    public function downInvoiceAsPDF(Request $request, $order_id)
+    {
+
+        $order = Orders::where('id', $order_id)->first();
+
+        $data = [
+            'order' => $order ?? "N/A",
+        ];
+
+        $pdf = \PDF::loadView('invoice', $data);
+        return $pdf->download('SlimRiffInvoice.pdf');
+    }
+    public function downReceiptAsPDF(Request $request, $order_id)
+    {
+
+        $order = Orders::where('id', $order_id)->first();
+
+        $data = [
+            'order' => $order ?? "N/A",
+        ];
+
+        $pdf = \PDF::loadView('receipt', $data);
+        return $pdf->download('SlimRiffReceipt.pdf');
     }
 
     /**
