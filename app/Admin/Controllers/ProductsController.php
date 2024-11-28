@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Products;
+use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -25,6 +26,14 @@ class ProductsController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Products());
+
+        $grid->filter(function ($filter) {
+            // Remove the default id filter
+            $filter->disableIdFilter();
+            // Add a column filter
+            $filter->like('name', 'Search By Product Name');
+            $filter->like('price', 'Search By Product Price');
+        });
 
         $grid->column('id', __('Id'));
         $grid->column('feature_image', __('Feature image'))->image();
@@ -68,11 +77,29 @@ class ProductsController extends AdminController
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
+        $show->orders('Product Orders', function ($fields) {
+
+            $fields->resource('/admin/orders');
+            $fields->id();
+            $fields->total();
+            $fields->status();
+            $fields->fields();
+            $fields->user_id('User')->display(function ($use_id) {
+                $user = User::findOrFail($use_id);
+                return "<span >{$user->name}</span>";
+            });
+            $fields->created_at();
+            $fields->updated_at();
+        });
         $show->fieldss('Product Fields', function ($fields) {
 
             $fields->resource('/admin/fields');
             $fields->id();
             $fields->fields();
+            // $fields->user_id('User')->display(function ($use_id) {
+            //     $user = User::findOrFail($use_id);
+            //     return "<span >{$user->name}</span>";
+            // });
             $fields->created_at();
             $fields->updated_at();
         });
@@ -82,6 +109,10 @@ class ProductsController extends AdminController
             $fields->id();
             $fields->rating();
             $fields->review();
+            $fields->user_id('User')->display(function ($use_id) {
+                $user = User::findOrFail($use_id);
+                return "<span >{$user->name}</span>";
+            });
             $fields->created_at();
             $fields->updated_at();
         });

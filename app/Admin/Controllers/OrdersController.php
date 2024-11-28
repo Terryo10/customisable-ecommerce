@@ -22,9 +22,27 @@ class OrdersController extends AdminController
      *
      * @return Grid
      */
+
+
     protected function grid()
     {
         $grid = new Grid(new Orders());
+
+        $grid->filter(function ($filter) {
+            // Remove the default id filter
+            $filter->disableIdFilter();
+            // Add a column filter
+            $filter->like('name', 'Search By Name');
+            $filter->equal('status', 'By Status')->select([
+                'pending' => 'Pending',
+                'processed' => 'Processed',
+                'shipped' => 'Shipped',
+                'paid' => 'Product Is Paid',
+                'delivered' => 'Delivered',
+                'cancelled' => 'Cancelled',
+            ]);
+        });
+
 
         $grid->column('id', __('Id'));
         $grid->column('quantity', __('Quantity'));
