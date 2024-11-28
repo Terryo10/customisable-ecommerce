@@ -187,7 +187,7 @@
                                                         <div class="quantity-cart section">
                                                             <div class="product-quantity">
                                                                 <input wire:model="order.quantity" name="quantity"
-                                                                    type="text" value="0" />
+                                                                    type="number" value="1" required />
                                                             </div>
                                                             <button type="submit" class="add-to-cart">
                                                                 Place Order

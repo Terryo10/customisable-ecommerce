@@ -7,7 +7,8 @@
                         <h1>{{$title}}</h1>
                         <ul class="breadcrumb">
                             <li>
-                                <a wire:navigate href="/">Home</a>
+                                <a href="/">Home</a>
+                                {{-- <a wire:navigate href="/">Home</a> --}}
                             </li>
                             <li class="active">{{$title}}</li>
                         </ul>

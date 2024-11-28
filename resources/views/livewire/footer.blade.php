@@ -13,7 +13,7 @@
                 <div class="footer-widget col-lg-3 col-md-6 col-12 mb-40">
                     <h5 class="widget-title">CUSTOMER SERVICE</h5>
                     <ul>
-                        <li><a href="#" data-bs-toggle="modal" data-bs-target={{"#quickViewModalContact"}}>Contact
+                        <li><a href="#!" data-bs-toggle="modal" data-bs-target={{"#quickViewModalContact"}}>Contact
                                 Us</a></li>
                     </ul>
                 </div>
@@ -22,7 +22,7 @@
                 <div class="footer-widget col-lg-2 col-md-6 col-12 mb-40">
                     <h5 class="widget-title">PROFILE</h5>
                     <ul>
-                        <li><a wire:navigate href="/orders">my Orders</a></li>
+                        <li><a href="/orders">my Orders</a></li>
 
                     </ul>
                 </div>
