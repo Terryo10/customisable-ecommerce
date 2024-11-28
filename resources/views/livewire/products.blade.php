@@ -74,6 +74,13 @@
                                             X</span>
                                     </div>
                                     <div class="modal-body" id={{"content_$product->id"}}>
+                                        <div>
+                                            @if (session()->has('message'))
+                                            <div class="alert alert-success">
+                                                {{ session('message') }}
+                                            </div>
+                                            @endif
+                                        </div>
                                         <div class="row">
                                             <div class="col-xl-5 col-md-6 col-12 mb-40">
                                                 <div class="tab-content mb-10">
@@ -133,13 +140,7 @@
                                                     <form method="POST" action="{{ route('placeOrder') }}">
 
                                                         @csrf
-                                                        <div>
-                                                            @if (session()->has('message'))
-                                                            <div class="alert alert-success">
-                                                                {{ session('message') }}
-                                                            </div>
-                                                            @endif
-                                                        </div>
+
                                                         <div class="short-desc section">
                                                             <h5 class="pd-sub-title">
                                                                 Quick Overview
