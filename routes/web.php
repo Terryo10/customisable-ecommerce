@@ -9,7 +9,9 @@ use App\Http\Controllers\RegisterController;
 use App\Livewire\ForgotPasswordPage;
 use App\Livewire\HomePage;
 use App\Livewire\Orders;
+use App\Livewire\ProductsSearch;
 use App\Livewire\ResetPasswordForm;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +27,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomePage::class);
 Route::get('/product/{id}', HomePage::class);
+Route::get('/products/{search}', ProductsSearch::class);
+Route::post('/search', function (Request $request) {
+    $search_value = $request->input('search');
+    return redirect()->to('/products/' . $search_value);
+});
 Route::get('/download-invoice/{order_id}', [ProductReviewController::class, 'downInvoiceAsPDF']);
 Route::get('/download-receipt/{order_id}', [ProductReviewController::class, 'downReceiptAsPDF']);
 Route::get('/forgot-password', ForgotPasswordPage::class);

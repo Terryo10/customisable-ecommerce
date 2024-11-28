@@ -30,6 +30,20 @@
                                     class="contactModal">Contact</a></li>
                         </ul>
                     </nav>
+                    <div class="header-option-btns d-flex">
+                        <!-- header-search -->
+                        <div class="header-search">
+                            <button class="search-toggle"><i class="pe-7s-search"></i></button>
+                            <div class="header-search-form">
+                                <form method="POST" action="/search">
+                                    @csrf
+                                    <input type="text" name="search" placeholder="Search">
+                                    <button type="submit"><i class="fa fa-long-arrow-right"></i></button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
 
                 </div>
                 <div class="mobile-menu"></div>
