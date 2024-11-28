@@ -190,6 +190,12 @@
             </div>
             <div class="site-data">
                 <div class="item">
+                    <h3><strong>Product Bar Code:</strong></h3>
+                    <p>
+                        {!! $order->product->barcode ?? "N/A" !!}
+                    </p>
+                </div>
+                <div class="item">
                     <h3><strong>Receipt To Name:</strong></h3>
                     <p>
                         {!! $order->user->name !!}

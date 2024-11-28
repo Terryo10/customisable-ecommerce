@@ -32,12 +32,14 @@ class ProductsController extends AdminController
             $filter->disableIdFilter();
             // Add a column filter
             $filter->like('name', 'Search By Product Name');
+            $filter->like('barcode', 'Search By Product BarCode');
             $filter->like('price', 'Search By Product Price');
         });
 
         $grid->column('id', __('Id'));
         $grid->column('feature_image', __('Feature image'))->image();
         $grid->column('name', __('Name'));
+        $grid->column('barcode', __('Bar Code'));
         $grid->column('images', __('Images'));
         // $grid->column('images', __('Images'))->display(function ($value) {
         //     return json_encode($value);
@@ -66,6 +68,7 @@ class ProductsController extends AdminController
         $show->field('id', __('Id'));
         $show->field('feature_image', __('Feature image'))->image();
         $show->field('name', __('Name'));
+        $show->field('barcode', __('Bar Code'));
         // $show->field('images', __('Images'))->display(function ($value) {
         //     return json_encode($value);
         // });
@@ -132,6 +135,7 @@ class ProductsController extends AdminController
 
         $form->image('feature_image', __('Feature image'))->required();
         $form->textarea('name', __('Name'))->required();
+        $form->text('barcode', __('Bar Code'));
         $form->multipleImage('images', __('Images'))->required();
         $form->textarea('description', __('Description'))->required();
         // $form->textarea('short_description', __('Short description'));
