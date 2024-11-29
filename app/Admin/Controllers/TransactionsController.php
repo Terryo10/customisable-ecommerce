@@ -33,7 +33,7 @@ class TransactionsController extends AdminController
         $grid->column('isPaid', __('IsPaid'));
         $grid->column('total', __('Total'));
         // Display product name
-        $grid->column('order.id', __('Order ID'))->sortable()->filter();
+        $grid->column('order_id', __('Order ID'))->sortable()->filter();
 
         // Display user name
         $grid->column('user.name', __('User'))->sortable()->filter();
@@ -58,10 +58,7 @@ class TransactionsController extends AdminController
         $show->field('isPaid', __('IsPaid'));
         $show->field('total', __('Total'));
         // $show->field('order_id', __('Order id'));
-        $show->field('order_id', __('Order'))->as(function ($orderId) {
-            $order = Orders::find($orderId);
-            return $order ? $order->id : __('Unknown Order');
-        });
+        $show->field('order_id', __('Order'));
         $show->field('user_id', __('User'))->as(function ($userId) {
             $user = User::find($userId);
             return $user ? $user->name : __('Unknown User');

@@ -10,15 +10,15 @@ class Transaction extends Model
     use HasFactory;
     protected $guarded;
 
-    protected $with = ['user', 'order'];
+    protected $with = ['user'];
 
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
-    public function order()
-    {
-        return $this->hasOne(Orders::class, 'id', 'order_id');
-    }
+    // public function order()
+    // {
+    //     return $this->hasOne(Orders::class, 'id', 'order_id');
+    // }
 
 }
