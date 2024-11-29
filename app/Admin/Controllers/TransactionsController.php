@@ -2,7 +2,9 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Orders;
 use App\Models\Transaction;
+use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -30,8 +32,11 @@ class TransactionsController extends AdminController
         $grid->column('type', __('Type'));
         $grid->column('isPaid', __('IsPaid'));
         $grid->column('total', __('Total'));
-        $grid->column('order_id', __('Order id'));
-        $grid->column('user_id', __('User id'));
+        // Display product name
+        $grid->column('order.id', __('Order ID'))->sortable()->filter();
+
+        // Display user name
+        $grid->column('user.name', __('User'))->sortable()->filter();
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -52,8 +57,15 @@ class TransactionsController extends AdminController
         $show->field('type', __('Type'));
         $show->field('isPaid', __('IsPaid'));
         $show->field('total', __('Total'));
-        $show->field('order_id', __('Order id'));
-        $show->field('user_id', __('User id'));
+        // $show->field('order_id', __('Order id'));
+        $show->field('order_id', __('Order'))->as(function ($orderId) {
+            $order = Orders::find($orderId);
+            return $order ? $order->id : __('Unknown Order');
+        });
+        $show->field('user_id', __('User'))->as(function ($userId) {
+            $user = User::find($userId);
+            return $user ? $user->name : __('Unknown User');
+        });
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -72,8 +84,16 @@ class TransactionsController extends AdminController
         $form->textarea('type', __('Type'));
         $form->switch('isPaid', __('IsPaid'));
         $form->number('total', __('Total'));
-        $form->number('order_id', __('Order id'));
-        $form->number('user_id', __('User id'));
+        // Load products into a dropdown
+        $form->select('order_id', __('Link Order To this transaction'))
+            ->options(Orders::all()->pluck('id', 'id'))
+            ->rules('required')
+            ->placeholder('Select a order to link');
+        // Load users into a dropdown
+        $form->select('user_id', __('Link User To this transaction'))
+            ->options(User::all()->pluck('name', 'id'))
+            ->rules('required')
+            ->placeholder('Select a user');
 
         return $form;
     }

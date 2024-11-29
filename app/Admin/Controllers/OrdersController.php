@@ -75,7 +75,10 @@ class OrdersController extends AdminController
         $show->field('quantity', __('Quantity'));
         $show->field('total', __('Total'));
         $show->field('status', __('Status'));
-        $show->field('product_id', __('Product id'));
+        $show->field('product_id', __('Product'))->as(function ($productId) {
+            $product = Products::find($productId);
+            return $product ? $product->name : __('Unknown Prpduct');
+        });
         $show->field('user_id', __('User'))->as(function ($userId) {
             $user = User::find($userId);
             return $user ? $user->name : __('Unknown User');
