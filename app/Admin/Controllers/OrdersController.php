@@ -48,7 +48,7 @@ class OrdersController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('quantity', __('Quantity'));
-        $grid->column('total', __('Total'));
+        $grid->column('total', __('Total ($)'));
         $grid->column('status', __('Status'));
         // Display product name
         $grid->column('product.name', __('Product'))->sortable()->filter();
@@ -110,13 +110,13 @@ class OrdersController extends AdminController
         ])->default('pending')->rules('required');
 
         // Load products into a dropdown
-        $form->select('product_id', __('Product'))
+        $form->select('product_id', __('Link Product to this order'))
             ->options(Products::all()->pluck('name', 'id'))
             ->rules('required')
             ->placeholder('Select a product');
 
         // Load users into a dropdown
-        $form->select('user_id', __('User'))
+        $form->select('user_id', __('Link User to this order'))
             ->options(User::all()->pluck('name', 'id'))
             ->rules('required')
             ->placeholder('Select a user');
