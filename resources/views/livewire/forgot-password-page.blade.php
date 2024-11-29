@@ -45,7 +45,7 @@
 
                                         </div>
                                         <div class="col-12">
-                                            <a wire:navigate href="/">Return Home</a>
+                                            <a href="/">Return Home</a>
                                         </div>
                                     </div>
                                 </form>
