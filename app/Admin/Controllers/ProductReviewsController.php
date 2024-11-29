@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\ProductReviews;
+use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -53,7 +54,10 @@ class ProductReviewsController extends AdminController
         $show->field('rating', __('Rating'));
         $show->field('review', __('Review'));
         $show->field('product_id', __('Product id'));
-        $show->field('user_id', __('User id'));
+        $show->field('user_id', __('User'))->as(function ($userId) {
+            $user = User::find($userId);
+            return $user ? $user->name : __('Unknown User');
+        });
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 

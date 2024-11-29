@@ -3,6 +3,8 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Orders;
+use App\Models\Products;
+use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -48,8 +50,11 @@ class OrdersController extends AdminController
         $grid->column('quantity', __('Quantity'));
         $grid->column('total', __('Total'));
         $grid->column('status', __('Status'));
-        $grid->column('product_id', __('Product id'));
-        $grid->column('user_id', __('User id'));
+        // Display product name
+        $grid->column('product.name', __('Product'))->sortable()->filter();
+
+        // Display user name
+        $grid->column('user.name', __('User'))->sortable()->filter();
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -71,7 +76,10 @@ class OrdersController extends AdminController
         $show->field('total', __('Total'));
         $show->field('status', __('Status'));
         $show->field('product_id', __('Product id'));
-        $show->field('user_id', __('User id'));
+        $show->field('user_id', __('User'))->as(function ($userId) {
+            $user = User::find($userId);
+            return $user ? $user->name : __('Unknown User');
+        });
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -87,8 +95,8 @@ class OrdersController extends AdminController
     {
         $form = new Form(new Orders());
 
-        $form->number('quantity', __('Quantity'))->readonly();
-        $form->number('total', __('Total'))->readonly();
+        $form->number('quantity', __('Quantity'))->rules('required|integer|min:1');
+        $form->currency('total', __('Total'))->symbol('$')->rules('required|numeric|min:0');
         $form->select('status', __('Status'))->options([
             'pending' => 'Pending',
             'processed' => 'Processed',
@@ -96,9 +104,19 @@ class OrdersController extends AdminController
             'paid' => 'Product Is Paid',
             'delivered' => 'Delivered',
             'cancelled' => 'Cancelled',
-        ])->default('pending');
-        $form->number('product_id', __('Product id'))->readonly();
-        $form->number('user_id', __('User id'))->readonly();
+        ])->default('pending')->rules('required');
+
+        // Load products into a dropdown
+        $form->select('product_id', __('Product'))
+            ->options(Products::all()->pluck('name', 'id'))
+            ->rules('required')
+            ->placeholder('Select a product');
+
+        // Load users into a dropdown
+        $form->select('user_id', __('User'))
+            ->options(User::all()->pluck('name', 'id'))
+            ->rules('required')
+            ->placeholder('Select a user');
 
         return $form;
     }
