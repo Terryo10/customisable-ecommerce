@@ -36,7 +36,7 @@ class TransactionsController extends AdminController
         $grid->column('order_id', __('Order ID'))->sortable()->filter();
 
         // Display user name
-        $grid->column('user.name', __('User'))->sortable()->filter();
+        $grid->column('user.name', __('Customer'))->sortable()->filter();
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -59,7 +59,7 @@ class TransactionsController extends AdminController
         $show->field('total', __('Total'));
         // $show->field('order_id', __('Order id'));
         $show->field('order_id', __('Order'));
-        $show->field('user_id', __('User'))->as(function ($userId) {
+        $show->field('user_id', __('Customer'))->as(function ($userId) {
             $user = User::find($userId);
             return $user ? $user->name : __('Unknown User');
         });
@@ -87,10 +87,10 @@ class TransactionsController extends AdminController
             ->rules('required')
             ->placeholder('Select a order to link');
         // Load users into a dropdown
-        $form->select('user_id', __('Link User To this transaction'))
+        $form->select('user_id', __('Link Customer To this transaction'))
             ->options(User::all()->pluck('name', 'id'))
             ->rules('required')
-            ->placeholder('Select a user');
+            ->placeholder('Select customer');
 
         return $form;
     }

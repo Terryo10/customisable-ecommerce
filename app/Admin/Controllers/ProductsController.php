@@ -87,7 +87,7 @@ class ProductsController extends AdminController
             $fields->total();
             $fields->status();
             $fields->fields();
-            $fields->user_id('User')->display(function ($use_id) {
+            $fields->user_id('Customer')->display(function ($use_id) {
                 $user = User::findOrFail($use_id);
                 return "<span >{$user->name}</span>";
             });
@@ -112,7 +112,7 @@ class ProductsController extends AdminController
             $fields->id();
             $fields->rating();
             $fields->review();
-            $fields->user_id('User')->display(function ($use_id) {
+            $fields->user_id('Customer')->display(function ($use_id) {
                 $user = User::findOrFail($use_id);
                 return "<span >{$user->name}</span>";
             });

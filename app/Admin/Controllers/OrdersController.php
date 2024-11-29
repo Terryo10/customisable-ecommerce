@@ -54,7 +54,7 @@ class OrdersController extends AdminController
         $grid->column('product.name', __('Product'))->sortable()->filter();
 
         // Display user name
-        $grid->column('user.name', __('User'))->sortable()->filter();
+        $grid->column('user.name', __('Customer'))->sortable()->filter();
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -79,9 +79,9 @@ class OrdersController extends AdminController
             $product = Products::findOrFail($productId);
             return $product ? $product->name : __('Unknown Product');
         });
-        $show->field('user_id', __('User'))->as(function ($userId) {
+        $show->field('user_id', __('Customer'))->as(function ($userId) {
             $user = User::findOrFail($userId);
-            return $user ? $user->name : __('Unknown User');
+            return $user ? $user->name : __('Unknown Customer');
         });
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
@@ -116,10 +116,10 @@ class OrdersController extends AdminController
             ->placeholder('Select a product');
 
         // Load users into a dropdown
-        $form->select('user_id', __('Link User to this order'))
+        $form->select('user_id', __('Link Customer to this order'))
             ->options(User::all()->pluck('name', 'id'))
             ->rules('required')
-            ->placeholder('Select a user');
+            ->placeholder('Select a customer');
 
         return $form;
     }

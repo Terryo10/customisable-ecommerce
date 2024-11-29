@@ -32,7 +32,7 @@ class ProductReviewsController extends AdminController
         $grid->column('rating', __('Rating'));
         $grid->column('review', __('Review'));
         $grid->column('product_id', __('Product id'));
-        $grid->column('user_id', __('User id'));
+        $grid->column('user_id', __('Customer id'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -54,9 +54,9 @@ class ProductReviewsController extends AdminController
         $show->field('rating', __('Rating'));
         $show->field('review', __('Review'));
         $show->field('product_id', __('Product id'));
-        $show->field('user_id', __('User'))->as(function ($userId) {
+        $show->field('user_id', __('Customer'))->as(function ($userId) {
             $user = User::find($userId);
-            return $user ? $user->name : __('Unknown User');
+            return $user ? $user->name : __('Unknown Customer');
         });
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
@@ -77,7 +77,7 @@ class ProductReviewsController extends AdminController
         $form->text('rating', __('Rating'));
         $form->textarea('review', __('Review'));
         $form->number('product_id', __('Product id'));
-        $form->number('user_id', __('User id'));
+        $form->number('user_id', __('Customer id'));
 
         return $form;
     }
