@@ -25,4 +25,5 @@ Route::group([
     $router->resource('subscriptions', SubscriptionsController::class);
     $router->resource('product-reviews', ProductReviewsController::class);
     $router->resource('contact-forms', ContactFormsController::class);
+    $router->resource('customers', CustomersController::class);
 });

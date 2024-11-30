@@ -17,7 +17,7 @@ class OrdersController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Orders';
+    protected $title = 'Orders Management (POS) Where You Download Customers Invoice & Receipt';
 
     /**
      * Make a grid builder.
