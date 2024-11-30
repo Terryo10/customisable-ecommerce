@@ -57,7 +57,7 @@ class OrdersController extends AdminController
         $grid->column('id', __('Download'))->display(function ($orderId) {
             $order = Orders::findOrFail($orderId);
 
-            $downloadLink = $order->status !== 'paid' ? admin_url("download-receipt/"
+            $downloadLink = $order->status === 'paid' ? admin_url("download-receipt/"
                 . $order->id) : admin_url("download-invoice/"
                 . $order->id);
             $adminBtnClasses = $order->status === "paid" ? "btn btn-success text-white" : "btn btn-warning text-white";
@@ -97,7 +97,7 @@ class OrdersController extends AdminController
         $show->field('id', __('Download'))->as(function ($orderId) {
             $order = Orders::findOrFail($orderId);
 
-            $downloadLink = $order->status !== 'paid' ? admin_url("download-receipt/"
+            $downloadLink = $order->status === 'paid' ? admin_url("download-receipt/"
                 . $order->id) : admin_url("download-invoice/"
                 . $order->id);
             $adminBtnClasses = $order->status === "paid" ? "btn btn-success text-white" : "btn btn-warning text-white";
