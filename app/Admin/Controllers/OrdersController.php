@@ -65,6 +65,7 @@ class OrdersController extends AdminController
             $button = "<button type='submit' class='$adminBtnClasses'> $adminBtnName </button>";
             return "<form method='GET' action='$downloadLink'>{$button}</form>";
         });
+        $grid->column('fields', __('Customised Options'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -104,6 +105,7 @@ class OrdersController extends AdminController
             $button = "<button type='submit' class='$adminBtnClasses'> $adminBtnName </button>";
             return "<form method='GET' action='$downloadLink'>{$button}</form>";
         });
+        $show->field('fields', __('Customised Options'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
