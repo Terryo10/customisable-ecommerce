@@ -46,7 +46,6 @@ class OrdersController extends AdminController
         });
 
 
-        $grid->column('id', __('Id'));
         $grid->column('quantity', __('Quantity'));
         $grid->column('total', __('Total ($)'));
         $grid->column('status', __('Status'));
@@ -55,6 +54,17 @@ class OrdersController extends AdminController
 
         // Display user name
         $grid->column('user.name', __('Customer'))->sortable()->filter();
+        $grid->column('id', __('Download'))->display(function ($orderId) {
+            $order = Orders::findOrFail($orderId);
+
+            $downloadLink = $order->status !== 'paid' ? admin_url("download-receipt/"
+                . $order->id) : admin_url("download-invoice/"
+                . $order->id);
+            $adminBtnClasses = $order->status === "paid" ? "btn btn-success text-white" : "btn btn-warning text-white";
+            $adminBtnName = $order->status === "paid" ? "Download Receipt" : "Download Invoice";
+            $button = "<button type='submit' class='$adminBtnClasses'> $adminBtnName </button>";
+            return "<form method='GET' action='$downloadLink'>{$button}</form>";
+        });
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -82,6 +92,17 @@ class OrdersController extends AdminController
         $show->field('user_id', __('Customer'))->as(function ($userId) {
             $user = User::findOrFail($userId);
             return $user ? $user->name : __('Unknown Customer');
+        });
+        $show->field('id', __('Download'))->as(function ($orderId) {
+            $order = Orders::findOrFail($orderId);
+
+            $downloadLink = $order->status !== 'paid' ? admin_url("download-receipt/"
+                . $order->id) : admin_url("download-invoice/"
+                . $order->id);
+            $adminBtnClasses = $order->status === "paid" ? "btn btn-success text-white" : "btn btn-warning text-white";
+            $adminBtnName = $order->status === "paid" ? "Download Receipt" : "Download Invoice";
+            $button = "<button type='submit' class='$adminBtnClasses'> $adminBtnName </button>";
+            return "<form method='GET' action='$downloadLink'>{$button}</form>";
         });
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));

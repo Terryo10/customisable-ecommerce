@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Orders;
 use App\Models\Products;
 use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
@@ -83,7 +84,7 @@ class ProductsController extends AdminController
         $show->orders('Product Orders', function ($fields) {
 
             $fields->resource('/admin/orders');
-            $fields->id();
+            // $fields->id();
             $fields->total();
             $fields->status();
             $fields->fields();
@@ -91,6 +92,18 @@ class ProductsController extends AdminController
                 $user = User::findOrFail($use_id);
                 return "<span >{$user->name}</span>";
             });
+            $fields->id('Download')->display(function ($orderId) {
+                $order = Orders::findOrFail($orderId);
+
+                $downloadLink = $order->status !== 'paid' ? admin_url("download-receipt/"
+                    . $order->id) : admin_url("download-invoice/"
+                    . $order->id);
+                $adminBtnClasses = $order->status === "paid" ? "btn btn-success text-white" : "btn btn-warning text-white";
+                $adminBtnName = $order->status === "paid" ? "Download Receipt" : "Download Invoice";
+                $button = "<button type='submit' class='$adminBtnClasses'> $adminBtnName </button>";
+                return "<form method='GET' action='$downloadLink'>{$button}</form>";
+            });
+
             $fields->created_at();
             $fields->updated_at();
         });

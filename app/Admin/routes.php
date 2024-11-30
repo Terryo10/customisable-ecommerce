@@ -1,6 +1,7 @@
 <?php
 
 use App\Admin\Controllers\CustomiseController;
+use App\Http\Controllers\ProductReviewController;
 use Illuminate\Routing\Router;
 
 Admin::routes();
@@ -15,6 +16,8 @@ Route::group([
     $router->get('/', 'HomeController@index')->name('home');
     $router->get('/customise', 'CustomiseController@index');
     $router->post('/add-product-fields', [CustomiseController::class, 'submitForm'])->name('add-product-fields');
+    $router->get('/download-invoice/{order_id}', [ProductReviewController::class, 'downInvoiceAsPDF']);
+    $router->get('/download-receipt/{order_id}', [ProductReviewController::class, 'downReceiptAsPDF']);
     $router->resource('products', ProductsController::class);
     $router->resource('orders', OrdersController::class);
     $router->resource('sliders', SlidersController::class);
