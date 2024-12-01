@@ -26,6 +26,7 @@
             /* align items center top */
             /* padding-left: 20px; */
             position: fixed;
+            right: 0;
         }
 
         .brand {
@@ -47,6 +48,8 @@
             height: 100vh;
             background-color: white;
             float: left;
+            position: fixed;
+            left: 0;
         }
 
         ul {
@@ -94,7 +97,7 @@
             /* Collapses borders between cells */
             margin: 0px auto;
             /* Centers the table */
-            border: 3px double #e74c3c;
+            border: 3px double #0b940b;
             /* Double red border around the table */
             border-radius: 10px;
             /* Rounded corners */
