@@ -31,6 +31,10 @@ class ProductReviewController extends Controller
      */
     public function store(Request $request, $product_id)
     {
+        if (!$request->rating) {
+            session()->flash('message', 'Please you should add 1 star at least!!');
+            return redirect()->to("/product/$product_id");
+        }
         $request->validate([
             'rating' => 'required',
             'review' => 'required|min:6',

@@ -14,8 +14,8 @@
             <div class="container">
                 <div class="row">
                     <div class="hero-slider-content col-sm-8 col-xs-12">
-                        <h1 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">{{$slider->title}}</h1>
-                        <p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s">{{$slider->description}} </p>
+                        <h1 class="wow fadeInUp text-white" data-wow-duration="1s" data-wow-delay="0.5s">{{$slider->title}}</h1>
+                        <p class="wow fadeInUp text-dark" data-wow-duration="1s" data-wow-delay="1s">{{$slider->description}} </p>
                         <a href="#shop" class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.5s">View Shop</a>
                     </div>
                 </div>
