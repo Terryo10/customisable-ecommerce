@@ -210,6 +210,16 @@
                         {!! $order->user->email !!}
                     </p>
                 </div>
+                <div class="item">
+                    <h3><strong>Banking Details:</strong></h3>
+
+                    @foreach ($bankingDetails as $banking)
+
+                    <p>
+                        {!! $banking->name !!} - <b>{!! $banking->value !!}</b>
+                    </p>
+                    @endforeach
+                </div>
             </div>
         </div>
         <div class="aside">

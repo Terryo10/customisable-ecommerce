@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BankingDetails;
 use App\Models\Orders;
 use App\Models\ProductReviews;
 use Illuminate\Http\Request;
@@ -52,6 +53,7 @@ class ProductReviewController extends Controller
 
         $data = [
             'order' => $order ?? "N/A",
+            'bankingDetails' => BankingDetails::get(),
         ];
 
         $pdf = \PDF::loadView('invoice', $data);

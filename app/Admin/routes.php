@@ -26,4 +26,5 @@ Route::group([
     $router->resource('product-reviews', ProductReviewsController::class);
     $router->resource('contact-forms', ContactFormsController::class);
     $router->resource('customers', CustomersController::class);
+    $router->resource('banking-details', BankingDetailsController::class);
 });
