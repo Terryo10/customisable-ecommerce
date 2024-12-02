@@ -211,7 +211,7 @@
                     </p>
                 </div>
                 <div class="item">
-                    <h3><strong>Banking Details:</strong></h3>
+                    <h3><strong>Banking Details To Send Balance:</strong></h3>
 
                     @foreach ($bankingDetails as $banking)
 
