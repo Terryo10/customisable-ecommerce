@@ -20,7 +20,7 @@ class PayNowController extends Controller
         ]);
         $uuid = $this->generateRandomId();
         $payment = $this->paynow($new_trans->id, "paynow")->createPayment("$uuid", Auth::user()->email);
-        $payment->add("paynow", $order->total);
+        $payment->add("Invoice Payment With id of " . $order->id, $order->total);
         $response = $this->paynow($new_trans->id, "paynow")->send($payment);
 
         if ($response->success) {
