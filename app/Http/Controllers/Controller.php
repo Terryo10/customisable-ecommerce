@@ -17,7 +17,7 @@ class Controller extends BaseController
         $this->site_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
     }
 
-    private function generateRandomId(): string
+    public function generateRandomId(): string
     {
         $random_data = "1234567890jefhbeyeaihiuhneiunwurbhihnoahuhrihw";
         return uniqid($random_data);
