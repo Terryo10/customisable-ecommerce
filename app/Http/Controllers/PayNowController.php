@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Orders;
 use App\Models\Transaction;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,19 +20,23 @@ class PayNowController extends Controller
             'type' => 'paynow',
             'total' => $order->total
         ]);
-        $uuid = $this->generateRandomId();
-        $payment = $this->paynow($new_trans->id, "paynow")->createPayment("$uuid", Auth::user()->email);
-        $payment->add("Invoice Payment With id of " . $order->id, $order->total);
-        $response = $this->paynow($new_trans->id, "paynow")->send($payment);
+        try {
+            $uuid = $this->generateRandomId();
+            $payment = $this->paynow($new_trans->id, "paynow")->createPayment("$uuid", Auth::user()->email);
+            $payment->add("Invoice Payment With id of " . $order->id, $order->total);
+            $response = $this->paynow($new_trans->id, "paynow")->send($payment);
 
-        if ($response->success) {
-            $update_tran = Transaction::find($new_trans->id);
-            $update_tran->update(['poll_url' => $response->pollUrl()]);
+            if ($response->success) {
+                $update_tran = Transaction::find($new_trans->id);
+                $update_tran->update(['poll_url' => $response->pollUrl()]);
 
-            $link = $response->redirectUrl();
-            return redirect()->to($link);
-        } else {
-            return redirect()->back()->WithErrors(['message' => 'Oops something went wrong while trying to proccess your transaction please try again']);
+                $link = $response->redirectUrl();
+                return redirect()->to($link);
+            } else {
+                return redirect()->back()->WithErrors(['message' => 'Oops something went wrong while trying to proccess your transaction please try again']);
+            }
+        } catch (Exception $error) {
+            return redirect()->to('/errors')->WithErrors(['message' => $error->getMessage()]);
         }
     }
 

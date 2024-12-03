@@ -52,31 +52,31 @@
                                                         /download-invoice/" . $order->id}}">Download
                                                         Invoice</a>
                                                     @endif
-                                                    @if ($order->transaction)
-                                                    @if ($order->transaction->isPaid !== "1")
-
-
-                                                    <form method="POST" action="{{" /handle-payment/" . $order->id}}">
-                                                        @csrf
-                                                        <button type="submit"
-                                                            class="btn btn-warning form-control text-white">Retry
-                                                            Payment</button>
-                                                    </form>
-
-                                                    @endif
-                                                    @else
-
-                                                    <form method="POST" action="{{" /handle-payment/" . $order->id}}">
-                                                        @csrf
-                                                        <button type="submit"
-                                                            class="btn btn-warning form-control text-white">Pay
-                                                            Now</button>
-                                                    </form>
-
-                                                    @endif
-
-
                                                 </span>
+
+                                                {{-- @if ($order->transaction)
+                                                @if ($order->transaction->isPaid !== "1")
+
+
+                                                <form method="POST" action="{{" /handle-payment/" . $order->id}}">
+                                                    @csrf
+                                                    <button type="submit"
+                                                        class="btn btn-warning form-control text-white">Retry
+                                                        Payment</button>
+                                                </form>
+
+                                                @endif
+                                                @else --}}
+
+                                                <a href="{{"/handle-payment/" . $order->id}}">
+
+                                                    <button class="btn btn-warning form-control text-white">Pay
+                                                        Now</button>
+                                                </a>
+
+                                                {{-- @endif --}}
+
+
                                             </td>
                                             <td>
                                                 <a href="#">
