@@ -51,12 +51,15 @@ class PayNowController extends Controller
         return redirect()->to('/');
     }
 
-    public function checkPayments(Request $request, $id)
+    public function checkPayment(Request $request, $id)
     {
         $transaction = Transaction::findOrFail($id);
+        $order = Orders::findOrFail($transaction->order_id ?? 0);
         $status = $this->paynow($id, "paynow")->pollTransaction($transaction->poll_url);
 
         if ($status->paid()) {
+            $transaction->update(['isPaid' => true, 'status' => 'paid']);
+            $order->update(['status' => 'paid']);
             return redirect()->to('/orders')->with(['message' => 'Transaction paid']);
         } else {
             return redirect()->to('/orders')->withErrors(['message' => 'Why not pay??']);

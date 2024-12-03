@@ -52,8 +52,8 @@ class Controller extends BaseController
             env('PAYNOW_INTERGRATION_ID'),
             env('PAYNOW_INTERGRATION_KEY'),
             // The return url can be set at later stages. You might want to do this if you want to pass data to the return url (like the reference of the transaction)
-            "$site_url/confirm-payment/$id", //return url
-            "$site_url/confirm-payment/$id", //result url
+            "$site_url/check-payment/$id", //return url
+            "$site_url/check-payment/$id", //result url
         );
     }
 }
