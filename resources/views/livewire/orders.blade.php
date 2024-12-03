@@ -68,11 +68,12 @@
                                                 @endif
                                                 @else --}}
 
-                                                <a href="{{"/handle-payment/" . $order->id}}">
 
-                                                    <button class="btn btn-warning form-control text-white">Pay
-                                                        Now</button>
-                                                </a>
+
+                                                <a href="{{" /handle-payment/" . $order->id}}" class="btn btn-warning
+                                                    form-control text-white">Pay
+                                                    Now</a>
+
 
                                                 {{-- @endif --}}
 
