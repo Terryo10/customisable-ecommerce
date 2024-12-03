@@ -54,28 +54,22 @@
                                                     @endif
                                                 </span>
 
-                                                {{-- @if ($order->transaction)
+                                                @if ($order->transaction)
                                                 @if ($order->transaction->isPaid !== "1")
 
 
-                                                <form method="POST" action="{{" /handle-payment/" . $order->id}}">
-                                                    @csrf
-                                                    <button type="submit"
-                                                        class="btn btn-warning form-control text-white">Retry
-                                                        Payment</button>
-                                                </form>
+                                                <a href="{{" /handle-payment/" . $order->id}}" class="btn btn-danger
+                                                    form-control text-white">Retry Payment
+                                                </a>
 
                                                 @endif
-                                                @else --}}
+                                                @else
 
-
-
-                                                <a href="{{" /handle-payment/" . $order->id}}" class="btn btn-warning
+                                                <a href="{{" /handle-payment/" . $order->id}}" class="btn btn-success
                                                     form-control text-white">Pay
                                                     Now</a>
 
-
-                                                {{-- @endif --}}
+                                                @endif
 
 
                                             </td>
