@@ -20,7 +20,7 @@
                                 @else
                                 <!-- User is not logged in -->
                             <li><a href="#!" data-bs-toggle="modal" data-bs-target={{"#quickViewModalLogin"}}
-                                    class="loginModal">Login with Google</a>
+                                    class="loginModal">Login / SignUp</a>
                                 @endif
 
 

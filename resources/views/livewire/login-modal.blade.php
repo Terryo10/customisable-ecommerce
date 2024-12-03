@@ -181,7 +181,10 @@
                                                         <button type="submit" data-mdb-button-init data-mdb-ripple-init
                                                             class="btn btn-primary btn-lg btn-block">Sign Up</button>
 
-
+                                                            <a data-mdb-ripple-init class="btn btn-primary btn-lg btn-block"
+                                                            style="background-color: #55acee" href="/login-google"
+                                                            role="button">
+                                                            Continue with Google</a>
 
 
                                                     </form>

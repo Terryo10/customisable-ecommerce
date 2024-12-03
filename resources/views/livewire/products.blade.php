@@ -1,4 +1,7 @@
 <div>
+    @php
+        $increment = 1;
+    @endphp
     <div class="product-section section pt-120 pb-120">
         <div class="container">
 
@@ -12,6 +15,9 @@
 
             <div class="isotope-grid row" id="shop">
                 @foreach ($products as $product)
+                @php
+                $increment += 1;
+                 @endphp
 
                 <!-- Product Item Start -->
                 <div class="isotope-item col-xl-3 col-lg-4 col-md-6 col-12 mb-50">
@@ -84,13 +90,14 @@
                                         <div class="row">
                                             <div class="col-xl-5 col-md-6 col-12 mb-40">
                                                 <div class="tab-content mb-10">
-                                                    <div class="pro-large-img tab-pane active" id="{{"
+                                                    {{-- <div class="pro-large-img tab-pane active" id="{{"
                                                         pro-large-img-1"}}">
                                                         <img src="{{" /storage/$product->feature_image"}}" alt="">
-                                                    </div>
+                                                    </div> --}}
 
                                                     @foreach ($product->images as $key => $img)
-                                                    <div class="pro-large-img tab-pane" id="{{" pro-large-img-$key"}}">
+                                                    <div class="{{ $key === 0 ? "pro-large-img tab-pane active"
+                                                        : "pro-large-img tab-pane" }}" id="{{"pro-large-img-$key"}}">
                                                         <img src={{"/storage/$img"}} alt="" />
                                                     </div>
                                                     @endforeach
@@ -100,7 +107,8 @@
                                                     @foreach ($product->images as $key => $img)
 
                                                     <div>
-                                                        <a href="{{" #pro-large-img-$key"}}" data-bs-toggle="tab">
+                                                        <a href="{{"#pro-large-img-$key"}}" class="{{ $key === 0
+                                                            ? " active" : "" }}" data-bs-toggle="tab">
                                                             <img src="{{" /storage/$img"}}" alt="" />
                                                         </a>
                                                     </div>
