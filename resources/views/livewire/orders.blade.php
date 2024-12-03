@@ -48,10 +48,33 @@
                                                         . $order->id}}">Download
                                                         Receipt</a>
                                                     @else
-                                                    <a class="btn btn-warning text-white" href="{{" /download-invoice/"
-                                                        . $order->id}}">Download
+                                                    <a class="btn btn-warning text-white mb-1" href="{{"
+                                                        /download-invoice/" . $order->id}}">Download
                                                         Invoice</a>
                                                     @endif
+                                                    @if ($order->transaction)
+                                                    @if ($order->transaction->isPaid !== "1")
+
+
+                                                    <form method="POST" action="{{" /handle-payment/" . $order->id}}">
+                                                        @csrf
+                                                        <button type="submit"
+                                                            class="btn btn-warning form-control text-white">Retry
+                                                            Payment</button>
+                                                    </form>
+
+                                                    @endif
+                                                    @else
+
+                                                    <form method="POST" action="{{" /handle-payment/" . $order->id}}">
+                                                        @csrf
+                                                        <button type="submit"
+                                                            class="btn btn-warning form-control text-white">Pay
+                                                            Now</button>
+                                                    </form>
+
+                                                    @endif
+
 
                                                 </span>
                                             </td>
