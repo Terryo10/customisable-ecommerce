@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PayNowController;
 use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RegisterController;
@@ -34,6 +35,10 @@ Route::post('/search', function (Request $request) {
 });
 Route::get('/download-invoice/{order_id}', [ProductReviewController::class, 'downInvoiceAsPDF']);
 Route::get('/download-receipt/{order_id}', [ProductReviewController::class, 'downReceiptAsPDF']);
+Route::post('/handle-payment/{order_id}', [PayNowController::class, 'createPayment'])->name('paynow.payment');
+Route::get('/cancel-payment/{id}', [PayNowController::class, 'paymentCancel'])->name('paynowCancel.payment');
+Route::get('/check-payment/{id}', [PayNowController::class, 'checkPayment'])->name('paynowCheck.payment');
+Route::get('/success-payment/{id}', [PayNowController::class, 'paymentSuccess'])->name('paynowSuccess.payment');
 Route::get('/forgot-password', ForgotPasswordPage::class);
 Route::post('/forgot-password', [LoginController::class, 'forgotPassword']);
 Route::post('/contact', [ContactFormController::class, 'create'])->name('contact.create');

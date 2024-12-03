@@ -33,4 +33,33 @@ class PayNowController extends Controller
             return redirect()->back()->WithErrors(['message' => 'Oops something went wrong while trying to proccess your transaction please try again']);
         }
     }
+
+    public function paymentCancel()
+
+    {
+        return redirect('/')->with("message", "Your payment has been declined. The payment cancelation page goes here!");
+    }
+
+
+    public function paymentSuccess(Request $request, $id = "")
+
+    {
+        $user = Auth::user();
+
+        $transaction_top = Transaction::where('id', $id)->first();
+
+        return redirect()->to('/');
+    }
+
+    public function checkPayments(Request $request, $id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        $status = $this->paynow($id, "paynow")->pollTransaction($transaction->poll_url);
+
+        if ($status->paid()) {
+            return redirect()->to('/orders')->with(['message' => 'Transaction paid']);
+        } else {
+            return redirect()->to('/orders')->withErrors(['message' => 'Why not pay??']);
+        }
+    }
 }
