@@ -4,7 +4,7 @@
   width: 1310px;
 }
 
-.modal-dialog{
+.modal-dialogs{
   max-width: 1170px;
 }
 
@@ -29,7 +29,7 @@
   padding-top: 20px;
 }
 
-.modal-dialog{
+.modal-dialogs{
   max-width: 1170px;
 }
 
@@ -87,7 +87,7 @@
 }
 
 
-.modal-dialog{
+.modal-dialogs{
   max-width: 970px;
 }
 
@@ -163,7 +163,7 @@
   margin: 0;
 }
 
-.modal-dialog{
+.modal-dialogs{
   max-width: 750px;
 }
 
@@ -304,7 +304,7 @@ a.meanmenu-reveal {
   margin: 0;
 }
 
-.modal-dialog{
+.modal-dialogs{
   max-width: 450px;
 }
 
@@ -429,7 +429,7 @@ blockquote p {
   float: left;
 }
 
-.modal-dialog{
+.modal-dialogs{
   max-width: 100%;
 }
 

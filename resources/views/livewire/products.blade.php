@@ -70,7 +70,7 @@
                     </div>
                     <div class="block relative">
                         <div class="modal fade" id={{"quickViewModal$product->id"}} tabindex="-1">
-                            <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-dialog modal-dialogs modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <span type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
