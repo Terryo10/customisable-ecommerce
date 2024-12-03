@@ -14,12 +14,14 @@ class PayNowController extends Controller
     {
         $order = Orders::findOrFail($order_id);
 
-        $new_trans = Transaction::create([
-            'user_id' => Auth::user()->id,
-            'order_id' => $order_id,
-            'type' => 'paynow',
-            'total' => $order->total
-        ]);
+        $new_trans = Transaction::updateOrCreate(
+            ['order_id' => $order_id],
+            [
+                'user_id' => Auth::user()->id,
+                'type' => 'paynow',
+                'total' => $order->total
+            ]
+        );
         try {
             $uuid = $this->generateRandomId();
             $payment = $this->paynow($new_trans->id, "paynow")->createPayment("$uuid", Auth::user()->email);
