@@ -16,7 +16,8 @@ class PayNowController extends Controller
         $new_trans = Transaction::create([
             'user_id' => Auth::user()->id,
             'order_id' => $order_id,
-            'status' => 'pending'
+            'status' => 'pending',
+            'total' => $order->total
         ]);
         $uuid = $this->generateRandomId();
         $payment = $this->paynow($new_trans->id, "paynow")->createPayment("$uuid", Auth::user()->email);
