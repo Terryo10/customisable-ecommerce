@@ -16,7 +16,7 @@ class PayNowController extends Controller
         $new_trans = Transaction::create([
             'user_id' => Auth::user()->id,
             'order_id' => $order_id,
-            'status' => 'pending',
+            'type' => 'paynow',
             'total' => $order->total
         ]);
         $uuid = $this->generateRandomId();
@@ -59,7 +59,7 @@ class PayNowController extends Controller
         $status = $this->paynow($id, "paynow")->pollTransaction($transaction->poll_url);
 
         if ($status->paid()) {
-            $transaction->update(['isPaid' => true, 'status' => 'paid']);
+            $transaction->update(['isPaid' => true]);
             $order->update(['status' => 'paid']);
             return redirect()->to('/orders')->with(['message' => 'Transaction paid']);
         } else {
