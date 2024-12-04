@@ -95,12 +95,6 @@
                                                         <img src="{{" /storage/$product->feature_image"}}" class="{{"pro-large-img-". $product->id}}" alt="">
                                                     </div>
 
-                                                    {{-- @foreach ($product->images as $key => $img)
-                                                    <div class="{{ $key === 0 ? " pro-large-img tab-pane active"
-                                                        : "pro-large-img tab-pane" }}" id="{{" pro-large-img-$key"}}">
-                                                        <img src={{"/storage/$img"}} alt="" />
-                                                    </div>
-                                                    @endforeach --}}
                                                 </div>
 
                                                 <div class="pro-thumb-img-slider nav">
@@ -144,8 +138,7 @@
                                                             @endif
 
 
-                                                            <span> (({{$product->reviews->count()}}) Customer
-                                                                Review)</span>
+                                                         
                                                         </span>
                                                     </div>
                                                     <form method="POST" action="{{ route('placeOrder') }}">
@@ -216,22 +209,15 @@
                                                             </a>
                                                         </li>
 
-                                                        {{-- <li id="download" data-target="{{$product->id}}">
-                                                            <a href="#print">
-                                                                <i class="pe-7s-print"></i> print
-                                                            </a>
-                                                        </li> --}}
+                                                       
                                                     </ul>
 
                                                     <div class="share-icons section">
                                                         <span>share :</span>
-                                                        <a href="#!">
+                                                        <a href="https://www.facebook.com/profile.php?id=100082974115013">
                                                             <i class="fa fa-facebook"></i>
                                                         </a>
-                                                        <a href="#!">
-                                                            <i class="fa fa-twitter"></i>
-                                                        </a>
-                                                        <a href="#!">
+                                                        <a href="https://www.instagram.com/slimriff?igsh=MWVoMm5vZHF4NTY5cQ==">
                                                             <i class="fa fa-instagram"></i>
                                                         </a>
 
@@ -241,7 +227,7 @@
                                                         @php
                                                         $review_product = $product;
                                                         @endphp
-                                                        <livewire:products-reviews :product="$review_product">
+                                                        {{-- <livewire:products-reviews :product="$review_product"> --}}
                                                     </div>
                                                 </div>
                                             </div>
