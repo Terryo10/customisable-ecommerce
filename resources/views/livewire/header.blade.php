@@ -31,13 +31,14 @@
                     <div class="header-option-btns d-flex">
                         <!-- header-search -->
                         <div class="header-search">
-                            <button class="search-toggle"><i class="pe-7s-search"></i></button>
+                            <button class="search-toggle" data-bs-toggle="modal" data-bs-target="{{"
+                                #quickViewModalSearch"}}"><i class="pe-7s-search"></i></button>
                             <div class="header-search-form">
-                                <form method="POST" action="/search">
+                                {{-- <form method="POST" action="/search">
                                     @csrf
                                     <input type="text" name="search" placeholder="Search">
                                     <button type="submit"><i class="fa fa-long-arrow-right"></i></button>
-                                </form>
+                                </form> --}}
                             </div>
                         </div>
 
