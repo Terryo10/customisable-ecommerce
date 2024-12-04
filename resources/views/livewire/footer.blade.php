@@ -70,5 +70,6 @@
         </div>
     </div>
     <livewire:contact-modal>
-        <livewire:login-modal>
+    <livewire:search-modal>
+    <livewire:login-modal>
 </div>
