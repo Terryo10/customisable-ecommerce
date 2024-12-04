@@ -5,7 +5,7 @@
                 <div class="col-auto">
                     <!-- logo -->
                     <div class="header-logo">
-                        <a href="/"><img src="/logo.png" alt="main logo" style="height: 100px"></a>
+                        <a href="/"><img src="/logo.png" alt="main logo" style="height: 80px"></a>
                     </div>
                 </div>
                 <div class="col-auto d-flex">
@@ -22,9 +22,7 @@
                                     class="loginModal">Login / SignUp</a>
                                 @endif
 
-
                             </li>
-
 
                             <li><a href="#!" data-bs-toggle="modal" data-bs-target="{{" #quickViewModalContact"}}"
                                     class="contactModal">Contact</a></li>
@@ -50,6 +48,4 @@
             </div>
         </div>
     </header>
-    <livewire:contact-modal>
-        <livewire:login-modal>
 </div>
