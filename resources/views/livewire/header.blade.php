@@ -1,7 +1,7 @@
 <div>
     <header class="header-section section sticker">
         <div class="container">
-            <div class="row justify-content-between">
+            <div class="row justify-content-between align-items-center">
                 <div class="col-auto">
                     <!-- logo -->
                     <div class="header-logo">
@@ -24,23 +24,23 @@
 
                             </li>
 
-                            <li><a href="#!" data-bs-toggle="modal" data-bs-target="{{" #quickViewModalContact"}}"
-                                    class="contactModal">Contact</a></li>
+                            <li><a href="#!" data-bs-toggle="modal" data-bs-target="{{" #quickViewModalSearch"}}"
+                                    class="search-toggle"><i style="font-size: 15px;" class="pe-7s-search"></i></a></li>
                         </ul>
                     </nav>
                     <div class="header-option-btns d-flex">
                         <!-- header-search -->
-                        <div class="header-search">
+                        {{-- <div class="header-search">
                             <button class="search-toggle" data-bs-toggle="modal" data-bs-target="{{"
                                 #quickViewModalSearch"}}"><i class="pe-7s-search"></i></button>
                             <div class="header-search-form">
-                                {{-- <form method="POST" action="/search">
+                                <form method="POST" action="/search">
                                     @csrf
                                     <input type="text" name="search" placeholder="Search">
                                     <button type="submit"><i class="fa fa-long-arrow-right"></i></button>
-                                </form> --}}
+                                </form>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
 
