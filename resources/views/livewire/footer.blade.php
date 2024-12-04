@@ -5,16 +5,15 @@
 
                 <!-- Footer Widget -->
                 <div class="footer-widget col-lg-4 col-md-6 col-12 mb-40">
-                    <h5 class="widget-title">ABOUT THE STORE</h5>
-                    <p>SlimRiff is an e-commerce platform</p>
+                    <h5 class="widget-title">ABOUT THE SLIMRIFF</h5>
+                    <p>Expertly crafting personalized garments and graduation essentials, we bring your vision to life with precision and style. Celebrate every milestone with custom designs made just for you!</p>
                 </div>
 
                 <!-- Footer Widget -->
                 <div class="footer-widget col-lg-3 col-md-6 col-12 mb-40">
-                    <h5 class="widget-title">CUSTOMER SERVICE</h5>
+                    <h5 class="widget-title"></h5>
                     <ul>
-                        <li><a href="#!" data-bs-toggle="modal" data-bs-target={{"#quickViewModalContact"}}>Contact
-                                Us</a></li>
+
                     </ul>
                 </div>
 
