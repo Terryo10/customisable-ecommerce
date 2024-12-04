@@ -9,7 +9,7 @@
                     <div class="home-slick-content">
                         <h1>{{ $slider->title ?? "" }}</h1>
                         <p>{{ $slider->description ?? "" }}</p>
-                        <a href="#shop" class="btn">View Shop</a>
+                        <a href="#shop" class="btn">Shop Now</a>
                     </div>
                     @endforeach
                 </div>
