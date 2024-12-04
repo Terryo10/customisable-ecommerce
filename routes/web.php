@@ -29,8 +29,7 @@ Route::get('/', HomePage::class);
 Route::get('/product/{id}', HomePage::class);
 Route::get('/products/{search}', ProductsSearch::class);
 Route::post('/search', function (Request $request) {
-    $search_value = $request->input('search');
-    return redirect()->to('/products/' . $search_value);
+    return redirect()->to('/products/' . $request->input('search'));
 });
 Route::get('/download-invoice/{order_id}', [ProductReviewController::class, 'downInvoiceAsPDF']);
 Route::get('/download-receipt/{order_id}', [ProductReviewController::class, 'downReceiptAsPDF']);
@@ -38,7 +37,6 @@ Route::get('/forgot-password', ForgotPasswordPage::class);
 Route::post('/forgot-password', [LoginController::class, 'forgotPassword']);
 Route::post('/contact', [ContactFormController::class, 'create'])->name('contact.create');
 Route::post('/reset-password', [LoginController::class, 'submitResetPasswordForm'])->name('update.password');
-// Route::get('reset-password/{token}', [LoginController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::get('reset-password/{token}', ResetPasswordForm::class)->name('reset.password.get');
 Route::get('/orders', Orders::class)->middleware('auth');
 Route::post('/place-order', [ProductsController::class, 'placeOrder'])->middleware('auth')->name('placeOrder');
@@ -52,6 +50,4 @@ Route::get('/logout', [GoogleAuthController::class, 'logout'])->middleware('auth
 Route::get('/google-callback', [GoogleAuthController::class, 'callbackFromGoogle']);
 Route::get('/check-user', [GoogleAuthController::class, 'checkUser']);
 Route::get('/{any}',  HomePage::class)->where('any', '^(?!api).*');
-// Route::get('/{any}', function () {
-//     return view('app');
-// })->where('any', '^(?!api).*');
+

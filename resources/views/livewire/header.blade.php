@@ -5,8 +5,7 @@
                 <div class="col-auto">
                     <!-- logo -->
                     <div class="header-logo">
-                        <a href="/"><img src="/template/outside/img/logo.png" alt="main logo"></a>
-                        {{-- <a wire:navigate href="/"><img src="/template/outside/img/logo.png" alt="main logo"></a> --}}
+                        <a href="/"><img src="/logo.png" alt="main logo" style="height: 100px"></a>
                     </div>
                 </div>
                 <div class="col-auto d-flex">

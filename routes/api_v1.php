@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Authenticated API (sanctum)
-Route::get('/products', [ProductsController::class, "index"]);
-Route::get('/sliders', [ProductsController::class, "sliders"]);
 
 Route::group(['middeware' => 'auth:sanctum'], function () {
     Route::get('/check-user', [GoogleAuthController::class, "checkUser"]);
