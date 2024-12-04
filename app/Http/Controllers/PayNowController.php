@@ -88,11 +88,14 @@ class PayNowController extends Controller
             if ($status->paid()) {
                 $transaction->update(['isPaid' => true]);
                 $order->update(['status' => 'paid']);
+                admin_success('Payment successful', 'payment was successful');
                 return redirect()->back();
             } else {
+                admin_error('Customer did not pay', 'wait for customer to pay...');
                 return redirect()->back();
             }
         } catch (Exception $error) {
+            admin_error('Something went wrong!!!', $error->getMessage());
             return redirect()->back();
         }
     }
