@@ -28,15 +28,28 @@ class TransactionsController extends AdminController
     {
         $grid = new Grid(new Transaction());
 
-        $grid->column('id', __('Id'));
         $grid->column('type', __('Type'));
-        $grid->column('isPaid', __('IsPaid'));
+        $grid->column('isPaid', __('Payment Status'))->display(function ($status) {
+            $status_text = $status === 1 ? "Paid" : "Cancelled";
+            $status_classes = $status === 1 ? "btn btn-success form-control" : "btn btn-danger form-control";
+            return "<span class='$status_classes'>{$status_text}</span>";
+        });
         $grid->column('total', __('Total'));
         // Display product name
         $grid->column('order_id', __('Order ID'))->sortable()->filter();
 
         // Display user name
         $grid->column('user.name', __('Customer'))->sortable()->filter();
+        $grid->column('id', __('Payment Status Check'))->display(function ($id) {
+            $order = Transaction::findOrFail($id);
+
+            $downloadLink = $order->isPaid === 1 ? admin_url("transactions") : admin_url("check-payment/"
+                . $order->id);
+            $adminBtnClasses = $order->isPaid === 1 ? "btn btn-success form-control text-white" : "btn form-control btn-warning text-white";
+            $adminBtnName = $order->isPaid === 1 ? "Paid" : "Check Transaction Status";
+            $button = "<button type='submit' class='$adminBtnClasses'> $adminBtnName </button>";
+            return "<form method='GET' action='$downloadLink'>{$button}</form>";
+        });
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 

@@ -10,9 +10,9 @@
             }
         </style>
 
-        <div className="block relative">
+        <div class="block relative">
             <div class="modal fade" id="quickViewModalLogin" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h3>SlimRiff</h3>
@@ -41,14 +41,14 @@
                                 @endif
                             </div>
 
-                            <section class="vh-100">
-                                <div class="container py-5 h-100">
-                                    <div class="row d-flex align-items-center justify-content-center h-100">
-                                        <div class="col-md-8 col-lg-7 col-xl-6">
+                            <section class="">
+                                <div class="container py-5">
+                                    <div class="row d-flex align-items-center justify-content-center">
+                                        {{-- <div class="col-md-8 col-lg-7 col-xl-6">
                                             <img src="{{ asset('template/outside/img/draw2.svg') }}" class="img-fluid"
                                                 alt="Phone image">
-                                        </div>
-                                        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                                        </div> --}}
+                                        <div class="">
                                             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                                 <li class="nav-item" role="presentation">
                                                     <span class="nav-link active" id="pills-home-tab"
@@ -79,7 +79,7 @@
                                                         </div>
                                                         @endif
                                                         <!-- Email input -->
-                                                        <div data-mdb-input-init class="form-outline mb-4">
+                                                        <div data-mdb-input-init class="form-outline mb-1">
                                                             <input type="email" id="form1Example13" name="email"
                                                                 class="form-control form-control-lg" />
                                                             <label class="form-label" for="form1Example13">Email
@@ -87,7 +87,7 @@
                                                         </div>
 
                                                         <!-- Password input -->
-                                                        <div data-mdb-input-init class="form-outline mb-4">
+                                                        <div data-mdb-input-init class="form-outline mb-1">
                                                             <input type="password" id="form1Example23" name="password"
                                                                 class="form-control form-control-lg" />
                                                             <label class="form-label"
@@ -95,7 +95,7 @@
                                                         </div>
 
                                                         <div
-                                                            class="d-flex justify-content-around align-items-center mb-4">
+                                                            class="d-flex justify-content-around align-items-center mb-1">
                                                             <!-- Checkbox -->
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox" value=""
@@ -144,13 +144,13 @@
                                                         </div>
                                                         @endif
                                                         <!-- Email input -->
-                                                        <div data-mdb-input-init class="form-outline mb-4">
+                                                        <div data-mdb-input-init class="form-outline mb-1">
                                                             <input type="text" id="form1Example13" name="name"
                                                                 class="form-control form-control-lg" />
                                                             <label class="form-label" for="form1Example13">Your
                                                                 Name</label>
                                                         </div>
-                                                        <div data-mdb-input-init class="form-outline mb-4">
+                                                        <div data-mdb-input-init class="form-outline mb-1">
                                                             <input type="email" id="form1Example13" name="email"
                                                                 class="form-control form-control-lg" />
                                                             <label class="form-label" for="form1Example13">Email
@@ -158,13 +158,13 @@
                                                         </div>
 
                                                         <!-- Password input -->
-                                                        <div data-mdb-input-init class="form-outline mb-4">
+                                                        <div data-mdb-input-init class="form-outline mb-1">
                                                             <input type="password" id="form1Example23" name="password"
                                                                 class="form-control form-control-lg" />
                                                             <label class="form-label"
                                                                 for="form1Example23">Password</label>
                                                         </div>
-                                                        <div data-mdb-input-init class="form-outline mb-4">
+                                                        <div data-mdb-input-init class="form-outline mb-1">
                                                             <input type="password" id="form1Example23"
                                                                 name="confirm_password"
                                                                 class="form-control form-control-lg" />
@@ -173,7 +173,7 @@
                                                         </div>
 
                                                         <div
-                                                            class="d-flex justify-content-around align-items-center mb-4">
+                                                            class="d-flex justify-content-around align-items-center mb-1">
 
                                                         </div>
 
@@ -181,7 +181,10 @@
                                                         <button type="submit" data-mdb-button-init data-mdb-ripple-init
                                                             class="btn btn-primary btn-lg btn-block">Sign Up</button>
 
-
+                                                            <a data-mdb-ripple-init class="btn btn-primary btn-lg btn-block"
+                                                            style="background-color: #55acee" href="/login-google"
+                                                            role="button">
+                                                            Continue with Google</a>
 
 
                                                     </form>

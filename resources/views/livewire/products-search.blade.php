@@ -72,7 +72,7 @@
                         </div>
                         <div class="block relative">
                             <div class="modal fade" id={{"quickViewModal$product->id"}} tabindex="-1">
-                                <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-dialog modal-dialogs modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <span type="button" class="btn-close" data-bs-dismiss="modal"
@@ -82,29 +82,43 @@
                                                 X</span>
                                         </div>
                                         <div class="modal-body" id={{"content_$product->id"}}>
+                                            <div>
+                                                @if (session()->has('message'))
+                                                <div class="alert alert-success">
+                                                    {{ session('message') }}
+                                                </div>
+                                                @endif
+                                            </div>
                                             <div class="row">
                                                 <div class="col-xl-5 col-md-6 col-12 mb-40">
                                                     <div class="tab-content mb-10">
-                                                        <div class="pro-large-img tab-pane active" id="{{"
-                                                            pro-large-img-1"}}">
-                                                            <img src="{{" /storage/$product->feature_image"}}" alt="">
+                                                        <div class="{{" pro-large-img tab-pane active"}}" id="{{"
+                                                            pro-large-img-$product->id"}}">
+                                                            <img src="{{" /storage/$product->feature_image"}}"
+                                                            class="{{"pro-large-img-". $product->id}}" alt="">
                                                         </div>
 
-                                                        @foreach ($product->images as $key => $img)
-                                                        <div class="pro-large-img tab-pane" id="{{"
+                                                        {{-- @foreach ($product->images as $key => $img)
+                                                        <div class="{{ $key === 0 ? " pro-large-img tab-pane active"
+                                                            : "pro-large-img tab-pane" }}" id="{{"
                                                             pro-large-img-$key"}}">
                                                             <img src={{"/storage/$img"}} alt="" />
                                                         </div>
-                                                        @endforeach
+                                                        @endforeach --}}
                                                     </div>
 
                                                     <div class="pro-thumb-img-slider nav">
                                                         @foreach ($product->images as $key => $img)
 
                                                         <div>
-                                                            <a href="{{" #pro-large-img-$key"}}" data-bs-toggle="tab">
-                                                                <img src="{{" /storage/$img"}}" alt="" />
-                                                            </a>
+                                                            <span class="{{ $key === 0
+                                                                ? " active" : "" }}" data-bs-toggle="tab">
+                                                                <img src="{{" /storage/$img"}}" data-target="{{"
+                                                                    #pro-large-img-$product->id"}}"
+                                                                data-id={{$product->id}}
+                                                                alt="" class="img-click"
+                                                                />
+                                                            </span>
                                                         </div>
                                                         @endforeach
                                                     </div>
@@ -142,13 +156,7 @@
                                                         <form method="POST" action="{{ route('placeOrder') }}">
 
                                                             @csrf
-                                                            <div>
-                                                                @if (session()->has('message'))
-                                                                <div class="alert alert-success">
-                                                                    {{ session('message') }}
-                                                                </div>
-                                                                @endif
-                                                            </div>
+
                                                             <div class="short-desc section">
                                                                 <h5 class="pd-sub-title">
                                                                     Quick Overview
@@ -197,7 +205,7 @@
                                                             <div class="quantity-cart section">
                                                                 <div class="product-quantity">
                                                                     <input wire:model="order.quantity" name="quantity"
-                                                                        type="text" value="0" />
+                                                                        type="number" value="1" required />
                                                                 </div>
                                                                 <button type="submit" class="add-to-cart">
                                                                     Place Order
@@ -267,6 +275,16 @@
     </div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.img-click').forEach((img)=>{
+        img.addEventListener('click', function (e){
+            document.querySelectorAll(`.pro-large-img-${e.target.getAttribute('data-id')}`).forEach((element)=>{
+                element.setAttribute('src', e.target.getAttribute('src'));
+            })
+        })
+    })
+
+    });
         // document.addEventListener("DOMContentLoaded", () => {
         const stars = document.querySelectorAll(".star");
         const reviewText = document.getElementById("reviewText");

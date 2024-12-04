@@ -48,12 +48,30 @@
                                                         . $order->id}}">Download
                                                         Receipt</a>
                                                     @else
-                                                    <a class="btn btn-warning text-white" href="{{" /download-invoice/"
-                                                        . $order->id}}">Download
+                                                    <a class="btn btn-warning text-white mb-1" href="{{"
+                                                        /download-invoice/" . $order->id}}">Download
                                                         Invoice</a>
                                                     @endif
-
                                                 </span>
+
+                                                @if ($order->transaction)
+                                                @if ($order->transaction->isPaid !== 1)
+
+
+                                                <a href="{{" /handle-payment/" . $order->id}}" class="btn btn-danger
+                                                    form-control text-white">Retry Payment
+                                                </a>
+
+                                                @endif
+                                                @else
+
+                                                <a href="{{" /handle-payment/" . $order->id}}" class="btn btn-success
+                                                    form-control text-white">Pay
+                                                    Now</a>
+
+                                                @endif
+
+
                                             </td>
                                             <td>
                                                 <a href="#">

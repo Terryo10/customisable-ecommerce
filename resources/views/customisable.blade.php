@@ -36,7 +36,7 @@
             <div id="custom_fields_data" class="col-md-12" style="margin: 10px 0px">
 
                 <input type="text" class="form-control" id="customAddedFields" name="fields"
-                    placeholder="Added Fields" />
+                    placeholder="Added Fields" required />
             </div>
 
         </div>
