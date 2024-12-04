@@ -55,7 +55,7 @@
                                                 </span>
 
                                                 @if ($order->transaction)
-                                                @if ($order->transaction->isPaid !== "1")
+                                                @if ($order->transaction->isPaid !== 1)
 
 
                                                 <a href="{{" /handle-payment/" . $order->id}}" class="btn btn-danger

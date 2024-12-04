@@ -61,16 +61,39 @@ class PayNowController extends Controller
 
     public function checkPayment(Request $request, $id)
     {
-        $transaction = Transaction::findOrFail($id);
-        $order = Orders::findOrFail($transaction->order_id ?? 0);
-        $status = $this->paynow($id, "paynow")->pollTransaction($transaction->poll_url);
+        try {
+            $transaction = Transaction::findOrFail($id);
+            $order = Orders::findOrFail($transaction->order_id ?? 0);
+            $status = $this->paynow($id, "paynow")->pollTransaction($transaction->poll_url);
 
-        if ($status->paid()) {
-            $transaction->update(['isPaid' => true]);
-            $order->update(['status' => 'paid']);
-            return redirect()->to('/orders')->with(['message' => 'Transaction paid']);
-        } else {
-            return redirect()->to('/orders')->withErrors(['message' => 'Why not pay??']);
+            if ($status->paid()) {
+                $transaction->update(['isPaid' => true]);
+                $order->update(['status' => 'paid']);
+                return redirect()->to('/orders')->with(['message' => 'Transaction paid']);
+            } else {
+                return redirect()->to('/orders')->withErrors(['message' => 'Why not pay??']);
+            }
+        } catch (Exception $error) {
+            return redirect()->to('/errors')->WithErrors(['message' => $error->getMessage()]);
+        }
+    }
+    public function checkPaymentAdmin(Request $request, $id)
+    {
+        try {
+
+            $transaction = Transaction::findOrFail($id);
+            $order = Orders::findOrFail($transaction->order_id ?? 0);
+            $status = $this->paynow($id, "paynow")->pollTransaction($transaction->poll_url);
+
+            if ($status->paid()) {
+                $transaction->update(['isPaid' => true]);
+                $order->update(['status' => 'paid']);
+                return redirect()->back();
+            } else {
+                return redirect()->back();
+            }
+        } catch (Exception $error) {
+            return redirect()->back();
         }
     }
 }
