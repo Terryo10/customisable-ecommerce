@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Orders;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -25,7 +26,7 @@ class PayUsingEcocash extends Component
         $this->validate([
             'phone' => 'required|regex:/^[0-9]{10,15}$/', // Add validation for phone number
         ]);
-        
+
         $order = Orders::findOrFail($this->orderId);
 
         $new_trans = Transaction::updateOrCreate(
@@ -41,20 +42,29 @@ class PayUsingEcocash extends Component
             $uuid = $this->generateRandomId();
             $payment = $this->paynow($new_trans->id, "paynow")->createPayment("$uuid", Auth::user()->email);
             $payment->add("Invoice Payment With id of " . $order->id, $order->total);
-            $response = $this->paynow($new_trans->id, "paynow")->send($payment);
+            $response = $this->paynow($new_trans->id, "paynow")->sendMobile($payment, $this->phone, 'ecocash');
 
             if ($response->success) {
                 $update_tran = Transaction::find($new_trans->id);
                 $update_tran->update(['poll_url' => $response->pollUrl()]);
 
-                $link = $response->redirectUrl();
-                return redirect()->to($link);
+                $pollUrl = $response->pollUrl();
+
+
+                // sleep(15);
+                $status = $this->paynow($new_trans->id, "paynow")->pollTransaction($pollUrl);
+
+
+                if ($status->paid()) {
+                    return redirect()->to("/orders")->with('message', 'Your payment was successdull!!');
+                } else {
+                    session()->flash('error', 'Why not pay!!');
+                }
             } else {
                 session()->flash('error', 'Oops something went wrong while trying to process your transaction. Please try again.');
             }
         } catch (\Exception $error) {
             session()->flash('error', $error->getMessage());
-            return redirect()->to('/errors');
         }
     }
 
