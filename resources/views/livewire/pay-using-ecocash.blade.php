@@ -10,7 +10,7 @@
         <div class="container row justify-content-center align-items-center">
             <div class="col-md-6">
                 @if (session()->has('error'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger" style="margin-top: 80px;">
                     {{ session('error') }}
                 </div>
                 @endif

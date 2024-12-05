@@ -61,7 +61,7 @@
                                                 <a href="{{" /handle-payment/" . $order->id}}" class="btn btn-danger
                                                     form-control text-white mb-3">Retry Payment
                                                 </a>
-                                                <a href="{{" /pay-ecocash/" . $order->id}}" class="btn btn-danger
+                                                <a href="{{" /pay-ecocash/" . $order->id}}" class="btn btn-primary
                                                     form-control text-white mb-3">Retry Ecocash
                                                 </a>
 
@@ -71,7 +71,7 @@
                                                 <a href="{{" /handle-payment/" . $order->id}}" class="btn btn-success
                                                     form-control text-white mb-3">Pay
                                                     Now</a>
-                                                <a href="{{" /pay-ecocash/" . $order->id}}" class="btn btn-success
+                                                <a href="{{" /pay-ecocash/" . $order->id}}" class="btn btn-primary
                                                     form-control text-white mb-3">Pay
                                                     Using Ecocash</a>
 
