@@ -58,12 +58,18 @@
                                 border: none;
                                 outline: none;
                             }
+
+                            @media (max-width: 999px){
+                                .searchbar:hover>.search_input{
+                                    width: 60% !important;
+                                }
+                            }
                         </style>
                         <div class="d-flex justify-content-center h-100">
                             <form method="POST" action="/search">
                                 @csrf
                                 <div class="searchbar">
-                                    <input class="search_input" type="text" name="search" placeholder="Search...">
+                                    <input class="search_input" type="text" required name="search" placeholder="Search...">
                                     <button type="submit" class="search_icon"><i class="pe-7s-search"></i></button>
                                 </div>
                             </form>
