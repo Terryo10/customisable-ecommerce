@@ -10,6 +10,7 @@ use App\Http\Controllers\RegisterController;
 use App\Livewire\ForgotPasswordPage;
 use App\Livewire\HomePage;
 use App\Livewire\Orders;
+use App\Livewire\PayUsingEcocash;
 use App\Livewire\ProductsSearch;
 use App\Livewire\ResetPasswordForm;
 use Illuminate\Http\Request;
@@ -34,6 +35,7 @@ Route::post('/search', function (Request $request) {
 });
 Route::get('/download-invoice/{order_id}', [ProductReviewController::class, 'downInvoiceAsPDF']);
 Route::get('/download-receipt/{order_id}', [ProductReviewController::class, 'downReceiptAsPDF']);
+Route::get('/pay-ecocash/{orderId}', PayUsingEcocash::class)->name('create.payment.ecocash');
 Route::get('/handle-payment/{order_id}', [PayNowController::class, 'createPayment'])->middleware('auth')->name('paynow.payment');
 Route::get('/cancel-payment/{id}', [PayNowController::class, 'paymentCancel'])->name('paynowCancel.payment');
 Route::get('/check-payment/{id}', [PayNowController::class, 'checkPayment'])->name('paynowCheck.payment');
