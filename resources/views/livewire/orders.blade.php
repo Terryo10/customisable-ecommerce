@@ -59,7 +59,8 @@
 
 
                                                 <a href="{{" /handle-payment/" . $order->id}}" class="btn btn-danger
-                                                    form-control text-white mb-3">Retry Payment
+                                                    form-control text-white mb-3">Retry Payment Using VISA / Ecocash /
+                                                    Mastercard / Inn Bucks
                                                 </a>
                                                 <a wire:navigate href="{{" /pay-ecocash/" . $order->id}}" class="btn
                                                     btn-primary
@@ -71,7 +72,7 @@
 
                                                 <a href="{{" /handle-payment/" . $order->id}}" class="btn btn-success
                                                     form-control text-white mb-3">Pay
-                                                    Now</a>
+                                                    Now Using VISA / Ecocash / Mastercard / Inn Bucks</a>
                                                 <a wire:navigate href="{{" /pay-ecocash/" . $order->id}}" class="btn
                                                     btn-primary
                                                     form-control text-white mb-3">Pay
