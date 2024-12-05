@@ -59,20 +59,20 @@
 
 
                                                 <a href="{{" /handle-payment/" . $order->id}}" class="btn btn-danger
-                                                    form-control text-white">Retry Payment
+                                                    form-control text-white mb-3">Retry Payment
                                                 </a>
                                                 <a href="{{" /pay-ecocash/" . $order->id}}" class="btn btn-danger
-                                                    form-control text-white">Retry Ecocash
+                                                    form-control text-white mb-3">Retry Ecocash
                                                 </a>
 
                                                 @endif
                                                 @else
 
                                                 <a href="{{" /handle-payment/" . $order->id}}" class="btn btn-success
-                                                    form-control text-white">Pay
+                                                    form-control text-white mb-3">Pay
                                                     Now</a>
                                                 <a href="{{" /pay-ecocash/" . $order->id}}" class="btn btn-success
-                                                    form-control text-white">Pay
+                                                    form-control text-white mb-3">Pay
                                                     Using Ecocash</a>
 
                                                 @endif
