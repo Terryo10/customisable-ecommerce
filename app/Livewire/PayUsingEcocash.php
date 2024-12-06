@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Orders;
 use App\Models\Transaction;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Paynow\Payments\Paynow;
@@ -14,6 +15,8 @@ class PayUsingEcocash extends Component
     public $orderId;
     public $site_url;
     public $phone;
+    public $isProccessing = "false";
+    public $paymentSent = "false";
 
     public function mount($orderId)
     {
@@ -27,6 +30,7 @@ class PayUsingEcocash extends Component
             'phone' => 'required|regex:/^[0-9]{10,15}$/', // Add validation for phone number
         ]);
 
+        $this->isProccessing = true;
         $order = Orders::findOrFail($this->orderId);
 
         $new_trans = Transaction::updateOrCreate(
@@ -54,16 +58,63 @@ class PayUsingEcocash extends Component
                 // sleep(15);
                 $status = $this->paynow($new_trans->id, "paynow")->pollTransaction($pollUrl);
 
+                if ($status->status() === "sent") {
+                    session()->flash('message', 'Payment has been sent to your phone please confirm with pin!!');
+                    $this->paymentSent = "true";
+                }
 
                 if ($status->paid()) {
+                    $this->isProccessing = "false";
+
                     return redirect()->to("/orders")->with('message', 'Your payment was successdull!!');
                 } else {
-                    session()->flash('error', 'Why not pay!!');
+                    $this->isProccessing = "false";
+                    // session()->flash('error', 'Why not pay!!');
                 }
             } else {
+                $this->isProccessing = "false";
                 session()->flash('error', 'Oops something went wrong while trying to process your transaction. Please try again.');
             }
         } catch (\Exception $error) {
+            $this->isProccessing = "false";
+            session()->flash('error', $error->getMessage());
+        }
+    }
+
+    public function checkPayment()
+    {
+        $this->isProccessing = "true";
+        $this->paymentSent = "false";
+
+        try {
+            $transaction = Transaction::where('order_id', $this->orderId)->first();
+            $order = Orders::findOrFail($this->orderId);
+
+            $pollUrl = $transaction->poll_url;
+
+
+            // sleep(15);
+            $status = $this->paynow($this->orderId, "paynow")->pollTransaction($pollUrl);
+
+            if ($status->status() === "sent") {
+                session()->flash('message', 'Payment was unsuccessfull please try repaying again!!');
+                $this->paymentSent = "true";
+            }
+
+            if ($status->paid()) {
+                $this->isProccessing = "false";
+                $transaction->update(['isPaid' => "true"]);
+                $order->update(['status' => 'paid']);
+                $this->paymentSent = "false";
+
+                return redirect()->to("/orders")->with('message', 'Your payment was successdull!!');
+            } else {
+                $this->isProccessing = "false";
+                $this->paymentSent = "false";
+                session()->flash('error', 'Payment was unsuccessfull please try and pay again!!');
+            }
+        } catch (Exception $error) {
+            $this->isProccessing = "false";
             session()->flash('error', $error->getMessage());
         }
     }
