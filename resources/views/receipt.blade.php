@@ -214,7 +214,7 @@
         </div>
         <div class="aside">
             <div class="brand">
-                <img width="100" height="30" src="/logo.png" />
+                <img width="100" height="70" src="logo1.png" />
             </div>
         </div>
     </div>
