@@ -16,6 +16,7 @@ class PayUsingEcocash extends Component
     public $site_url;
     public $phone;
     public $submitting = "false";
+    public $submittingCheck = "false";
     public $paymentSent = "false";
 
     public function mount($orderId)
@@ -83,7 +84,7 @@ class PayUsingEcocash extends Component
 
     public function checkPayment()
     {
-        $this->submitting = "true";
+        $this->submittingCheck = "true";
         $this->paymentSent = "false";
 
         try {
@@ -102,6 +103,7 @@ class PayUsingEcocash extends Component
             }
 
             if ($status->paid()) {
+                $this->submittingCheck = "false";
                 $this->submitting = "false";
                 $transaction->update(['isPaid' => "true"]);
                 $order->update(['status' => 'paid']);
@@ -109,12 +111,13 @@ class PayUsingEcocash extends Component
 
                 return redirect()->to("/orders")->with('message', 'Your payment was successdull!!');
             } else {
+                $this->submittingCheck = "false";
                 $this->submitting = "false";
                 $this->paymentSent = "false";
                 session()->flash('error', 'Payment was unsuccessfull please try and pay again!!');
             }
         } catch (Exception $error) {
-            $this->submitting = "false";
+            $this->submittingCheck = "false";
             session()->flash('error', $error->getMessage());
         }
     }
