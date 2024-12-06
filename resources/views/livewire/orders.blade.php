@@ -11,6 +11,16 @@
                 <div class="row">
                     <form action="#">
                         <div class="col-xs-12">
+                            @if (session()->has('error'))
+                            <div class="alert alert-danger mb-2" style="margin-top: 80px;">
+                                {{ session('error') }}
+                            </div>
+                            @endif
+                            @if (session()->has('message'))
+                            <div class="alert alert-success mt-3">
+                                {{ session('message') }}
+                            </div>
+                            @endif
                             <div class="wishlist-table table-responsive mb-40">
                                 <table>
                                     <thead>
