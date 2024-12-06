@@ -15,7 +15,7 @@ class PayUsingEcocash extends Component
     public $orderId;
     public $site_url;
     public $phone;
-    public $isProccessing = "false";
+    public $submitting = "false";
     public $paymentSent = "false";
 
     public function mount($orderId)
@@ -30,7 +30,7 @@ class PayUsingEcocash extends Component
             'phone' => 'required|regex:/^[0-9]{10,15}$/', // Add validation for phone number
         ]);
 
-        $this->isProccessing = true;
+        $this->submitting = "true";
         $order = Orders::findOrFail($this->orderId);
 
         $new_trans = Transaction::updateOrCreate(
@@ -64,26 +64,26 @@ class PayUsingEcocash extends Component
                 }
 
                 if ($status->paid()) {
-                    $this->isProccessing = "false";
+                    $this->submitting = "false";
 
                     return redirect()->to("/orders")->with('message', 'Your payment was successdull!!');
                 } else {
-                    $this->isProccessing = "false";
+                    // $this->submitting = "false";
                     // session()->flash('error', 'Why not pay!!');
                 }
             } else {
-                $this->isProccessing = "false";
+                $this->submitting = "false";
                 session()->flash('error', 'Oops something went wrong while trying to process your transaction. Please try again.');
             }
         } catch (\Exception $error) {
-            $this->isProccessing = "false";
+            $this->submitting = "false";
             session()->flash('error', $error->getMessage());
         }
     }
 
     public function checkPayment()
     {
-        $this->isProccessing = "true";
+        $this->submitting = "true";
         $this->paymentSent = "false";
 
         try {
@@ -102,19 +102,19 @@ class PayUsingEcocash extends Component
             }
 
             if ($status->paid()) {
-                $this->isProccessing = "false";
+                $this->submitting = "false";
                 $transaction->update(['isPaid' => "true"]);
                 $order->update(['status' => 'paid']);
                 $this->paymentSent = "false";
 
                 return redirect()->to("/orders")->with('message', 'Your payment was successdull!!');
             } else {
-                $this->isProccessing = "false";
+                $this->submitting = "false";
                 $this->paymentSent = "false";
                 session()->flash('error', 'Payment was unsuccessfull please try and pay again!!');
             }
         } catch (Exception $error) {
-            $this->isProccessing = "false";
+            $this->submitting = "false";
             session()->flash('error', $error->getMessage());
         }
     }

@@ -31,15 +31,15 @@
                             placeholder="Enter your phone number">
                         @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
-
+                    <span>{{$submitting}} </span>
                     <button type="submit" class="btn btn-primary mb-3">
-                        <span>{{$isProccessing === "true" ? "Please wait!!!" : "Pay Now Using Ecocash"}}</span>
+                        <span>{{$submitting === "true" ? "Please wait!!!" : "Pay Now Using Ecocash"}}</span>
                     </button>
 
                 </form>
 
                 @if ($paymentSent === "true")
-                @if ($isProccessing === true)
+                @if ($submitting === true)
                 <button class="btn btn-warning" disabled wire:click="checkPayment">Checking Payment</button>
 
                 @else
@@ -49,7 +49,7 @@
 
                 @endif
 
-                @if ($isProccessing === "true")
+                @if ($submitting === "true")
                 <div>
                     <div class="mt-3 alert alert-info">
                         Processing your payment. Please wait...
