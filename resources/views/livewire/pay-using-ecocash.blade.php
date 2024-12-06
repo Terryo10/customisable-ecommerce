@@ -31,8 +31,9 @@
                             placeholder="Enter your phone number">
                         @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
-                    <button type={{$submitting==="true" ?"button":"submit"}} class="btn btn-primary mb-3">
-                        <span>{{$submitting === "true" ? "Please wait!!!" : "Pay Now Using Ecocash"}}</span>
+                    <button type="submit" class="btn btn-primary mb-3" wire:loading.attr="disabled">
+                        <span wire:loading.remove>Pay Now Using Ecocash</span>
+                        <span wire:loading>Please wait...</span>
                     </button>
 
                 </form>
