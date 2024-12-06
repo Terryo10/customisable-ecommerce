@@ -39,14 +39,10 @@
                 </form>
 
                 @if ($paymentSent === "true")
-                @if ($submittingCheck === "true")
-                <button class="btn btn-warning" disabled wire:click="checkPayment">Checking Payment</button>
-
-                @else
-                <button class="btn btn-warning" wire:click="checkPayment">Check Payment</button>
-
-                @endif
-
+                <button class="btn btn-warning" wire:click="checkPayment" wire:loading.attr="disabled">
+                    <span wire:loading.remove>Check your initiated payment</span>
+                    <span wire:loading>Checking...</span>
+                </button>
                 @endif
 
                 @if ($submitting === "true")
