@@ -13,6 +13,7 @@ class PayUsingEcocash extends Component
 {
 
     public $orderId;
+    public $amount;
     public $site_url;
     public $phone;
     public $submitting = "false";
@@ -22,6 +23,8 @@ class PayUsingEcocash extends Component
     public function mount($orderId)
     {
         $this->orderId = $orderId;
+        $order = Orders::findOrFail($orderId);
+        $this->amount = $order->total;
         $this->site_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
     }
 
