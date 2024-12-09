@@ -153,102 +153,120 @@
                                                                     Review)</span>
                                                             </span>
                                                         </div>
-                                                        <form method="POST" action="{{ route('placeOrder') }}">
+                                                        @if ($product->quantity <= 0) <h3>This Item is Out of Stock
+                                                            </h3>
+                                                            @else
+                                                            <form method="POST" action="{{ route('placeOrder') }}">
 
-                                                            @csrf
+                                                                @csrf
 
-                                                            <div class="short-desc section">
-                                                                <h5 class="pd-sub-title">
-                                                                    Quick Overview
-                                                                </h5>
-                                                                <p>{{$product->description}}</p>
-                                                            </div>
-                                                            @php
-                                                            $productsFields = is_string($product->fields) ?
-                                                            json_decode($product->fields == "null" ? "[]":
-                                                            $product->fields,
-                                                            true) : $product->fields;
-
-                                                            @endphp
-                                                            @foreach ($productsFields as $field)
-                                                            @php
-                                                            $fieldFields = json_decode($field);
-                                                            $fieldFields = json_decode($fieldFields->fields);
-                                                            $fieldFields = json_decode($fieldFields == "null" ? "[]":
-                                                            $fieldFields);
-                                                            $newFieldsSet = $fieldFields == null ? [] : $fieldFields;
-                                                            @endphp
-                                                            @foreach ($newFieldsSet as $fild)
-
-                                                            <div class="short-desc section">
-                                                                <h5 class="pd-sub-title">
-                                                                    {{$fild->name}}
-                                                                </h5>
-                                                                <p>
-                                                                    <input type="text" name="{{$fild->value}}"
-                                                                        class="addedFields form-control" required />
-                                                                </p>
-                                                            </div>
-
-                                                            @endforeach
-                                                            @endforeach
-
-
-
-                                                            <label>Quantity</label>
-                                                            <input style="display: none;" type="text"
-                                                                wire:model="order.product_id" name="product_id"
-                                                                value={{"$product->id"}} />
-                                                            <input style="display: none;" type="text"
-                                                                wire:model="order.fields" name="fields" id="addedFields"
-                                                                value="[]" />
-                                                            <div class="quantity-cart section">
-                                                                <div class="product-quantity">
-                                                                    <input wire:model="order.quantity" name="quantity"
-                                                                        type="number" value="1" required />
+                                                                <div class="short-desc section">
+                                                                    <h5 class="pd-sub-title">
+                                                                        Quick Overview
+                                                                    </h5>
+                                                                    <p>{{$product->description}}</p>
                                                                 </div>
-                                                                <button type="submit" class="add-to-cart">
-                                                                    Place Order
-                                                                </button>
+                                                                @php
+                                                                $productsFields = is_string($product->fields) ?
+                                                                json_decode($product->fields == "null" ? "[]":
+                                                                $product->fields,
+                                                                true) : $product->fields;
+
+                                                                @endphp
+                                                                @foreach ($productsFields as $field)
+                                                                @php
+                                                                $fieldFields = json_decode($field);
+                                                                $fieldFields = json_decode($fieldFields->fields);
+                                                                $fieldFields = json_decode($fieldFields == "null" ?
+                                                                "[]":
+                                                                $fieldFields);
+                                                                $newFieldsSet = $fieldFields == null ? [] :
+                                                                $fieldFields;
+                                                                @endphp
+                                                                @foreach ($newFieldsSet as $fild)
+
+                                                                <div class="short-desc section">
+                                                                    <h5 class="pd-sub-title">
+                                                                        {{$fild->name}}
+                                                                    </h5>
+                                                                    <p>
+                                                                        <input type="text" name="{{$fild->value}}"
+                                                                            class="addedFields form-control" required />
+                                                                    </p>
+                                                                </div>
+
+                                                                @endforeach
+                                                                @endforeach
+
+                                                                <div class="short-desc section">
+                                                                    <h5 class="pd-sub-title">
+                                                                        {{"Enter Your Shipping Address Details"}}
+                                                                    </h5>
+                                                                    <p>
+                                                                        <input type="text" name="address"
+                                                                            class="addedFields form-control" required />
+                                                                    </p>
+                                                                </div>
+
+
+
+                                                                <label>Quantity</label>
+                                                                <input style="display: none;" type="text"
+                                                                    wire:model="order.product_id" name="product_id"
+                                                                    value={{"$product->id"}} />
+                                                                <input style="display: none;" type="text"
+                                                                    wire:model="order.fields" name="fields"
+                                                                    id="addedFields" value="[]" />
+                                                                <div class="quantity-cart section">
+                                                                    <div class="product-quantity">
+                                                                        <input wire:model="order.quantity"
+                                                                            name="quantity" type="number" value="1"
+                                                                            required />
+                                                                    </div>
+                                                                    <button type="submit" class="add-to-cart">
+                                                                        Place Order
+                                                                    </button>
+                                                                </div>
+
+                                                            </form>
+
+                                                            @endif
+
+                                                            <ul class="usefull-link section">
+                                                                <li id="share-btn" data-target="{{$product->id}}">
+                                                                    <a href="#!">
+                                                                        <i class="pe-7s-mail"></i> Share
+                                                                        to a Friend
+                                                                    </a>
+                                                                </li>
+
+                                                                {{-- <li id="download" data-target="{{$product->id}}">
+                                                                    <a href="#print">
+                                                                        <i class="pe-7s-print"></i> print
+                                                                    </a>
+                                                                </li> --}}
+                                                            </ul>
+
+                                                            <div class="share-icons section">
+                                                                <span>share :</span>
+                                                                <a href="#!">
+                                                                    <i class="fa fa-facebook"></i>
+                                                                </a>
+                                                                <a href="#!">
+                                                                    <i class="fa fa-twitter"></i>
+                                                                </a>
+                                                                <a href="#!">
+                                                                    <i class="fa fa-instagram"></i>
+                                                                </a>
+
                                                             </div>
 
-                                                        </form>
-
-                                                        <ul class="usefull-link section">
-                                                            <li id="share-btn" data-target="{{$product->id}}">
-                                                                <a href="#!">
-                                                                    <i class="pe-7s-mail"></i> Share
-                                                                    to a Friend
-                                                                </a>
-                                                            </li>
-
-                                                            {{-- <li id="download" data-target="{{$product->id}}">
-                                                                <a href="#print">
-                                                                    <i class="pe-7s-print"></i> print
-                                                                </a>
-                                                            </li> --}}
-                                                        </ul>
-
-                                                        <div class="share-icons section">
-                                                            <span>share :</span>
-                                                            <a href="#!">
-                                                                <i class="fa fa-facebook"></i>
-                                                            </a>
-                                                            <a href="#!">
-                                                                <i class="fa fa-twitter"></i>
-                                                            </a>
-                                                            <a href="#!">
-                                                                <i class="fa fa-instagram"></i>
-                                                            </a>
-
-                                                        </div>
-
-                                                        <div class="">
-                                                            @php
-                                                            $review_product = $product;
-                                                            @endphp
-                                                            <livewire:products-reviews :product="$review_product">
-                                                        </div>
+                                                            <div class="">
+                                                                @php
+                                                                $review_product = $product;
+                                                                @endphp
+                                                                <livewire:products-reviews :product="$review_product">
+                                                            </div>
                                                     </div>
                                                 </div>
                                             </div>

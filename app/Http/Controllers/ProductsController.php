@@ -34,6 +34,13 @@ class ProductsController extends Controller
         $product = Products::where('id', $product_id)->first();
 
         $total = $product->price * $quantity;
+        $productQuantity = $product->quantity - $quantity;
+
+        if ($productQuantity <= 0) {
+            return redirect()->to('/product/' . $product_id)->with('message', 'Your quantity you added is out of stock');
+        }
+
+        $product->update(['quantity' => $productQuantity]);
 
         Orders::create([
             'product_id' => $product_id,
@@ -42,8 +49,9 @@ class ProductsController extends Controller
             'total' => $total,
             'quantity' => $quantity,
             'status' => 'pending',
+            'address' => $request->address
         ]);
 
-        return redirect()->to('/orders');
+        return redirect()->to('/orders')->with('message', 'Your order is placed successfully!!');
     }
 }

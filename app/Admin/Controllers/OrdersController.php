@@ -66,6 +66,7 @@ class OrdersController extends AdminController
             return "<form method='GET' action='$downloadLink'>{$button}</form>";
         });
         $grid->column('fields', __('Customised Options'));
+        $grid->column('address', __('Shipping Address'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -106,6 +107,7 @@ class OrdersController extends AdminController
             return "<form method='GET' action='$downloadLink'>{$button}</form>";
         });
         $show->field('fields', __('Customised Options'));
+        $show->field('address', __('Shipping Address'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -122,6 +124,7 @@ class OrdersController extends AdminController
         $form = new Form(new Orders());
 
         $form->number('quantity', __('Quantity'))->rules('required|integer|min:1');
+        $form->text('address', __('Enter Shipping Address'))->rules('required|min:1');
         $form->currency('total', __('Total'))->symbol('$')->rules('required|numeric|min:0');
         $form->select('status', __('Status'))->options([
             'pending' => 'Pending',

@@ -128,13 +128,13 @@
                                                         </div>
 
                                                         <!-- Social Buttons -->
-                                                        <a data-mdb-ripple-init class="btn btn-lg btn-block"
+                                                        {{-- <a data-mdb-ripple-init class="btn btn-lg btn-block"
                                                            style="background-color: #000; color: #fff;" href="#!"
                                                            role="button">
                                                             Continue with Facebook
-                                                        </a>
+                                                        </a> --}}
                                                         <a data-mdb-ripple-init class="btn btn-lg btn-block"
-                                                           style="background-color: #dca34a; color: #fff;"
+                                                           style="background-color: #000; color: #fff;"
                                                            href="/login-google" role="button">
                                                             Continue with Google
                                                         </a>
