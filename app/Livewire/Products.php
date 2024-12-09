@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Orders;
 use App\Models\Products as ModelsProducts;
+use App\Models\ShopAvailability;
 use Livewire\Component;
 
 class Products extends Component
@@ -29,6 +30,7 @@ class Products extends Component
     public function render()
     {
         $products = ModelsProducts::paginate(10);
-        return view('livewire.products', compact('products'));
+        $availabity = ShopAvailability::latest()->first();
+        return view('livewire.products', compact('products', 'availabity'));
     }
 }

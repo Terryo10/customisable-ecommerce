@@ -29,4 +29,5 @@ Route::group([
     $router->resource('contact-forms', ContactFormsController::class);
     $router->resource('customers', CustomersController::class);
     $router->resource('banking-details', BankingDetailsController::class);
+    $router->resource('shop-availabilities', ShopAvailabilityController::class);
 });

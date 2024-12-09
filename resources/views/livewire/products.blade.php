@@ -13,6 +13,7 @@
 
             </div>
 
+            @if ($availabity->isOpen ?? "0" === 1)
             <div class="isotope-grid row" id="shop">
                 @foreach ($products as $product)
                 @php
@@ -90,9 +91,10 @@
                                         <div class="row">
                                             <div class="col-xl-5 col-md-6 col-12 mb-40">
                                                 <div class="tab-content mb-10">
-                                                    <div class="{{"pro-large-img tab-pane active"}}" id="{{"
+                                                    <div class="{{" pro-large-img tab-pane active"}}" id="{{"
                                                         pro-large-img-$product->id"}}">
-                                                        <img src="{{" /storage/$product->feature_image"}}" class="{{"pro-large-img-". $product->id}}" alt="">
+                                                        <img src="{{" /storage/$product->feature_image"}}"
+                                                        class="{{"pro-large-img-". $product->id}}" alt="">
                                                     </div>
 
                                                 </div>
@@ -138,7 +140,7 @@
                                                             @endif
 
 
-                                                         
+
                                                         </span>
                                                     </div>
                                                     <form method="POST" action="{{ route('placeOrder') }}">
@@ -209,15 +211,17 @@
                                                             </a>
                                                         </li>
 
-                                                       
+
                                                     </ul>
 
                                                     <div class="share-icons section">
                                                         <span>share :</span>
-                                                        <a href="https://www.facebook.com/profile.php?id=100082974115013">
+                                                        <a
+                                                            href="https://www.facebook.com/profile.php?id=100082974115013">
                                                             <i class="fa fa-facebook"></i>
                                                         </a>
-                                                        <a href="https://www.instagram.com/slimriff?igsh=MWVoMm5vZHF4NTY5cQ==">
+                                                        <a
+                                                            href="https://www.instagram.com/slimriff?igsh=MWVoMm5vZHF4NTY5cQ==">
                                                             <i class="fa fa-instagram"></i>
                                                         </a>
 
@@ -249,6 +253,14 @@
                     {{-- {{ $products->links() }} --}}
                 </div>
             </div>
+
+            @else
+
+            <div class="isotope-grid row" id="shop">
+                <h3>Shop is closed for now!!!</h3>
+            </div>
+            @endif
+
 
         </div>
     </div>
