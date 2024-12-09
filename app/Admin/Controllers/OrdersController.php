@@ -65,8 +65,25 @@ class OrdersController extends AdminController
             $button = "<button type='submit' class='$adminBtnClasses'> $adminBtnName </button>";
             return "<form method='GET' action='$downloadLink'>{$button}</form>";
         });
+<<<<<<< HEAD
         $grid->column('fields', __('Customised Options'));
         $grid->column('address', __('Shipping Address'));
+=======
+        $grid->column('fields', __('Customised Options'))->display(function ($fields) {
+            $items = json_decode(json_decode($fields));
+            $sentence = "";
+
+            if (is_array($items)) {
+                foreach ($items as $item) {
+                    $sentence .= $item->name . ': ' . $item->value . '; ';
+                }
+                $sentence = rtrim($sentence, '; ');
+            }
+
+            return $sentence;
+        });
+
+>>>>>>> b3a1497f9365423dd979471bee64ee24e91d6b7b
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -97,7 +114,6 @@ class OrdersController extends AdminController
         });
         $show->field('id', __('Download'))->as(function ($orderId) {
             $order = Orders::findOrFail($orderId);
-
             $downloadLink = $order->status === 'paid' ? admin_url("download-receipt/"
                 . $order->id) : admin_url("download-invoice/"
                 . $order->id);
@@ -106,8 +122,26 @@ class OrdersController extends AdminController
             $button = "<button type='submit' class='$adminBtnClasses'> $adminBtnName </button>";
             return "<form method='GET' action='$downloadLink'>{$button}</form>";
         });
+<<<<<<< HEAD
         $show->field('fields', __('Customised Options'));
         $show->field('address', __('Shipping Address'));
+=======
+//        $show->field('fields', __('Customised Options'));
+        $show->field('fields')->display(function ($value) {
+            // Decode the JSON string
+            $data = json_decode($value, true);
+
+            // Check if the JSON is valid and has the desired structure
+            if (is_array($data) && isset($data[0]['value'])) {
+                // Extract the 'value' field
+                return substr(strip_tags($data[0]['value']), 0, 100);
+            }
+
+            // Return a default value if the JSON is invalid or missing the expected structure
+            return '-';
+        });
+
+>>>>>>> b3a1497f9365423dd979471bee64ee24e91d6b7b
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 

@@ -8,7 +8,6 @@
                         <ul class="breadcrumb">
                             <li>
                                 <a href="/">Home</a>
-                                {{-- <a wire:navigate href="/">Home</a> --}}
                             </li>
                             <li class="active">{{$title}}</li>
                         </ul>
