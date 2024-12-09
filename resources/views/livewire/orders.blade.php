@@ -25,6 +25,7 @@
                                 <table>
                                     <thead>
                                         <tr>
+                                            <th>Select</th>
                                             <th class="pro-remove">Quantity</th>
                                             <th class="pro-thumbnail">Image</th>
                                             <th class="pro-title">Product</th>
@@ -36,6 +37,8 @@
                                     <tbody>
                                         @foreach ($orders as $order)
                                         <tr>
+                                            <td><input type="checkbox" class="row-checkbox" data-id="{{$order->id}}">
+                                            </td>
                                             <td class="pro-remove">
                                                 <a href="#">× {{$order->quantity}}</a>
                                             </td>
@@ -118,11 +121,37 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+
+
                             </div>
                         </div>
                     </form>
+                    {{-- <form method="POST" action="/bulk-checkout">
+                    <button id="saveButton" class="btn btn-warning text-white">Bulk CheckOut</button>
+                    <input type="text" name="items" placeholder="Selected bulk items"/>
+                    <p id="output"></p>
+                    </form> --}}
                 </div>
             </div>
         </div>
+        <script>
+            const saveButton = document.getElementById('saveButton');
+            const output = document.getElementById('output');
+        
+            saveButton.addEventListener('click', () => {
+              const selectedIds = [];
+              const checkboxes = document.querySelectorAll('.row-checkbox:checked');
+        
+              checkboxes.forEach((checkbox) => {
+                selectedIds.push(checkbox.getAttribute('data-id'));
+              });
+        
+              // Output the selected IDs
+              output.textContent = `Selected IDs: ${selectedIds.join(', ')}`;
+              console.log('Selected IDs:', selectedIds);
+        
+              // You can now use `selectedIds` to perform further actions like removal.
+            });
+        </script>
         <livewire:footer />
 </div>

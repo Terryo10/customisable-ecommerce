@@ -10,6 +10,10 @@ class Transaction extends Model
     use HasFactory;
     protected $guarded;
 
+    protected $casts = [
+        'items' => 'array',
+    ];
+
     protected $with = ['user'];
 
     public function user()
