@@ -24,6 +24,8 @@
                                         {{"Enter Your First Name"}}
                                     </h5>
                                     <p>
+                                        <input type="hidden" class="form-control" name="product_id"
+                                            value="{{$productid ?? null}} " />
                                         <input type="text" class="form-control" name="first_name"
                                             value="{{$profile->first_name ?? null}} "
                                             placeholder="Enter your first name..." required />
