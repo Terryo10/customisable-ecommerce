@@ -123,7 +123,7 @@ class CustomiseController extends Controller
 
     try {
       Mail::send('emails.contact', ['body' => $body], function ($message) use ($userEmail, $subject) {
-        $message->to(env('MAIL_FROM_ADDRESS', 'contact@slimriff.com'));
+        $message->to($userEmail);
         $message->subject($subject);
       });
     } catch (\Exception $e) {
