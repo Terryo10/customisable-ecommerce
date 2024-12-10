@@ -45,4 +45,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected $with = ['profile'];
+
+    public function profile()
+    {
+        return $this->hasOne(ShippingAddress::class, 'user_id', 'id');
+    }
 }
