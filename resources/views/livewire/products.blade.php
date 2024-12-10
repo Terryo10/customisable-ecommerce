@@ -187,13 +187,16 @@
                                                             @endforeach
                                                             @endforeach
 
+
+
                                                             <div class="short-desc section">
                                                                 <h5 class="pd-sub-title">
                                                                     {{"Enter Your Shipping Address Details"}}
                                                                 </h5>
                                                                 <p>
                                                                     @php
-                                                                    $userShippingAddress = Auth::user()->profile ?? false;
+                                                                    $userShippingAddress = Auth::user()->profile ??
+                                                                    false;
                                                                     @endphp
                                                                     @if ($userShippingAddress)
                                                                     <input type="button" name="address"
@@ -212,8 +215,6 @@
                                                                 </p>
                                                             </div>
 
-
-
                                                             <label>Quantity</label>
                                                             <input style="display: none;" type="text"
                                                                 wire:model="order.product_id" name="product_id"
@@ -226,9 +227,17 @@
                                                                     <input wire:model="order.quantity" name="quantity"
                                                                         type="number" value="1" required />
                                                                 </div>
+                                                                @if ($userShippingAddress)
                                                                 <button type="submit" class="add-to-cart">
                                                                     Place Order
                                                                 </button>
+
+                                                                @else
+                                                                <button type="button" class="add-to-cart">
+                                                                    Please update your shipping details..
+                                                                </button>
+
+                                                                @endif
                                                             </div>
 
                                                         </form>

@@ -72,5 +72,6 @@
     <livewire:contact-modal>
     <livewire:search-modal>
     <livewire:login-modal>
-    <livewire:shipping-details-modal>
+    <livewire:shipping-details-modal :productid="1">
+
 </div>

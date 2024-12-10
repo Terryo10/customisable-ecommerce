@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class ShippingDetailsModal extends Component
 {
-    public $post_id;
+    public $productid;
     public $user_id;
 
     public function render()
