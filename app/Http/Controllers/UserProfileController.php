@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ShippingAddress;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserProfileController extends Controller
 {
@@ -17,9 +19,24 @@ class UserProfileController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $user_id = Auth::user()->id;
+
+        ShippingAddress::updateOrCreate([
+            'user_id' => $user_id
+        ], [
+            'address' => $request->address,
+            'company' => $request->company,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone' => $request->phone,
+            'state' => $request->state,
+            'city' => $request->city,
+            'country' => $request->country,
+        ]);
+
+        return redirect()->to('/product/' . $request->product_id ?? '')->with('message', 'User shipping details updated successfull!!');
     }
 
     /**

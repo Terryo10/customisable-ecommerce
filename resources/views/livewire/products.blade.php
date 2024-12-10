@@ -192,8 +192,23 @@
                                                                     {{"Enter Your Shipping Address Details"}}
                                                                 </h5>
                                                                 <p>
-                                                                    <input type="text" name="address"
-                                                                        class="addedFields form-control" required />
+                                                                    @php
+                                                                    $userShippingAddress = Auth::user()->profile ?? false;
+                                                                    @endphp
+                                                                    @if ($userShippingAddress)
+                                                                    <input type="button" name="address"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target={{"#quickViewModalShippingDetails"}}
+                                                                        class="btn btn-success addedFields form-control"
+                                                                        value="Update Shipping Address" />
+
+                                                                    @else
+                                                                    <input data-bs-toggle="modal"
+                                                                        data-bs-target={{"#quickViewModalShippingDetails"}}
+                                                                        type="button" name="address"
+                                                                        class="btn btn-success addedFields form-control"
+                                                                        value="Add Shipping Address" />
+                                                                    @endif
                                                                 </p>
                                                             </div>
 
