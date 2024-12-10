@@ -102,6 +102,18 @@ class CustomiseController extends Controller
     // Redirect back with a success message
     return redirect()->back();
   }
+  public function changeOrderStatus(Request $request)
+  {
+    // Validate input
+    $validatedData = $request->validate([
+      'status' => 'required',
+    ]);
+
+
+    admin_success('Order Status Changed!!', 'Order Status Updated Successfully!!');
+    // Redirect back with a success message
+    return redirect()->back();
+  }
 
 
 

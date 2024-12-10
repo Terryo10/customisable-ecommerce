@@ -48,7 +48,23 @@ class OrdersController extends AdminController
 
         $grid->column('quantity', __('Quantity'));
         $grid->column('total', __('Total ($)'));
-        $grid->column('status', __('Status'));
+        $grid->column('status', __('Status'))->display(function ($status) {
+            $url = admin_url('change-order-status');
+            $form = "
+         <form method='POST' action='$url'>
+            <select name='status' class='form-control'>
+            <option value='$status'>$status</option>
+             <option value='paid'>Paid</option>
+             <option value='pending'>Pending</option>
+             <option value='delivered'>Delivered</option>
+             <option value='cancelled'>Cancelled</option>
+            </select>
+            <button type='submit' class='btn btn-warning form-control'>Change Status</button>
+         </form>
+         ";
+
+            return $form;
+        });
         // Display product name
         $grid->column('product.name', __('Product'))->sortable()->filter();
 
@@ -65,10 +81,6 @@ class OrdersController extends AdminController
             $button = "<button type='submit' class='$adminBtnClasses'> $adminBtnName </button>";
             return "<form method='GET' action='$downloadLink'>{$button}</form>";
         });
-<<<<<<< HEAD
-        $grid->column('fields', __('Customised Options'));
-        $grid->column('address', __('Shipping Address'));
-=======
         $grid->column('fields', __('Customised Options'))->display(function ($fields) {
             $items = json_decode(json_decode($fields));
             $sentence = "";
@@ -83,7 +95,6 @@ class OrdersController extends AdminController
             return $sentence;
         });
 
->>>>>>> b3a1497f9365423dd979471bee64ee24e91d6b7b
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -122,11 +133,7 @@ class OrdersController extends AdminController
             $button = "<button type='submit' class='$adminBtnClasses'> $adminBtnName </button>";
             return "<form method='GET' action='$downloadLink'>{$button}</form>";
         });
-<<<<<<< HEAD
-        $show->field('fields', __('Customised Options'));
-        $show->field('address', __('Shipping Address'));
-=======
-//        $show->field('fields', __('Customised Options'));
+        //        $show->field('fields', __('Customised Options'));
         $show->field('fields')->display(function ($value) {
             // Decode the JSON string
             $data = json_decode($value, true);
@@ -141,7 +148,6 @@ class OrdersController extends AdminController
             return '-';
         });
 
->>>>>>> b3a1497f9365423dd979471bee64ee24e91d6b7b
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
