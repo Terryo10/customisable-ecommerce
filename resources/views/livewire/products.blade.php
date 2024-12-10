@@ -274,7 +274,7 @@
             @else
 
             <div class="isotope-grid row" id="shop">
-                <h3>Shop is closed for now!!!</h3>
+                <h3>Shop closed!!!</h3>
             </div>
             @endif
 
