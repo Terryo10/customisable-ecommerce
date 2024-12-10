@@ -116,7 +116,7 @@ class CustomiseController extends Controller
     $order = Orders::findOrFail($order_id);
     $userEmail = $order->user->email ?? "";
     $subject = "Order Status Change";
-
+    $order->update(['status' => $status]);
     $body = " <br> <h4>New Order Status Update </h4> <br> <h4>Status: </h4><p>$status</p> <br> 
     <a href='https://slimriff/orders'>View Your Orders</a>
     ";
