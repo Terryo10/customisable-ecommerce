@@ -48,12 +48,14 @@ class OrdersController extends AdminController
 
         $grid->column('quantity', __('Quantity'));
         $grid->column('total', __('Total ($)'));
-        $grid->column('status', __('Status'))->display(function ($status) {
+        $grid->column('id', __('Status'))->display(function ($orderId) {
+            $order = Orders::findOrFail($orderId);
             $url = admin_url('change-order-status');
             $form = "
          <form method='POST' action='$url'>
+         <input type='hidden' name='order_id' value='$orderId' />
             <select name='status' class='form-control'>
-            <option value='$status'>$status</option>
+            <option value='$order->status'>$order->status</option>
              <option value='paid'>Paid</option>
              <option value='pending'>Pending</option>
              <option value='delivered'>Delivered</option>
@@ -70,17 +72,17 @@ class OrdersController extends AdminController
 
         // Display user name
         $grid->column('user.name', __('Customer'))->sortable()->filter();
-        $grid->column('id', __('Download'))->display(function ($orderId) {
-            $order = Orders::findOrFail($orderId);
+        // $grid->column('id', __('Download'))->display(function ($orderId) {
+        //     $order = Orders::findOrFail($orderId);
 
-            $downloadLink = $order->status === 'paid' ? admin_url("download-receipt/"
-                . $order->id) : admin_url("download-invoice/"
-                . $order->id);
-            $adminBtnClasses = $order->status === "paid" ? "btn btn-success text-white" : "btn btn-warning text-white";
-            $adminBtnName = $order->status === "paid" ? "Download Receipt" : "Download Invoice";
-            $button = "<button type='submit' class='$adminBtnClasses'> $adminBtnName </button>";
-            return "<form method='GET' action='$downloadLink'>{$button}</form>";
-        });
+        //     $downloadLink = $order->status === 'paid' ? admin_url("download-receipt/"
+        //         . $order->id) : admin_url("download-invoice/"
+        //         . $order->id);
+        //     $adminBtnClasses = $order->status === "paid" ? "btn btn-success text-white" : "btn btn-warning text-white";
+        //     $adminBtnName = $order->status === "paid" ? "Download Receipt" : "Download Invoice";
+        //     $button = "<button type='submit' class='$adminBtnClasses'> $adminBtnName </button>";
+        //     return "<form method='GET' action='$downloadLink'>{$button}</form>";
+        // });
         $grid->column('fields', __('Customised Options'))->display(function ($fields) {
             $items = json_decode(json_decode($fields));
             $sentence = "";

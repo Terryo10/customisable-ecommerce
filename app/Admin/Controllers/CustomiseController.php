@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\CustomizableFields;
+use App\Models\Orders;
 use App\Models\Products;
 use App\Models\User;
 use Carbon\Carbon;
@@ -14,6 +15,7 @@ use Encore\Admin\Layout\Column;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Layout\Row;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CustomiseController extends Controller
 {
@@ -109,6 +111,26 @@ class CustomiseController extends Controller
       'status' => 'required',
     ]);
 
+    $order_id = $request->input('order_id');
+    $status = $request->input('status');
+    $order = Orders::findOrFail($order_id);
+    $userEmail = $order->user->email ?? "";
+    $subject = "Order Status Change";
+
+    $body = " <br> <h4>New Order Status Update </h4> <br> <h4>Status: </h4><p>$status</p> <br> 
+    <a href='https://slimriff/orders'>View Your Orders</a>
+    ";
+
+    try {
+      Mail::send('emails.contact', ['body' => $body], function ($message) use ($userEmail, $subject) {
+        $message->to(env('MAIL_FROM_ADDRESS', 'contact@slimriff.com'));
+        $message->subject($subject);
+      });
+    } catch (\Exception $e) {
+      admin_error('error occurred!!', $e->getMessage());
+
+      return redirect()->back();
+    }
 
     admin_success('Order Status Changed!!', 'Order Status Updated Successfully!!');
     // Redirect back with a success message
