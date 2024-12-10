@@ -36,7 +36,7 @@ class ProductsController extends Controller
         $total = $product->price * $quantity;
         $productQuantity = $product->quantity - $quantity;
 
-        if ($productQuantity <= 0) {
+        if ($productQuantity <= -1) {
             return redirect()->to('/product/' . $product_id)->with('message', 'Your quantity you added is out of stock');
         }
 
