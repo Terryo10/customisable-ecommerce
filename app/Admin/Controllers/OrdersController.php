@@ -153,6 +153,19 @@ class OrdersController extends AdminController
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
+        $show->shippingDetails('Shipping Details', function ($fields) {
+            // $fields->resource('/shipping-addresses');
+            $fields->address();
+            $fields->phone();
+            $fields->state();
+            $fields->city();
+            $fields->country();
+            $fields->user_id('Customer')->display(function ($use_id) {
+                $user = User::findOrFail($use_id);
+                return "<span >{$user->name}</span>";
+            });
+
+        });
         return $show;
     }
 
