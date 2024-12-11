@@ -221,11 +221,11 @@
                                                                 name="product_id"
                                                                 value={{"$product->id"}} />
                                                             <input style="display: none;" type="text"
-                                                                wire:model="order.fields" name="fields" id="addedFields"
+                                                                 name="fields" id="addedFields"
                                                                 value="[]" />
                                                             <div class="quantity-cart section">
                                                                 <div class="product-quantity">
-                                                                    <input wire:model="order.quantity" name="quantity"
+                                                                    <input name="quantity"
                                                                         type="number" value="1" required />
                                                                 </div>
                                                                 @if ($userShippingAddress)
