@@ -75,10 +75,10 @@
                                 <div class="modal-dialog modal-dialogs modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <span type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close" style="
+                                            <span type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                                style="
                                             margin-right: 10px;">
-
+    
                                                 X</span>
                                         </div>
                                         <div class="modal-body" id={{"content_$product->id"}}>
@@ -97,25 +97,17 @@
                                                             <img src="{{" /storage/$product->feature_image"}}"
                                                             class="{{"pro-large-img-". $product->id}}" alt="">
                                                         </div>
-
-                                                        {{-- @foreach ($product->images as $key => $img)
-                                                        <div class="{{ $key === 0 ? " pro-large-img tab-pane active"
-                                                            : "pro-large-img tab-pane" }}" id="{{"
-                                                            pro-large-img-$key"}}">
-                                                            <img src={{"/storage/$img"}} alt="" />
-                                                        </div>
-                                                        @endforeach --}}
+    
                                                     </div>
-
+    
                                                     <div class="pro-thumb-img-slider nav">
                                                         @foreach ($product->images as $key => $img)
-
+    
                                                         <div>
                                                             <span class="{{ $key === 0
                                                                 ? " active" : "" }}" data-bs-toggle="tab">
                                                                 <img src="{{" /storage/$img"}}" data-target="{{"
-                                                                    #pro-large-img-$product->id"}}"
-                                                                data-id={{$product->id}}
+                                                                    #pro-large-img-$product->id"}}" data-id={{$product->id}}
                                                                 alt="" class="img-click"
                                                                 />
                                                             </span>
@@ -123,11 +115,11 @@
                                                         @endforeach
                                                     </div>
                                                 </div>
-
+    
                                                 <div class="col-xl-7 col-md-6 col-12 mb-40">
                                                     <div class="product-details section">
                                                         <h1 class="title">{{$product->name}}</h1>
-
+    
                                                         <div
                                                             class="price-ratting section d-flex flex-column flex-sm-row justify-content-between">
                                                             <span class="price">
@@ -135,7 +127,7 @@
                                                                     $ {{$product->price}}
                                                                 </span>
                                                             </span>
-
+    
                                                             <span class="ratting">
                                                                 @if ($product->reviews->count() > 0)
                                                                 @php
@@ -145,21 +137,21 @@
                                                                 @foreach ($newArray as $item)
                                                                 <i class="fa fa-star active"></i>
                                                                 @endforeach
-
+    
                                                                 @endif
-
-
-                                                                <span> (({{$product->reviews->count()}}) Customer
-                                                                    Review)</span>
+    
+    
+    
                                                             </span>
                                                         </div>
                                                         @if ($product->quantity <= 0) <h3>This Item is Out of Stock
                                                             </h3>
                                                             @else
+    
                                                             <form method="POST" action="{{ route('placeOrder') }}">
-
+    
                                                                 @csrf
-
+    
                                                                 <div class="short-desc section">
                                                                     <h5 class="pd-sub-title">
                                                                         Quick Overview
@@ -171,20 +163,18 @@
                                                                 json_decode($product->fields == "null" ? "[]":
                                                                 $product->fields,
                                                                 true) : $product->fields;
-
+    
                                                                 @endphp
                                                                 @foreach ($productsFields as $field)
                                                                 @php
                                                                 $fieldFields = json_decode($field);
                                                                 $fieldFields = json_decode($fieldFields->fields);
-                                                                $fieldFields = json_decode($fieldFields == "null" ?
-                                                                "[]":
+                                                                $fieldFields = json_decode($fieldFields == "null" ? "[]":
                                                                 $fieldFields);
-                                                                $newFieldsSet = $fieldFields == null ? [] :
-                                                                $fieldFields;
+                                                                $newFieldsSet = $fieldFields == null ? [] : $fieldFields;
                                                                 @endphp
                                                                 @foreach ($newFieldsSet as $fild)
-
+    
                                                                 <div class="short-desc section">
                                                                     <h5 class="pd-sub-title">
                                                                         {{$fild->name}}
@@ -194,44 +184,67 @@
                                                                             class="addedFields form-control" required />
                                                                     </p>
                                                                 </div>
-
+    
                                                                 @endforeach
                                                                 @endforeach
-
+    
+    
+    
                                                                 <div class="short-desc section">
                                                                     <h5 class="pd-sub-title">
                                                                         {{"Enter Your Shipping Address Details"}}
                                                                     </h5>
                                                                     <p>
-                                                                        <input type="text" name="address"
-                                                                            class="addedFields form-control" required />
+                                                                        @php
+                                                                        $userShippingAddress = Auth::user()->profile ??
+                                                                        false;
+                                                                        @endphp
+                                                                        @if ($userShippingAddress)
+                                                                        <input type="button" name="address"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="{{"#quickViewModalShippingDetails".$product->id}}"
+                                                                        class="btn btn-success addedFields form-control"
+                                                                        value="Update Shipping Address" />
+    
+                                                                        @else
+                                                                        <input data-bs-toggle="modal"
+                                                                            data-bs-target="{{"#quickViewModalShippingDetails".$product->id}}"
+                                                                        type="button" name="address"
+                                                                        class="btn btn-success addedFields form-control"
+                                                                        value="Add Shipping Address" />
+                                                                        @endif
                                                                     </p>
                                                                 </div>
-
-
-
+    
+    
                                                                 <label>Quantity</label>
                                                                 <input style="display: none;" type="text"
                                                                     wire:model="order.product_id" name="product_id"
                                                                     value={{"$product->id"}} />
                                                                 <input style="display: none;" type="text"
-                                                                    wire:model="order.fields" name="fields"
-                                                                    id="addedFields" value="[]" />
+                                                                    wire:model="order.fields" name="fields" id="addedFields"
+                                                                    value="[]" />
                                                                 <div class="quantity-cart section">
                                                                     <div class="product-quantity">
-                                                                        <input wire:model="order.quantity"
-                                                                            name="quantity" type="number" value="1"
-                                                                            required />
+                                                                        <input wire:model="order.quantity" name="quantity"
+                                                                            type="number" value="1" required />
                                                                     </div>
+                                                                    @if ($userShippingAddress)
                                                                     <button type="submit" class="add-to-cart">
                                                                         Place Order
                                                                     </button>
+    
+                                                                    @else
+                                                                    <button type="button" class="add-to-cart">
+                                                                        Please update your shipping details..
+                                                                    </button>
+    
+                                                                    @endif
                                                                 </div>
-
+    
                                                             </form>
-
                                                             @endif
-
+    
                                                             <ul class="usefull-link section">
                                                                 <li id="share-btn" data-target="{{$product->id}}">
                                                                     <a href="#!">
@@ -239,33 +252,29 @@
                                                                         to a Friend
                                                                     </a>
                                                                 </li>
-
-                                                                {{-- <li id="download" data-target="{{$product->id}}">
-                                                                    <a href="#print">
-                                                                        <i class="pe-7s-print"></i> print
-                                                                    </a>
-                                                                </li> --}}
+    
+    
                                                             </ul>
-
+    
                                                             <div class="share-icons section">
                                                                 <span>share :</span>
-                                                                <a href="#!">
+                                                                <a
+                                                                    href="https://www.facebook.com/profile.php?id=100082974115013">
                                                                     <i class="fa fa-facebook"></i>
                                                                 </a>
-                                                                <a href="#!">
-                                                                    <i class="fa fa-twitter"></i>
-                                                                </a>
-                                                                <a href="#!">
+                                                                <a
+                                                                    href="https://www.instagram.com/slimriff?igsh=MWVoMm5vZHF4NTY5cQ==">
                                                                     <i class="fa fa-instagram"></i>
                                                                 </a>
-
+    
                                                             </div>
-
+    
                                                             <div class="">
                                                                 @php
                                                                 $review_product = $product;
                                                                 @endphp
-                                                                <livewire:products-reviews :product="$review_product">
+                                                                {{-- <livewire:products-reviews :product="$review_product">
+                                                                    --}}
                                                             </div>
                                                     </div>
                                                 </div>

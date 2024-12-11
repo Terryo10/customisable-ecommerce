@@ -9,7 +9,7 @@ class Footer extends Component
 {
     public function render()
     {
-        $products = Products::latest()->paginate(10);
+        $products = Products::latest()->get();
         return view('livewire.footer', compact('products'));
     }
 }
