@@ -218,7 +218,7 @@
 
                                                             <label>Quantity</label>
                                                             <input style="display: none;" type="text"
-                                                                wire:model="order.product_id" name="product_id"
+                                                                name="product_id"
                                                                 value={{"$product->id"}} />
                                                             <input style="display: none;" type="text"
                                                                 wire:model="order.fields" name="fields" id="addedFields"

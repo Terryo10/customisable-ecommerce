@@ -26,13 +26,13 @@ class ProductsController extends Controller
     public function placeOrder(Request $request)
     {
 
-        $product_id = $request->product_id;
+        $product_id = $request->input('product_id');
         $user_id = Auth::user()->id;
         $fields = $request->fields;
         $quantity = $request->quantity;
 
-        $product = Products::where('id', $product_id)->first();
-
+        $product = Products::find($product_id);
+	
         $total = $product->price * $quantity;
         $productQuantity = $product->quantity - $quantity;
 
