@@ -187,21 +187,38 @@
                                                             @endforeach
                                                             @endforeach
 
+
+
                                                             <div class="short-desc section">
                                                                 <h5 class="pd-sub-title">
                                                                     {{"Enter Your Shipping Address Details"}}
                                                                 </h5>
                                                                 <p>
-                                                                    <input type="text" name="address"
-                                                                        class="addedFields form-control" required />
+                                                                    @php
+                                                                    $userShippingAddress = Auth::user()->profile ??
+                                                                    false;
+                                                                    @endphp
+                                                                    @if ($userShippingAddress)
+                                                                    <input type="button" name="address"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="{{"#quickViewModalShippingDetails".$product->id}}"
+                                                                    class="btn btn-success addedFields form-control"
+                                                                    value="Update Shipping Address" />
+
+                                                                    @else
+                                                                    <input data-bs-toggle="modal"
+                                                                        data-bs-target="{{"#quickViewModalShippingDetails".$product->id}}"
+                                                                    type="button" name="address"
+                                                                    class="btn btn-success addedFields form-control"
+                                                                    value="Add Shipping Address" />
+                                                                    @endif
                                                                 </p>
                                                             </div>
 
 
-
                                                             <label>Quantity</label>
                                                             <input style="display: none;" type="text"
-                                                                wire:model="order.product_id" name="product_id"
+                                                                name="product_id"
                                                                 value={{"$product->id"}} />
                                                             <input style="display: none;" type="text"
                                                                 wire:model="order.fields" name="fields" id="addedFields"
@@ -211,9 +228,17 @@
                                                                     <input wire:model="order.quantity" name="quantity"
                                                                         type="number" value="1" required />
                                                                 </div>
+                                                                @if ($userShippingAddress)
                                                                 <button type="submit" class="add-to-cart">
                                                                     Place Order
                                                                 </button>
+
+                                                                @else
+                                                                <button type="button" class="add-to-cart">
+                                                                    Please update your shipping details..
+                                                                </button>
+
+                                                                @endif
                                                             </div>
 
                                                         </form>
@@ -274,7 +299,7 @@
             @else
 
             <div class="isotope-grid row" id="shop">
-                <h3>Shop is closed for now!!!</h3>
+                <h3>Shop closed!!!</h3>
             </div>
             @endif
 

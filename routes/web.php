@@ -7,6 +7,7 @@ use App\Http\Controllers\PayNowController;
 use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserProfileController;
 use App\Livewire\ForgotPasswordPage;
 use App\Livewire\HomePage;
 use App\Livewire\Orders;
@@ -42,6 +43,7 @@ Route::get('/check-payment/{id}', [PayNowController::class, 'checkPayment'])->na
 Route::get('/success-payment/{id}', [PayNowController::class, 'paymentSuccess'])->name('paynowSuccess.payment');
 Route::get('/forgot-password', ForgotPasswordPage::class);
 Route::post('/forgot-password', [LoginController::class, 'forgotPassword']);
+Route::post('/update/shipping/details', [UserProfileController::class, 'create'])->middleware('auth');
 Route::post('/contact', [ContactFormController::class, 'create'])->name('contact.create');
 Route::post('/reset-password', [LoginController::class, 'submitResetPasswordForm'])->name('update.password');
 Route::get('reset-password/{token}', ResetPasswordForm::class)->name('reset.password.get');
@@ -57,4 +59,3 @@ Route::get('/logout', [GoogleAuthController::class, 'logout'])->middleware('auth
 Route::get('/google-callback', [GoogleAuthController::class, 'callbackFromGoogle']);
 Route::get('/check-user', [GoogleAuthController::class, 'checkUser']);
 Route::get('/{any}',  HomePage::class)->where('any', '^(?!api).*');
-

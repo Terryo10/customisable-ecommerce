@@ -27,10 +27,10 @@ class GoogleAuthController extends Controller
                 ->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))
                 ->user();
             $create_user = User::updateOrCreate([
-                'google_id' => $user->getId()
+                'email' => $user->getEmail(),
             ], [
                 'name' => $user->getName(),
-                'email' => $user->getEmail(),
+                'google_id' => $user->getId(),
                 'avatar' => $user->getAvatar(),
                 'password' => Hash::make($user->getName() . '#' . $user->getId())
             ]);
