@@ -29,7 +29,7 @@ class Products extends Component
 
     public function render()
     {
-        $products = ModelsProducts::paginate(10);
+        $products = ModelsProducts::latest()->paginate(10);
         $availabity = ShopAvailability::latest()->first();
         return view('livewire.products', compact('products', 'availabity'));
     }

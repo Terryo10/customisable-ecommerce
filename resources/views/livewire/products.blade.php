@@ -201,19 +201,20 @@
                                                                     @if ($userShippingAddress)
                                                                     <input type="button" name="address"
                                                                         data-bs-toggle="modal"
-                                                                        data-bs-target={{"#quickViewModalShippingDetails"}}
-                                                                        class="btn btn-success addedFields form-control"
-                                                                        value="Update Shipping Address" />
+                                                                        data-bs-target="{{"#quickViewModalShippingDetails".$product->id}}"
+                                                                    class="btn btn-success addedFields form-control"
+                                                                    value="Update Shipping Address" />
 
                                                                     @else
                                                                     <input data-bs-toggle="modal"
-                                                                        data-bs-target={{"#quickViewModalShippingDetails"}}
-                                                                        type="button" name="address"
-                                                                        class="btn btn-success addedFields form-control"
-                                                                        value="Add Shipping Address" />
+                                                                        data-bs-target="{{"#quickViewModalShippingDetails".$product->id}}"
+                                                                    type="button" name="address"
+                                                                    class="btn btn-success addedFields form-control"
+                                                                    value="Add Shipping Address" />
                                                                     @endif
                                                                 </p>
                                                             </div>
+
 
                                                             <label>Quantity</label>
                                                             <input style="display: none;" type="text"

@@ -3,7 +3,7 @@
     $profile = Auth::user()->profile ?? false;
     @endphp
     <div className="block relative">
-        <div class="modal fade" id="quickViewModalShippingDetails" tabindex="-1">
+        <div class="modal fade" id="{{"quickViewModalShippingDetails".$productid}}" tabindex="-1">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header">
