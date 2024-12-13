@@ -23,6 +23,10 @@ class RegisterController extends Controller
             'password' => 'required|min:3',
             'confirm_password' => 'required|same:password',
         ]);
+        $userExist = User::where('email', $request->email)->first();
+        if ($userExist) {
+            return redirect()->to('login')->with('message', 'Account already exist please login!!!');
+        }
 
         $create_user = User::create([
             'name' => $request->name,
