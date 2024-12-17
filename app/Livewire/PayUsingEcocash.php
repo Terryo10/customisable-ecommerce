@@ -30,7 +30,6 @@ class PayUsingEcocash extends Component
 
     public function createPayment()
     {
-        dd('sd nsdj');
 
         $this->validate([
             'phone' => 'required|regex:/^[0-9]{10,15}$/', // Add validation for phone number
@@ -53,6 +52,7 @@ class PayUsingEcocash extends Component
             $payment = $this->paynow($new_trans->id, "paynow")->createPayment("$uuid", Auth::user()->email);
             $payment->add("Invoice Payment With id of " . $order->id, $order->total);
             $response = $this->paynow($new_trans->id, "paynow")->sendMobile($payment, $this->phone, 'ecocash');
+            dd($response);
             if ($response->success) {
                 $update_tran = Transaction::find($new_trans->id);
                 $update_tran->update(['poll_url' => $response->pollUrl()]);
