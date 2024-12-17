@@ -25,7 +25,7 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Select</th>
+                                            {{-- <th>Select</th> --}}
                                             <th>Order ID</th>
                                             <th class="pro-remove">Quantity</th>
                                             <th class="pro-thumbnail">Image</th>
@@ -33,13 +33,14 @@
                                             <th class="pro-price">Unit Price</th>
                                             <th class="pro-stock-stauts">Order Stauts</th>
                                             <th class="pro-add-to-cart">Added Options</th>
+                                            <th class="pro-add-to-cart">Order Creation Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($orders as $order)
                                         <tr>
-                                            <td><input type="checkbox" class="row-checkbox" data-id="{{$order->id}}">
-                                            </td>
+                                            {{-- <td><input type="checkbox" class="row-checkbox" data-id="{{$order->id}}">
+                                            </td> --}}
                                             <td>{{$order->id}}</td>
                                             <td class="pro-remove">
                                                 <a href="#">× {{$order->quantity}}</a>
@@ -118,6 +119,7 @@
                                                     @endforeach
                                                 </a>
                                             </td>
+                                            <td>{{$order->created_at}}</td>
                                         </tr>
 
                                         @endforeach
