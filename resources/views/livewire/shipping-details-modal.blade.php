@@ -91,7 +91,7 @@
 
                                     </p>
                                 </div>
-                                <div class="short-desc section">
+                                {{-- <div class="short-desc section">
                                     <h5 class="pd-sub-title" style="margin-bottom: 10px;">
                                         {{"Enter Your State"}}
                                     </h5>
@@ -100,7 +100,7 @@
                                             value="{{$profile->state ?? null}} " placeholder="Enter your state..." />
 
                                     </p>
-                                </div>
+                                </div> --}}
 
                                 <div class="short-desc section">
                                     <h5 class="pd-sub-title" style="margin-bottom: 10px;">

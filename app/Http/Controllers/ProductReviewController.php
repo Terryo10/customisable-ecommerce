@@ -7,6 +7,7 @@ use App\Models\Orders;
 use App\Models\ProductReviews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class ProductReviewController extends Controller
 {
@@ -60,7 +61,7 @@ class ProductReviewController extends Controller
             'bankingDetails' => BankingDetails::get(),
         ];
 
-        $pdf = \PDF::loadView('invoice', $data);
+        $pdf = PDF::loadView('invoice', $data);
         return $pdf->download('SlimRiffInvoice.pdf');
     }
     public function downReceiptAsPDF(Request $request, $order_id)
@@ -72,7 +73,7 @@ class ProductReviewController extends Controller
             'order' => $order ?? "N/A",
         ];
 
-        $pdf = \PDF::loadView('receipt', $data);
+        $pdf = PDF::loadView('receipt', $data);
         return $pdf->download('SlimRiffReceipt.pdf');
     }
 
