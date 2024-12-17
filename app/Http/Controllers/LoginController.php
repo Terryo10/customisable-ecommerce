@@ -54,11 +54,15 @@ class LoginController extends Controller
 
         $token = Str::random(64);
 
-        DB::table('password_reset_tokens')->insert([
-            'email' => $request->email,
-            'token' => $token,
-            'created_at' => Carbon::now()
-        ]);
+        DB::table('password_reset_tokens')->updateOrInsert(
+            [
+                'email' => $request->email, // Match condition
+            ],
+            [
+                'token' => $token, // Update or insert these values
+                'created_at' => Carbon::now(),
+            ]
+        );
 
         Mail::send('emails.forgotPassword', ['token' => $token, 'email' => $request->email], function ($message) use ($request) {
             $message->to($request->email);
@@ -68,7 +72,7 @@ class LoginController extends Controller
 
         session()->flash('message', "Reset password link sent to $email . Follow the link to reset your password and login again");
 
-        return response()->back();
+        return redirect()->back();
     }
 
 

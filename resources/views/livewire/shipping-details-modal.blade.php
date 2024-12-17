@@ -83,6 +83,16 @@
                                 </div>
                                 <div class="short-desc section">
                                     <h5 class="pd-sub-title" style="margin-bottom: 10px;">
+                                        {{"Enter Your Phone"}}
+                                    </h5>
+                                    <p>
+                                        <input type="phone" class="form-control" name="phone"
+                                            value="{{$profile->phone ?? null}} " placeholder="Enter your phone number..." />
+
+                                    </p>
+                                </div>
+                                {{-- <div class="short-desc section">
+                                    <h5 class="pd-sub-title" style="margin-bottom: 10px;">
                                         {{"Enter Your State"}}
                                     </h5>
                                     <p>
@@ -90,7 +100,7 @@
                                             value="{{$profile->state ?? null}} " placeholder="Enter your state..." />
 
                                     </p>
-                                </div>
+                                </div> --}}
 
                                 <div class="short-desc section">
                                     <h5 class="pd-sub-title" style="margin-bottom: 10px;">

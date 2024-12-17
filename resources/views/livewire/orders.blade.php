@@ -26,6 +26,7 @@
                                     <thead>
                                         <tr>
                                             <th>Select</th>
+                                            <th>Order ID</th>
                                             <th class="pro-remove">Quantity</th>
                                             <th class="pro-thumbnail">Image</th>
                                             <th class="pro-title">Product</th>
@@ -39,6 +40,7 @@
                                         <tr>
                                             <td><input type="checkbox" class="row-checkbox" data-id="{{$order->id}}">
                                             </td>
+                                            <td>{{$order->id}}</td>
                                             <td class="pro-remove">
                                                 <a href="#">× {{$order->quantity}}</a>
                                             </td>
