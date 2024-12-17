@@ -28,6 +28,8 @@ class PayNowController extends Controller
             $payment->add("Invoice Payment With id of " . $order->id, $order->total);
             $response = $this->paynow($new_trans->id, "paynow")->send($payment);
 
+            dd($response);
+
             if ($response->success) {
                 $update_tran = Transaction::find($new_trans->id);
                 $update_tran->update(['poll_url' => $response->pollUrl()]);
