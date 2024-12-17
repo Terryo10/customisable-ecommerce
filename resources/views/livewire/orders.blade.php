@@ -33,7 +33,7 @@
                                             <th class="pro-price">Unit Price</th>
                                             <th class="pro-stock-stauts">Order Stauts</th>
                                             <th class="pro-add-to-cart">Added Options</th>
-                                            <th class="pro-add-to-cart">Order Creation Date</th>
+                                            <th class="pro-add-to-cart">Order Creation</th>
                                         </tr>
                                     </thead>
                                     <tbody>
