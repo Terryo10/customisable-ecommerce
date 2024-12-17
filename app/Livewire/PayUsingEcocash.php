@@ -52,7 +52,6 @@ class PayUsingEcocash extends Component
             $payment = $this->paynow($new_trans->id, "paynow")->createPayment("$uuid", Auth::user()->email);
             $payment->add("Invoice Payment With id of " . $order->id, $order->total);
             $response = $this->paynow($new_trans->id, "paynow")->sendMobile($payment, $this->phone, 'ecocash');
-            dd($response['errors']);
             if ($response->success) {
                 $update_tran = Transaction::find($new_trans->id);
                 $update_tran->update(['poll_url' => $response->pollUrl()]);
