@@ -129,7 +129,7 @@ class ProductsController extends AdminController
         $form->image('feature_image', __('Feature image'))->required();
         $form->textarea('name', __('Name'))->required();
         $form->text('barcode', __('Bar Code'));
-        $form->multipleImage('images', __('Images'))->required();
+        $form->multipleImage('images', __('Images'));
         $form->textarea('description', __('Description'))->required();
         $form->number('quantity', __('Quantity'))->required();
         $form->number('price', __('Price'))->required();
