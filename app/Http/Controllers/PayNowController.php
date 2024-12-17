@@ -12,6 +12,8 @@ class PayNowController extends Controller
 {
     public function createPayment(Request $request, $order_id)
     {
+        dd($order_id);
+
         $order = Orders::findOrFail($order_id);
 
         $new_trans = Transaction::updateOrCreate(
@@ -27,8 +29,6 @@ class PayNowController extends Controller
             $payment = $this->paynow($new_trans->id, "paynow")->createPayment("$uuid", Auth::user()->email);
             $payment->add("Invoice Payment With id of " . $order->id, $order->total);
             $response = $this->paynow($new_trans->id, "paynow")->send($payment);
-
-            dd($response);
 
             if ($response->success) {
                 $update_tran = Transaction::find($new_trans->id);
