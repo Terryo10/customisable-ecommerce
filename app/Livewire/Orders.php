@@ -13,6 +13,6 @@ class Orders extends Component
     public function render()
     {
         $user_id = Auth::user()->id;
-        return view('livewire.orders', ['title' => 'Orders', 'orders' => ModelsOrders::where('user_id', $user_id)->get()])->extends('app');
+        return view('livewire.orders', ['title' => 'Orders', 'orders' => ModelsOrders::where('user_id', $user_id)->paginate(10)->latest()])->extends('app');
     }
 }
