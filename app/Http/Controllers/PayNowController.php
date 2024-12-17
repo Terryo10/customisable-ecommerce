@@ -12,7 +12,6 @@ class PayNowController extends Controller
 {
     public function createPayment(Request $request, $order_id)
     {
-        dd($order_id);
 
         $order = Orders::findOrFail($order_id);
 
