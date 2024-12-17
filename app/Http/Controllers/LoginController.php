@@ -68,7 +68,7 @@ class LoginController extends Controller
 
         session()->flash('message', "Reset password link sent to $email . Follow the link to reset your password and login again");
 
-        return response()->back();
+        return redirect()->back();
     }
 
 
