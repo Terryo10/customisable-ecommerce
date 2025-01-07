@@ -19,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        static::unguard();
+
         app()->bind('path.public', function () {
             return realpath(base_path('public'));
         });

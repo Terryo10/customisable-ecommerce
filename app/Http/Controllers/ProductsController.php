@@ -26,42 +26,56 @@ class ProductsController extends Controller
 
     public function placeOrder(Request $request)
     {
+        // Validate the request input
+        $validated = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'fields' => 'nullable|array',
+            'quantity' => 'required|integer|min:1',
 
-        $product_id = $request->input('product_id');
-        $user_id = Auth::user()->id;
-        $fields = $request->fields;
-        $quantity = $request->quantity;
-        $productQuantity = 0;
-        $stock = 0;
+        ]);
 
-        $product = Products::find($product_id);
+        $product_id = $validated['product_id'];
+        $fields = $validated['fields'] ?? [];
+        $quantity = $validated['quantity'];
+
+        // Find the product and check availability
+        $product = Products::with('productStock')->findOrFail($product_id);
+
+        $availableStock = $product->productStock->sum('quantity');
+
+        if ($quantity > $availableStock) {
+            return redirect()->to('/product/' . $product_id)
+                ->with('message', 'Requested quantity exceeds available stock.');
+        }
 
         $total = $product->price * $quantity;
-        foreach ($product->productStock as $stocks) {
-            $stock += $stocks->quantity ?? 0;
+
+        // Update stock
+        $remainingQuantity = $quantity;
+
+        foreach ($product->productStock as $stock) {
+            if ($remainingQuantity <= 0) {
+                break;
+            }
+
+            if ($stock->quantity > 0) {
+                $deduction = min($stock->quantity, $remainingQuantity);
+                $stock->update(['quantity' => $stock->quantity - $deduction]);
+                $remainingQuantity -= $deduction;
+            }
         }
 
-        $stock = $stock - $quantity;
-        if ($stock <= -1) {
-            return redirect()->to('/product/' . $product_id)->with('message', 'Your quantity you added is out of stock');
-        }
-        $productStock = ProductStock::where('product_id', $product_id)->where('quantity', '>', 0)->first();
-        if ($productStock) {
-
-            $productStock->update(['quantity' => $stock]);
-        }
-        $product->update(['quantity' => $stock]);
-
+        // Create the order
         Orders::create([
             'product_id' => $product_id,
-            'fields' =>  json_encode($fields),
-            'user_id' => $user_id,
+            'fields' => json_encode($fields),
+            'user_id' => Auth::id(),
             'total' => $total,
             'quantity' => $quantity,
             'status' => 'pending',
-            'address' => $request->address
         ]);
 
-        return redirect()->to('/orders')->with('message', 'Your order is placed successfully!!');
+        return redirect()->to('/orders')->with('message', 'Your order has been placed successfully!');
     }
+
 }
