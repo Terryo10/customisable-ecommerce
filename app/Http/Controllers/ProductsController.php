@@ -28,16 +28,16 @@ class ProductsController extends Controller
     public function placeOrder(Request $request)
     {
         // Validate the request input
-        $validated = $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'fields' => 'nullable|array',
-            'quantity' => 'required|integer|min:1',
+        // $validated = $request->validate([
+        //     'product_id' => 'required|exists:products,id',
+        //     'fields' => 'nullable|array',
+        //     'quantity' => 'required|integer|min:1',
 
-        ]);
+        // ]);
 
-        $product_id = $validated['product_id'];
-        $fields = $validated['fields'] ?? [];
-        $quantity = $validated['quantity'];
+        $product_id = $request->product_id;
+        $fields = $request->fields ?? [];
+        $quantity = $request->quantity;
 
         // Find the product and check availability
         $product = Products::with('productStock')->findOrFail($product_id);
@@ -84,5 +84,4 @@ class ProductsController extends Controller
 
         return redirect()->to('/orders')->with('message', 'Your order has been placed successfully!');
     }
-
 }

@@ -97,13 +97,28 @@ class ProductsController extends AdminController
         });
 
         $show->productStock('Product Stock', function ($fields) {
-
-
+            $fields->resource('/admin/product-stocks');
+            $fields->quantity_initial('Quantity Initial Value');
+            $fields->quantity('Quantity');
+            $fields->code('Stock Code');
+            $fields->product_id('Product')->display(function ($productId) {
+                $product = Products::findOrFail($productId);
+                return $product ? $product->name : __('Unknown Product');
+            });
+            $fields->created_at();
+            $fields->updated_at();
         });
 
-        $show->productStockHistory('Product Stock', function ($fields) {
-
-
+        $show->productStockHistory('Product Stock History', function ($fields) {
+            $fields->resource('/admin/product-histories');
+            $fields->quantity('In Stock');
+            $fields->stock_id('Stock ID');
+            $fields->product_id('Product')->display(function ($productId) {
+                $product = Products::findOrFail($productId);
+                return $product ? $product->name : __('Unknown Product');
+            });
+            $fields->created_at();
+            $fields->updated_at();
         });
 
 

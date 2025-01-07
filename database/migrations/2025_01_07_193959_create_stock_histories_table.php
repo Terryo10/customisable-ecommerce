@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('stock_id');
             $table->foreign('stock_id')->references('id')->on('product_stocks')->onDelete('cascade');
-            $table->integer('quantity');
-            $table->integer('quantity_before_deduction');
+            $table->integer('quantity')->default(0);
+            $table->integer('quantity_before_deduction')->default(0);
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->timestamps();
         });
