@@ -95,10 +95,18 @@ class ProductsController extends AdminController
             $fields->created_at();
             $fields->updated_at();
         });
-        // $show->fields('Product Fields', function ($fields) {
+
+        $show->productStock('Product Stock', function ($fields) {
 
 
-        // });
+        });
+
+        $show->productStockHistory('Product Stock', function ($fields) {
+
+
+        });
+
+
         $show->reviews('Product Reviews', function ($fields) {
 
             $fields->resource('/admin/product-reviews');

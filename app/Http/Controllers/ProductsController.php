@@ -6,6 +6,7 @@ use App\Models\Orders;
 use App\Models\Products;
 use App\Models\ProductStock;
 use App\Models\Sliders;
+use App\Models\StockHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -61,6 +62,12 @@ class ProductsController extends Controller
             if ($stock->quantity > 0) {
                 $deduction = min($stock->quantity, $remainingQuantity);
                 $stock->update(['quantity' => $stock->quantity - $deduction]);
+                $createStockHistory = new StockHistory();
+                $createStockHistory->quantity = $stock->quantity;
+                $createStockHistory->stock_id = $stock->id;
+                $createStockHistory->product_id = $product_id;
+                $createStockHistory->quantity_before_deduction = $availableStock;
+                $createStockHistory->save();
                 $remainingQuantity -= $deduction;
             }
         }
