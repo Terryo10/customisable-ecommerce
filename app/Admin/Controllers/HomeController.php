@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Orders;
+use App\Models\ProductStock;
 use Encore\Admin\Admin;
 use Encore\Admin\Controllers\Dashboard;
 use Encore\Admin\Layout\Column;
@@ -27,7 +28,7 @@ class HomeController extends Controller
                     foreach ($data as $key => $value) {
                         $orders[$value->month - 1] = $value->sum('total');
                     }
-                    $column->append(view('admin.chart', ['title'=> 'Orders'])->with('orders', $orders));
+                    $column->append(view('admin.chart', ['title' => 'Orders'])->with('orders', $orders));
                     Admin::js(asset('template/outside/js/chart.js'));
                     Admin::script("
     const labels = [
@@ -74,7 +75,16 @@ class HomeController extends Controller
         config
     );
 ");
+                });
+                $row->column(4, function (Column $column) {
 
+                    $stocks = array_fill(0, 12, 0);
+                    $data = ProductStock::selectRaw('COUNT(*) as count, YEAR(created_at) year, MONTH(created_at) month')->groupBy('year', 'month')->get();
+                    foreach ($data as $key => $value) {
+                        $stocks[$value->month - 1] = $value->sum('quantity');
+                    }
+                    $column->append(view('admin.stocks', ['title' => 'Product Stock Statistics'])->with('stocks', $stocks));
+                
                 });
             });
     }

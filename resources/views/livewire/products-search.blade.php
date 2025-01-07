@@ -144,7 +144,14 @@
     
                                                             </span>
                                                         </div>
-                                                        @if ($product->quantity <= 0) <h3>This Item is Out of Stock
+                                                        @php
+                                                    $stock = 0;
+
+                                                    foreach ($product->productStock as $stocks) {
+                                                    $stock += $stocks->quantity ?? 0;
+                                                    }
+                                                    @endphp
+                                                    @if ($stock <= 0) <h3>This Item is Out of Stock
                                                             </h3>
                                                             @else
     
