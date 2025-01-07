@@ -34,4 +34,8 @@ class Products extends Model
     {
         return $this->hasMany(Orders::class, 'product_id', 'id')->latest();
     }
+    public function productStock()
+    {
+        return $this->hasMany(ProductStock::class, 'product_id', 'id');
+    }
 }

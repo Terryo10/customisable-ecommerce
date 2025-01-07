@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pdf Template</title>
+    <title>{{env('APP_NAME')}} Receipt</title>
 
     <style>
         /* @font-face {
@@ -214,7 +214,7 @@
         </div>
         <div class="aside">
             <div class="brand">
-                <img width="100" height="70" src="logo1.png" />
+                <img width="100" height="70" src="https://slimriff.com/logo1.png" />
             </div>
         </div>
     </div>

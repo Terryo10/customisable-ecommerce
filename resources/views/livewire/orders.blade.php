@@ -25,7 +25,7 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Select</th>
+                                            {{-- <th>Select</th> --}}
                                             <th>Order ID</th>
                                             <th class="pro-remove">Quantity</th>
                                             <th class="pro-thumbnail">Image</th>
@@ -33,13 +33,15 @@
                                             <th class="pro-price">Unit Price</th>
                                             <th class="pro-stock-stauts">Order Stauts</th>
                                             <th class="pro-add-to-cart">Added Options</th>
+                                            <th class="pro-add-to-cart">Order Creation</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($orders as $order)
                                         <tr>
-                                            <td><input type="checkbox" class="row-checkbox" data-id="{{$order->id}}">
-                                            </td>
+                                            {{-- <td><input type="checkbox" class="row-checkbox"
+                                                    data-id="{{$order->id}}">
+                                            </td> --}}
                                             <td>{{$order->id}}</td>
                                             <td class="pro-remove">
                                                 <a href="#">× {{$order->quantity}}</a>
@@ -71,6 +73,7 @@
 
                                                 @if ($order->transaction)
                                                 @if ($order->transaction->isPaid !== 1)
+                                                @if ($order->status !== "paid")
 
 
                                                 <a href="{{" /handle-payment/" . $order->id}}" class="btn btn-danger
@@ -81,9 +84,12 @@
                                                     btn-primary
                                                     form-control text-white mb-3">Retry Ecocash
                                                 </a>
-
+                                                @endif
                                                 @endif
                                                 @else
+
+                                                @if ($order->status !== "paid")
+
 
                                                 <a href="{{" /handle-payment/" . $order->id}}" class="btn btn-success
                                                     form-control text-white mb-3">Pay
@@ -92,6 +98,8 @@
                                                     btn-primary
                                                     form-control text-white mb-3">Pay
                                                     Using Ecocash</a>
+
+                                                @endif
 
                                                 @endif
 
@@ -118,6 +126,7 @@
                                                     @endforeach
                                                 </a>
                                             </td>
+                                            <td>{{$order->created_at}}</td>
                                         </tr>
 
                                         @endforeach
@@ -129,9 +138,9 @@
                         </div>
                     </form>
                     {{-- <form method="POST" action="/bulk-checkout">
-                    <button id="saveButton" class="btn btn-warning text-white">Bulk CheckOut</button>
-                    <input type="text" name="items" placeholder="Selected bulk items"/>
-                    <p id="output"></p>
+                        <button id="saveButton" class="btn btn-warning text-white">Bulk CheckOut</button>
+                        <input type="text" name="items" placeholder="Selected bulk items" />
+                        <p id="output"></p>
                     </form> --}}
                 </div>
             </div>

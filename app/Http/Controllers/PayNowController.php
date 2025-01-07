@@ -12,6 +12,7 @@ class PayNowController extends Controller
 {
     public function createPayment(Request $request, $order_id)
     {
+
         $order = Orders::findOrFail($order_id);
 
         $new_trans = Transaction::updateOrCreate(

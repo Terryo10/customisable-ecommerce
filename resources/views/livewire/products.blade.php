@@ -100,7 +100,7 @@
                                                 </div>
 
                                                 <div class="pro-thumb-img-slider nav">
-                                                    @foreach ($product->images as $key => $img)
+                                                    @foreach ($product->images ?? [] as $key => $img)
 
                                                     <div>
                                                         <span class="{{ $key === 0
@@ -143,7 +143,14 @@
 
                                                         </span>
                                                     </div>
-                                                    @if ($product->quantity <= 0) <h3>This Item is Out of Stock
+                                                    @php
+                                                    $stock = 0;
+
+                                                    foreach ($product->productStock as $stocks) {
+                                                    $stock += $stocks->quantity ?? 0;
+                                                    }
+                                                    @endphp
+                                                    @if ($stock <= 0) <h3>This Item is Out of Stock
                                                         </h3>
                                                         @else
 
@@ -200,14 +207,14 @@
                                                                     @endphp
                                                                     @if ($userShippingAddress)
                                                                     <input type="button" name="address"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="{{"#quickViewModalShippingDetails".$product->id}}"
+                                                                        data-bs-toggle="modal" data-bs-target="{{"
+                                                                        #quickViewModalShippingDetails".$product->id}}"
                                                                     class="btn btn-success addedFields form-control"
                                                                     value="Update Shipping Address" />
 
                                                                     @else
-                                                                    <input data-bs-toggle="modal"
-                                                                        data-bs-target="{{"#quickViewModalShippingDetails".$product->id}}"
+                                                                    <input data-bs-toggle="modal" data-bs-target="{{"
+                                                                        #quickViewModalShippingDetails".$product->id}}"
                                                                     type="button" name="address"
                                                                     class="btn btn-success addedFields form-control"
                                                                     value="Add Shipping Address" />
@@ -217,16 +224,14 @@
 
 
                                                             <label>Quantity</label>
-                                                            <input style="display: none;" type="text"
-                                                                name="product_id"
+                                                            <input style="display: none;" type="text" name="product_id"
                                                                 value={{"$product->id"}} />
-                                                            <input style="display: none;" type="text"
-                                                                 name="fields" id="addedFields"
-                                                                value="[]" />
+                                                            <input style="display: none;" type="text" name="fields"
+                                                                id="addedFields" value="[]" />
                                                             <div class="quantity-cart section">
                                                                 <div class="product-quantity">
-                                                                    <input name="quantity"
-                                                                        type="number" value="1" required />
+                                                                    <input name="quantity" type="number" value="1"
+                                                                        required />
                                                                 </div>
                                                                 @if ($userShippingAddress)
                                                                 <button type="submit" class="add-to-cart">

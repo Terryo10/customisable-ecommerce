@@ -5,7 +5,7 @@
                 <!-- Home Slick Text Slider -->
                 <div class="home-slick-text-slider col-sm-6 col-xs-12">
                     <!-- Home Text Content -->
-                    @foreach ($sliders as $slider)
+                    @foreach ($sliders ?? [] as $slider)
                     <div class="home-slick-content">
                         <h1>{{ $slider->title ?? "" }}</h1>
                         <p>{{ $slider->description ?? "" }}</p>

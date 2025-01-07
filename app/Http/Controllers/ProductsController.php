@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Orders;
 use App\Models\Products;
+use App\Models\ProductStock;
 use App\Models\Sliders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,17 +31,26 @@ class ProductsController extends Controller
         $user_id = Auth::user()->id;
         $fields = $request->fields;
         $quantity = $request->quantity;
+        $productQuantity = 0;
+        $stock = 0;
 
         $product = Products::find($product_id);
-	
-        $total = $product->price * $quantity;
-        $productQuantity = $product->quantity - $quantity;
 
-        if ($productQuantity <= -1) {
-            return redirect()->to('/product/' . $product_id)->with('message', 'Your quantity you added is out of stock');
+        $total = $product->price * $quantity;
+        foreach ($product->productStock as $stocks) {
+            $stock += $stocks->quantity ?? 0;
         }
 
-        $product->update(['quantity' => $productQuantity]);
+        $stock = $stock - $quantity;
+        if ($stock <= -1) {
+            return redirect()->to('/product/' . $product_id)->with('message', 'Your quantity you added is out of stock');
+        }
+        $productStock = ProductStock::where('product_id', $product_id)->where('quantity', '>', 0)->first();
+        if ($productStock) {
+
+            $productStock->update(['quantity' => $stock]);
+        }
+        $product->update(['quantity' => $stock]);
 
         Orders::create([
             'product_id' => $product_id,

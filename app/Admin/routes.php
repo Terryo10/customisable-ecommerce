@@ -32,4 +32,5 @@ Route::group([
     $router->resource('banking-details', BankingDetailsController::class);
     $router->resource('shop-availabilities', ShopAvailabilityController::class);
     $router->resource('shipping-addresses', ShippingAddressController::class);
+    $router->resource('product-stocks', ProductStocksController::class);
 });
