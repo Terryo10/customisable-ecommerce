@@ -34,4 +34,5 @@ Route::group([
     $router->resource('shipping-addresses', ShippingAddressController::class);
     $router->resource('product-stocks', ProductStocksController::class);
     $router->resource('stock-histories', StockHistoryController::class);
+    $router->resource('branches', BranchesController::class);
 });

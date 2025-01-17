@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Branches;
 use App\Models\Products;
 use App\Models\ProductStock;
 use Encore\Admin\Controllers\AdminController;
@@ -33,6 +34,10 @@ class ProductStocksController extends AdminController
             $product = Products::findOrFail($productId);
             return $product ? $product->name : __('Unknown Product');
         });
+        $grid->column('branch_id', __('Selected Branch'))->display(function ($branchId) {
+            $branch = Branches::findOrFail($branchId);
+            return $branch ? $branch->name : __('Unknown branch');
+        });
         $grid->column('quantity_initial', __('Quantity initial'));
         $grid->column('quantity', __('Quantity'));
         $grid->column('created_at', __('Created at'));
@@ -53,6 +58,10 @@ class ProductStocksController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('code', __('Code'));
+        $show->field('branch_id', __('Branch'))->as(function ($branchId) {
+            $branch = Branches::findOrFail($branchId);
+            return $branch ? $branch->name : __('Unknown Branch');
+        });
         $show->field('product_id', __('Product'))->as(function ($productId) {
             $product = Products::findOrFail($productId);
             return $product ? $product->name : __('Unknown Product');
@@ -75,6 +84,10 @@ class ProductStocksController extends AdminController
         $form = new Form(new ProductStock());
 
         $form->text('code', __('Unique Code'))->rules('required');
+        $form->select('branch_id', __('Select Branch to link to this stock'))
+            ->options(Branches::all()->pluck('name', 'id'))
+            ->rules('required')
+            ->placeholder('Select branch');
         $form->select('product_id', __('Link Product to this order'))
             ->options(Products::all()->pluck('name', 'id'))
             ->rules('required')

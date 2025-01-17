@@ -10,6 +10,24 @@ use Illuminate\Support\Facades\Auth;
 
 class PayNowController extends Controller
 {
+    public function createCashPayment(Request $request, $order_id)
+    {
+
+        $order = Orders::findOrFail($order_id);
+
+        $new_trans = Transaction::updateOrCreate(
+            ['order_id' => $order_id],
+            [
+                'user_id' => Auth::user()->id,
+                'type' => 'cash',
+                'total' => $order->total
+            ]
+        );
+
+        $new_trans->update(['isPaid' => true]);
+        $order->update(['status' => 'paid']);
+        return redirect()->back()->with(['message' => 'Your transaction have been placed successfull!!! please contact ' . env('MAIL_FROM_ADDRESS') . ' to get full information about your order']);
+    }
     public function createPayment(Request $request, $order_id)
     {
 

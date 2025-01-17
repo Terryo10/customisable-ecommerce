@@ -36,6 +36,7 @@ class ProductsController extends Controller
         // ]);
 
         $product_id = $request->product_id;
+        $branch_id = $request->branch_id;
         $fields = $request->fields ?? [];
         $quantity = $request->quantity;
 
@@ -61,7 +62,9 @@ class ProductsController extends Controller
 
             if ($stock->quantity > 0) {
                 $deduction = min($stock->quantity, $remainingQuantity);
-                $stock->update(['quantity' => $stock->quantity - $deduction]);
+                if ($stock->branch_id === $branch_id) {
+                    $stock->update(['quantity' => $stock->quantity - $deduction]);
+                }
                 $createStockHistory = new StockHistory();
                 $createStockHistory->quantity = $stock->quantity;
                 $createStockHistory->stock_id = $stock->id;
@@ -77,6 +80,7 @@ class ProductsController extends Controller
             'product_id' => $product_id,
             'fields' => json_encode($fields),
             'user_id' => Auth::id(),
+            'branch_id' => $branch_id,
             'total' => $total,
             'quantity' => $quantity,
             'status' => 'pending',

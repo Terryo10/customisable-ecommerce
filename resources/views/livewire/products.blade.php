@@ -164,6 +164,17 @@
                                                                 </h5>
                                                                 <p>{{$product->description}}</p>
                                                             </div>
+                                                            <div class="short-desc section">
+                                                                <h5 class="pd-sub-title">
+                                                                    Select Branch
+                                                                </h5>
+                                                                <select name="branch_id" class="form-control">
+                                                                    @foreach ($branches as $branch)
+                                                                    <option value="{{$branch->id}}">{{$branch->name}}
+                                                                    </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
                                                             @php
                                                             $productsFields = is_string($product->fields) ?
                                                             json_decode($product->fields == "null" ? "[]":
@@ -213,11 +224,20 @@
                                                                     value="Update Shipping Address" />
 
                                                                     @else
+                                                                    @if (Auth::user())
                                                                     <input data-bs-toggle="modal" data-bs-target="{{"
                                                                         #quickViewModalShippingDetails".$product->id}}"
                                                                     type="button" name="address"
                                                                     class="btn btn-success addedFields form-control"
                                                                     value="Add Shipping Address" />
+                                                                    @else
+                                                                    <input data-bs-toggle="modal" data-bs-target="{{"
+                                                                        #quickViewModalShippingDetails".$product->id}}"
+                                                                    type="button" name="address"
+                                                                    class="btn btn-success addedFields form-control"
+                                                                    value="Please Login To Add Shipping Address" />
+                                                                    @endif
+
                                                                     @endif
                                                                 </p>
                                                             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Branches;
 use App\Models\Orders;
 use App\Models\Products as ModelsProducts;
 use App\Models\ShopAvailability;
@@ -31,6 +32,7 @@ class Products extends Component
     {
         $products = ModelsProducts::latest()->paginate(10);
         $availabity = ShopAvailability::latest()->first();
-        return view('livewire.products', compact('products', 'availabity'));
+        $branches = Branches::all();
+        return view('livewire.products', compact('products', 'availabity', 'branches'));
     }
 }

@@ -10,7 +10,7 @@ class Orders extends Model
     use HasFactory;
     protected $guarded;
 
-    protected $with = ['transaction', 'product', 'user', 'shippingDetails'];
+    protected $with = ['transaction', 'product', 'user', 'shippingDetails', 'branch'];
 
     public function transaction()
     {
@@ -30,5 +30,9 @@ class Orders extends Model
     public function shippingDetails()
     {
         return $this->hasOne(ShippingAddress::class, 'user_id', 'user_id');
+    }
+    public function branch()
+    {
+        return $this->hasOne(Branches::class, 'id', 'branch_id');
     }
 }

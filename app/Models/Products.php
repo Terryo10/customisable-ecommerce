@@ -43,5 +43,9 @@ class Products extends Model
         return $this->hasMany(StockHistory::class, 'product_id', 'id');
     }
 
-
+    /**
+     * Fetch all branches without any relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
 }

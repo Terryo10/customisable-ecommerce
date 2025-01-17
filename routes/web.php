@@ -37,6 +37,7 @@ Route::post('/search', function (Request $request) {
 Route::get('/download-invoice/{order_id}', [ProductReviewController::class, 'downInvoiceAsPDF']);
 Route::get('/download-receipt/{order_id}', [ProductReviewController::class, 'downReceiptAsPDF']);
 Route::get('/pay-ecocash/{orderId}', PayUsingEcocash::class)->middleware('auth')->name('create.payment.ecocash');
+Route::get('/pay-cash/{orderId}', [PayNowController::class, 'createCashPayment'])->middleware('auth')->name('create.payment.cash');
 Route::get('/handle-payment/{order_id}', [PayNowController::class, 'createPayment'])->middleware('auth')->name('paynow.payment');
 Route::get('/cancel-payment/{id}', [PayNowController::class, 'paymentCancel'])->name('paynowCancel.payment');
 Route::get('/check-payment/{id}', [PayNowController::class, 'checkPayment'])->name('paynowCheck.payment');

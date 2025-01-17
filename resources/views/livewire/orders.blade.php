@@ -28,6 +28,7 @@
                                             {{-- <th>Select</th> --}}
                                             <th>Order ID</th>
                                             <th class="pro-remove">Quantity</th>
+                                            <th class="pro-remove">Order Branch</th>
                                             <th class="pro-thumbnail">Image</th>
                                             <th class="pro-title">Product</th>
                                             <th class="pro-price">Unit Price</th>
@@ -45,6 +46,9 @@
                                             <td>{{$order->id}}</td>
                                             <td class="pro-remove">
                                                 <a href="#">× {{$order->quantity}}</a>
+                                            </td>
+                                            <td class="pro-remove">
+                                                <a href="#">{{$order->branch->name ?? ""}}</a>
                                             </td>
                                             <td class="pro-thumbnail">
 
@@ -84,6 +88,10 @@
                                                     btn-primary
                                                     form-control text-white mb-3">Retry Ecocash
                                                 </a>
+                                                <a wire:navigate href="{{" /pay-cash/" . $order->id}}" class="btn
+                                                    btn-primary
+                                                    form-control text-white mb-3">Retry Cash
+                                                </a>
                                                 @endif
                                                 @endif
                                                 @else
@@ -98,6 +106,10 @@
                                                     btn-primary
                                                     form-control text-white mb-3">Pay
                                                     Using Ecocash</a>
+                                                <a wire:navigate href="{{" /pay-cash/" . $order->id}}" class="btn
+                                                    btn-primary
+                                                    form-control text-white mb-3">Pay
+                                                    Using Cash</a>
 
                                                 @endif
 

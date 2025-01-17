@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Branches;
 use App\Models\Orders;
 use App\Models\Products;
 use App\Models\User;
@@ -35,6 +36,7 @@ class OrdersController extends AdminController
             $filter->disableIdFilter();
             // Add a column filter
             $filter->like('name', 'Search By Name');
+            
             $filter->equal('status', 'By Status')->select([
                 'pending' => 'Pending',
                 'processed' => 'Processed',
@@ -48,6 +50,10 @@ class OrdersController extends AdminController
 
         $grid->column('quantity', __('Quantity'));
         $grid->column('total', __('Total ($)'));
+        $grid->column('branch_id', __('Selected Branch'))->display(function ($branchId) {
+            $branch = Branches::findOrFail($branchId);
+            return $branch ? $branch->name : __('Unknown branch');
+        });
         $grid->column('id', __('Status'))->display(function ($orderId) {
             $order = Orders::findOrFail($orderId);
             $url = admin_url('change-order-status');
@@ -115,6 +121,10 @@ class OrdersController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('quantity', __('Quantity'));
+        $show->field('branch_id', __('Branch'))->as(function ($branchId) {
+            $branch = Branches::findOrFail($branchId);
+            return $branch ? $branch->name : __('Unknown Branch');
+        });
         $show->field('total', __('Total'));
         $show->field('status', __('Status'));
         $show->field('product_id', __('Product'))->as(function ($productId) {
@@ -181,6 +191,10 @@ class OrdersController extends AdminController
         $form->number('quantity', __('Quantity'))->rules('required|integer|min:1');
         $form->text('address', __('Enter Shipping Address'))->rules('required|min:1');
         $form->currency('total', __('Total'))->symbol('$')->rules('required|numeric|min:0');
+        $form->select('branch_id', __('Select Branch to link to this order'))
+            ->options(Branches::all()->pluck('name', 'id'))
+            ->rules('required')
+            ->placeholder('Select branch');
         $form->select('status', __('Status'))->options([
             'pending' => 'Pending',
             'processed' => 'Processed',
