@@ -43,7 +43,7 @@ class ProductsController extends Controller
         // Find the product and check availability
         $product = Products::with('productStock')->findOrFail($product_id);
 
-        $availableStock = $product->productStock->sum('quantity');
+        $availableStock = $product->productStock->where('branch_id', $branch_id)->sum('quantity');
 
         if ($quantity > $availableStock) {
             return redirect()->to('/product/' . $product_id)
@@ -56,13 +56,16 @@ class ProductsController extends Controller
         $remainingQuantity = $quantity;
 
         foreach ($product->productStock as $stock) {
+
             if ($remainingQuantity <= 0) {
                 break;
             }
 
             if ($stock->quantity > 0) {
+
                 $deduction = min($stock->quantity, $remainingQuantity);
-                if ($stock->branch_id === $branch_id) {
+
+                if ("$stock->branch_id" === $branch_id) {
                     $stock->update(['quantity' => $stock->quantity - $deduction]);
                 }
                 $createStockHistory = new StockHistory();
