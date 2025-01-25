@@ -105,7 +105,7 @@ class OrdersController extends AdminController
         
                     // Check if the type is "attachment"
                     if (($item['type'] ?? 'text') === 'attachment') {
-                        $html .= '<a href="' . ($item['value'] ?? '#') . '" download class="btn btn-success">';
+                        $html .= '<a href="' . ($item['value'] ?? '#') . '" download target="_blank" class="btn btn-success">';
                         $html .= 'Download Attachment';
                         $html .= '</a>';
                     } else {
