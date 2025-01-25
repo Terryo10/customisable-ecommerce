@@ -155,8 +155,8 @@
                                                             </h3>
                                                             @else
     
-                                                            <form method="POST" action="{{ route('placeOrder') }}">
-    
+                                                            <form method="POST" action="{{ route('placeOrder') }}" enctype="multipart/form-data">
+
                                                                 @csrf
     
                                                                 <div class="short-desc section">
@@ -164,6 +164,17 @@
                                                                         Quick Overview
                                                                     </h5>
                                                                     <p>{{$product->description}}</p>
+                                                                </div>
+                                                                <div class="short-desc section">
+                                                                    <h5 class="pd-sub-title">
+                                                                        Select Branch
+                                                                    </h5>
+                                                                    <select name="branch_id" class="form-control">
+                                                                        @foreach ($branches as $branch)
+                                                                        <option value="{{$branch->id}}">{{$branch->name}}
+                                                                        </option>
+                                                                        @endforeach
+                                                                    </select>
                                                                 </div>
                                                                 @php
                                                                 $productsFields = is_string($product->fields) ?
@@ -187,8 +198,13 @@
                                                                         {{$fild->name}}
                                                                     </h5>
                                                                     <p>
-                                                                        <input type="text" name="{{$fild->value}}"
+                                                                        @if ($fild->type === "attachment")
+                                                                        <input type="file" name="attachment"
                                                                             class="addedFields form-control" required />
+                                                                        @else
+                                                                        <input type="text" name="{{$fild->value}}"
+                                                                        class="addedFields form-control" required />
+                                                                        @endif
                                                                     </p>
                                                                 </div>
     
@@ -208,33 +224,40 @@
                                                                         @endphp
                                                                         @if ($userShippingAddress)
                                                                         <input type="button" name="address"
-                                                                            data-bs-toggle="modal"
-                                                                            data-bs-target="{{"#quickViewModalShippingDetails".$product->id}}"
+                                                                            data-bs-toggle="modal" data-bs-target="{{"
+                                                                            #quickViewModalShippingDetails".$product->id}}"
                                                                         class="btn btn-success addedFields form-control"
                                                                         value="Update Shipping Address" />
     
                                                                         @else
-                                                                        <input data-bs-toggle="modal"
-                                                                            data-bs-target="{{"#quickViewModalShippingDetails".$product->id}}"
+                                                                        @if (Auth::user())
+                                                                        <input data-bs-toggle="modal" data-bs-target="{{"
+                                                                            #quickViewModalShippingDetails".$product->id}}"
                                                                         type="button" name="address"
                                                                         class="btn btn-success addedFields form-control"
                                                                         value="Add Shipping Address" />
+                                                                        @else
+                                                                        <input data-bs-toggle="modal" data-bs-target="{{"
+                                                                            #quickViewModalShippingDetails".$product->id}}"
+                                                                        type="button" name="address"
+                                                                        class="btn btn-success addedFields form-control"
+                                                                        value="Please Login To Add Shipping Address" />
+                                                                        @endif
+    
                                                                         @endif
                                                                     </p>
                                                                 </div>
     
     
                                                                 <label>Quantity</label>
-                                                                <input style="display: none;" type="text"
-                                                                    wire:model="order.product_id" name="product_id"
+                                                                <input style="display: none;" type="text" name="product_id"
                                                                     value={{"$product->id"}} />
-                                                                <input style="display: none;" type="text"
-                                                                    wire:model="order.fields" name="fields" id="addedFields"
-                                                                    value="[]" />
+                                                                <input style="display: none;" type="text" name="fields"
+                                                                    id="addedFields" value="[]" />
                                                                 <div class="quantity-cart section">
                                                                     <div class="product-quantity">
-                                                                        <input wire:model="order.quantity" name="quantity"
-                                                                            type="number" value="1" required />
+                                                                        <input name="quantity" type="number" value="1"
+                                                                            required />
                                                                     </div>
                                                                     @if ($userShippingAddress)
                                                                     <button type="submit" class="add-to-cart">
@@ -310,15 +333,15 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll('.img-click').forEach((img)=>{
-        img.addEventListener('click', function (e){
-            document.querySelectorAll(`.pro-large-img-${e.target.getAttribute('data-id')}`).forEach((element)=>{
-                element.setAttribute('src', e.target.getAttribute('src'));
+        document.querySelectorAll('.img-click').forEach((img)=>{
+            img.addEventListener('click', function (e){
+                document.querySelectorAll(`.pro-large-img-${e.target.getAttribute('data-id')}`).forEach((element)=>{
+                    element.setAttribute('src', e.target.getAttribute('src'));
+                })
             })
         })
-    })
-
-    });
+    
+        });
         // document.addEventListener("DOMContentLoaded", () => {
         const stars = document.querySelectorAll(".star");
         const reviewText = document.getElementById("reviewText");
@@ -380,7 +403,7 @@
                             existingField.value = fieldValue;
                         } else {
                             // Add a new object if the fieldName does not exist
-                            currentData.push({ name: fieldName, value: fieldValue });
+                            currentData.push({ name: fieldName, value: fieldValue, type: fieldName.includes('attach') ? 'attachment': 'text' });
                         }
         
                         // Update the addedFieldsElement value

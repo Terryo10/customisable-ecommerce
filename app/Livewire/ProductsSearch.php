@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Branches;
 use App\Models\Products;
 use Livewire\Component;
 
@@ -16,6 +17,8 @@ class ProductsSearch extends Component
 
     public function render()
     {
-        return view('livewire.products-search', ['products_search' => Products::where('name', 'LIKE', '%' . $this->search . '%')->paginate(20)])->extends('app');
+        $branches = Branches::all();
+
+        return view('livewire.products-search', ['products_search' => Products::where('name', 'LIKE', '%' . $this->search . '%')->paginate(20), 'branches' => $branches])->extends('app');
     }
 }

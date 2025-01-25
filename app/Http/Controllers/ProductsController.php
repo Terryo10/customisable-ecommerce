@@ -40,6 +40,35 @@ class ProductsController extends Controller
         $fields = $request->fields ?? [];
         $quantity = $request->quantity;
 
+        if ($request->file('attachment')) {
+            $imageName = time() . '.' . $request->attachment->extension();
+            $request->attachment->move(public_path('profile'), $imageName);
+
+            // Decode the JSON string to a PHP array
+            $data = json_decode($fields, true);
+
+            // Check if decoding was successful
+            if (is_array($data)) {
+                // Iterate over the array to find the "attachment" field
+                foreach ($data as &$item) {
+                    if (isset($item['name']) && $item['name'] === 'attachment') {
+                        $item['value'] = "/profile/$imageName"; // Replace with your desired URL
+                    }
+                }
+                // Clean up the reference
+                unset($item);
+
+                $fields = json_encode($data);
+
+                // // Encode the array back to a JSON string
+                // $updatedJsonString = json_encode($data, JSON_PRETTY_PRINT);
+
+                // Output the updated JSON
+            } else {
+                // dd("Invalid JSON string!");
+            }
+        }
+
         // Find the product and check availability
         $product = Products::with('productStock')->findOrFail($product_id);
 

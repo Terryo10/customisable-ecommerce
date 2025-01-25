@@ -90,17 +90,34 @@ class OrdersController extends AdminController
         //     return "<form method='GET' action='$downloadLink'>{$button}</form>";
         // });
         $grid->column('fields', __('Customised Options'))->display(function ($fields) {
-            $items = json_decode(json_decode($fields));
-            $sentence = "";
-
+            // Decode the JSON data (twice, as per your example)
+            $items = json_decode(json_decode($fields, true), true);
+        
+            // Initialize an empty HTML string
+            $html = "";
+        
+            // Check if the decoded data is an array
             if (is_array($items)) {
                 foreach ($items as $item) {
-                    $sentence .= $item->name . ': ' . $item->value . '; ';
+                    // Render the name and value dynamically
+                    $html .= '<div class="short-desc section" style="border-bottom: 1px solid #333;padding: 4px 10px;">';
+                    $html .= '<h5 class="pd-sub-title">Field Name: ' . ($item['name'] ?? 'N/A') . '</h5>';
+        
+                    // Check if the type is "attachment"
+                    if (($item['type'] ?? 'text') === 'attachment') {
+                        $html .= '<a href="' . ($item['value'] ?? '#') . '" download class="btn btn-success">';
+                        $html .= 'Download Attachment';
+                        $html .= '</a>';
+                    } else {
+                        // Display value for non-attachment fields
+                        $html .= '<p>Field Value: ' . ($item['value'] ?? 'N/A') . '</p>';
+                    }
+        
+                    $html .= '</div>';
                 }
-                $sentence = rtrim($sentence, '; ');
             }
-
-            return $sentence;
+        
+            return $html; // Return the rendered HTML
         });
 
         $grid->column('created_at', __('Created at'));

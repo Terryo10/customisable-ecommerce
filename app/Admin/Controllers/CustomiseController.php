@@ -44,11 +44,14 @@ class CustomiseController extends Controller
     const fieldName = document.querySelector(
     `input[name="new_field_name"]`
     ).value;
+    const fieldType = document.querySelector(
+    `select[name="new_field_type"]`
+    ).value;
     const fieldValue = document.querySelector(
       `input[name="new_field_value"]`
     ).value;
 
-    if (fieldName && fieldValue) {
+    if (fieldName && fieldValue && fieldType) {
       // Add to the container
       const fieldElement = document.createElement("div");
       fieldElement.innerHTML = `
@@ -61,11 +64,12 @@ class CustomiseController extends Controller
       const currentData = JSON.parse(
         document.getElementById("customAddedFields").value || "[]"
       );
-      currentData.push({ name: fieldName, value: fieldValue });
+      currentData.push({ name: fieldName, value: fieldValue, type:  fieldType});
       document.getElementById("customAddedFields").value =
         JSON.stringify(currentData);
       document.querySelector(`input[name="new_field_name"]`).value = "";
       document.querySelector(`input[name="new_field_value"]`).value = "";
+      document.querySelector(`select[name="new_field_type"]`).value = "text";
 
       // customFieldsData.value = JSON.stringify(currentData);
     } else {

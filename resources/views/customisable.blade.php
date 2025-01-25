@@ -26,7 +26,16 @@
                     class="form-control" />
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-3">
+
+                <select style="margin: 10px 0px" name="new_field_type" class="form-control">
+                    <option>Select Type</option>
+                    <option value="text">Select Type Text</option>
+                    <option value="attachment">Select Type Attachment</option>
+                </select>
+
+            </div>
+            <div class="col-md-3">
 
                 <input style="margin: 10px 0px" type="text" name="new_field_value" placeholder="Enter field value..."
                     class="form-control" />
@@ -35,8 +44,8 @@
 
             <div id="custom_fields_data" class="col-md-12" style="margin: 10px 0px">
 
-                <input type="text" class="form-control" id="customAddedFields" name="fields"
-                    placeholder="Added Fields" required />
+                <input type="text" class="form-control" id="customAddedFields" name="fields" placeholder="Added Fields"
+                    required />
             </div>
 
         </div>
@@ -62,5 +71,5 @@
 </script>
 
 <script>
-    
+
 </script>

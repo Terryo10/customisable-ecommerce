@@ -154,7 +154,8 @@
                                                         </h3>
                                                         @else
 
-                                                        <form method="POST" action="{{ route('placeOrder') }}">
+                                                        <form method="POST" action="{{ route('placeOrder') }}"
+                                                            enctype="multipart/form-data">
 
                                                             @csrf
 
@@ -197,8 +198,13 @@
                                                                     {{$fild->name}}
                                                                 </h5>
                                                                 <p>
+                                                                    @if ($fild->type === "attachment")
+                                                                    <input type="file" name="attachment"
+                                                                        class="addedFields form-control" required />
+                                                                    @else
                                                                     <input type="text" name="{{$fild->value}}"
                                                                         class="addedFields form-control" required />
+                                                                    @endif
                                                                 </p>
                                                             </div>
 
@@ -405,7 +411,7 @@
                         existingField.value = fieldValue;
                     } else {
                         // Add a new object if the fieldName does not exist
-                        currentData.push({ name: fieldName, value: fieldValue });
+                        currentData.push({ name: fieldName, value: fieldValue, type: fieldName.includes('attach') ? 'attachment': 'text' });
                     }
     
                     // Update the addedFieldsElement value
