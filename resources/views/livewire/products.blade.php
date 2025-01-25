@@ -198,7 +198,7 @@
                                                                     {{$fild->name}}
                                                                 </h5>
                                                                 <p>
-                                                                    @if ($fild->type === "attachment")
+                                                                    @if ($fild->type ?? 'text' === "attachment")
                                                                     <input type="file" name="attachment"
                                                                         class="addedFields form-control" required />
                                                                     @else
