@@ -158,6 +158,7 @@
                     <thead>
                         <th>Product</th>
                         <th>Status</th>
+                        <th>Paid Using Cash</th>
                         <th>Quantity</th>
                         <th>Options Selected</th>
                     </thead>
@@ -165,6 +166,7 @@
                         <tr>
                             <td>{{ $order->product->name ?? "" }}</td>
                             <td>{{ $order->status ?? "N/A" }}</td>
+                            <td>{{ $order->type === "cash"? "Paid using cash ready for collection" : "N/A" }}</td>
                             <td>{{ $order->quantity ?? "" }}</td>
                             <td>
                                 @php

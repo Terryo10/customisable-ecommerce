@@ -25,7 +25,7 @@ class PayNowController extends Controller
         );
 
         $new_trans->update(['isPaid' => true]);
-        $order->update(['status' => 'paid']);
+        $order->update(['status' => 'paid', 'type' => 'cash']);
         return redirect()->back()->with(['message' => 'Your transaction have been placed successfull!!! please contact ' . env('MAIL_FROM_ADDRESS') . ' to get full information about your order']);
     }
     public function createPayment(Request $request, $order_id)
