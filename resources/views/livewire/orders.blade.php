@@ -130,7 +130,7 @@
                                                         <h5 class="pd-sub-title">
                                                             Field Name : {{$fild->name}}
                                                         </h5>
-                                                        @if ($fild->type ?? "text" === "attachment")
+                                                        @if (($fild->type ?? "text") === "attachment")
                                                         @if (str_contains($fild->value, "profile"))
                                                         <a href="{{ $fild->value }}" download class="btn btn-success">
                                                             Download Attachment
