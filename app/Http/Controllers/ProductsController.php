@@ -40,6 +40,16 @@ class ProductsController extends Controller
         $fields = $request->fields ?? [];
         $quantity = $request->quantity;
 
+        if (Orders::where('user_id', Auth::id())
+            ->whereNotIn('status', ['paid', 'received'])
+            ->where('product_id', $product_id)
+            ->where('branch_id', $branch_id)
+            ->first()
+        ) {
+            return redirect()->to('/product/' . $product_id)
+                ->with('message', 'An order has already been created for this user.');
+        }
+
         if ($request->file('attachment')) {
             $imageName = time() . '.' . $request->attachment->extension();
             $request->attachment->move(public_path('profile'), $imageName);

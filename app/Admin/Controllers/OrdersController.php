@@ -63,6 +63,7 @@ class OrdersController extends AdminController
             <select name='status' class='form-control'>
             <option value='$order->status'>$order->status</option>
              <option value='paid'>Paid</option>
+             <option value='received'>Cash Received</option>
              <option value='pending'>Pending</option>
              <option value='delivered'>Delivered</option>
              <option value='cancelled'>Cancelled</option>
@@ -217,6 +218,7 @@ class OrdersController extends AdminController
             'processed' => 'Processed',
             'shipped' => 'Shipped',
             'paid' => 'Product Is Paid',
+            'received' => 'Cash Received',
             'delivered' => 'Delivered',
             'cancelled' => 'Cancelled',
         ])->default('pending')->rules('required');
