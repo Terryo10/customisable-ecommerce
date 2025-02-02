@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('sliders', function (Blueprint $table) {
-            $table->foreignId('product_id')->default(1)->constrained('products')->onDelete('cascade');
+            $table->foreignId('product_id')->default(11)->constrained('products')->onDelete('cascade');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('sliders', function (Blueprint $table) {
-            $table->foreignId('product_id')->default(1)->constrained('products')->onDelete('cascade');
+            $table->foreignId('product_id')->default(11)->constrained('products')->onDelete('cascade');
         });
     }
 };
