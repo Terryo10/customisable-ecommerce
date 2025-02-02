@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Products;
 use App\Models\Sliders;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -68,6 +69,11 @@ class SlidersController extends AdminController
         $form->image('image', __('Image'))->required();
         $form->textarea('title', __('Title'))->required();
         $form->textarea('description', __('Description'))->required();
+            // Load products into a dropdown
+            $form->select('product_id', __('Link Product to this slider'))
+            ->options(Products::all()->pluck('name', 'id'))
+            ->rules('required')
+            ->placeholder('Select a product');
 
         return $form;
     }
