@@ -51,6 +51,10 @@ class SlidersController extends AdminController
         $show->field('image', __('Image'))->image();
         $show->field('title', __('Title'));
         $show->field('description', __('Description'));
+        $show->field('product_id', __('Product'))->as(function ($productId) {
+            $product = Products::findOrFail($productId);
+            return $product ? $product->name : __('Unknown Product');
+        });
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 

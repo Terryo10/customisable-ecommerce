@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="isotope-grid row" id="shop">
-                    @foreach ($products_search as $product)
+                    @foreach ($products_search ?? [] as $product)
 
                     <!-- Product Item Start -->
                     <div class="isotope-item col-xl-3 col-lg-4 col-md-6 col-12 mb-50">
@@ -54,7 +54,7 @@
                                         $newArray = array_fill(0, $product->reviews[0]->rating,
                                         null);
                                         @endphp
-                                        @foreach ($newArray as $item)
+                                        @foreach ($newArray ?? [] as $item)
                                         <i class="fa fa-star active"></i>
                                         @endforeach
 
@@ -101,7 +101,7 @@
                                                     </div>
     
                                                     <div class="pro-thumb-img-slider nav">
-                                                        @foreach ($product->images as $key => $img)
+                                                        @foreach ($product->images ?? [] as $key => $img)
     
                                                         <div>
                                                             <span class="{{ $key === 0
@@ -134,7 +134,7 @@
                                                                 $newArray = array_fill(0, $product->reviews[0]->rating,
                                                                 null);
                                                                 @endphp
-                                                                @foreach ($newArray as $item)
+                                                                @foreach ($newArray ?? [] as $item)
                                                                 <i class="fa fa-star active"></i>
                                                                 @endforeach
     
@@ -147,7 +147,7 @@
                                                         @php
                                                     $stock = 0;
 
-                                                    foreach ($product->productStock as $stocks) {
+                                                    foreach ($product->productStock ?? [] as $stocks) {
                                                     $stock += $stocks->quantity ?? 0;
                                                     }
                                                     @endphp
@@ -170,7 +170,7 @@
                                                                         Select Branch
                                                                     </h5>
                                                                     <select name="branch_id" class="form-control">
-                                                                        @foreach ($branches as $branch)
+                                                                        @foreach ($branches ?? [] as $branch)
                                                                         <option value="{{$branch->id}}">{{$branch->name}}
                                                                         </option>
                                                                         @endforeach
@@ -183,7 +183,7 @@
                                                                 true) : $product->fields;
     
                                                                 @endphp
-                                                                @foreach ($productsFields as $field)
+                                                                @foreach ($productsFields ?? [] as $field)
                                                                 @php
                                                                 $fieldFields = json_decode($field);
                                                                 $fieldFields = json_decode($fieldFields->fields);
