@@ -32,6 +32,8 @@
                     <option>Select Type</option>
                     <option value="text">Select Type Text</option>
                     <option value="attachment">Select Type Attachment</option>
+                    <option value="select">Select Type Options (seperate them with commas for this field value for
+                        example <b>verse</b>,<b>verse 2</b>)</option>
                 </select>
 
             </div>

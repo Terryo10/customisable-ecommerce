@@ -193,6 +193,10 @@
                                                             @endphp
                                                             @foreach ($newFieldsSet as $fild)
 
+                                                            @php
+                                                            $selectOPtions = explode(',', $fild->value);
+                                                            @endphp
+
                                                             <div class="short-desc section">
                                                                 <h5 class="pd-sub-title">
                                                                     {{$fild->name}}
@@ -201,6 +205,14 @@
                                                                     @if (($fild->type ?? 'text') === "attachment")
                                                                     <input type="file" name="attachment"
                                                                         class="addedFields form-control" required />
+                                                                    @elseif (($fild->type ?? 'text') === "select")
+                                                                    <select name="select"
+                                                                        class="addedFields form-control" required>
+                                                                        <option>Select Field</option>
+                                                                        @foreach ($selectOPtions ?? [] as $opt)
+                                                                        <option value="{{$opt}}">{{$opt}}</option>
+                                                                        @endforeach
+                                                                    </select>
                                                                     @else
                                                                     <input type="text" name="{{$fild->value}}"
                                                                         class="addedFields form-control" required />
