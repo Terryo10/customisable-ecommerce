@@ -76,7 +76,7 @@ class LoginController extends Controller
     }
 
 
-    public function login(Request $request)
+    public function login(Request $request, $product_id = 1)
     {
         $request->validate([
             'email' => 'required|min:6',
@@ -88,6 +88,8 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             session()->flash('message', "Login was successfull");
+
+            return redirect()->to("/product/$product_id");
 
             return redirect()->back();
         } else {

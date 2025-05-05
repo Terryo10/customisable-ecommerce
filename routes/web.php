@@ -52,6 +52,7 @@ Route::get('/orders', Orders::class)->middleware('auth');
 Route::post('/place-order', [ProductsController::class, 'placeOrder'])->middleware('auth')->name('placeOrder');
 Route::get('/login-google', [GoogleAuthController::class, 'loginUsingGoogle']);
 Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login/{product_id}', [LoginController::class, 'login'])->name('login');
 Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/subscribe', [RegisterController::class, 'subscribe']);
 Route::post('/review/{product_id}', [ProductReviewController::class, 'store'])->middleware('auth');

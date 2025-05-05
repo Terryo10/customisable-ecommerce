@@ -86,10 +86,15 @@ class ProductsController extends AdminController
                 $downloadLink = $order->status === 'paid' ? admin_url("download-receipt/"
                     . $order->id) : admin_url("download-invoice/"
                     . $order->id);
+                $printLink = admin_url("print/"
+                    . $order->id);
                 $adminBtnClasses = $order->status === "paid" ? "btn btn-success text-white" : "btn btn-warning text-white";
                 $adminBtnName = $order->status === "paid" ? "Download Receipt" : "Download Invoice";
                 $button = "<button type='submit' class='$adminBtnClasses'> $adminBtnName </button>";
-                return "<form method='GET' action='$downloadLink'>{$button}</form>";
+                $printButton = "<button type='submit' class='btn btn-alt'> Print Order </button>";
+                return "
+                
+                <div><a target='_blank' href='$downloadLink'>{$button}</a> <a target='_blank' href='$printLink'>{$printButton}</a></div>";
             });
 
             $fields->created_at();

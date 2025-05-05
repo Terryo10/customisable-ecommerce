@@ -20,6 +20,7 @@ Route::group([
     $router->post('/change-order-status', [CustomiseController::class, 'changeOrderStatus'])->name('change-order-status');
     $router->get('/download-invoice/{order_id}', [ProductReviewController::class, 'downInvoiceAsPDF']);
     $router->get('/download-receipt/{order_id}', [ProductReviewController::class, 'downReceiptAsPDF']);
+    $router->get('/print/{order_id}', [ProductReviewController::class, 'printOrderAsPDF']);
     $router->get('/check-payment/{id}', [PayNowController::class, 'checkPaymentAdmin']);
     $router->resource('products', ProductsController::class);
     $router->resource('orders', OrdersController::class);

@@ -76,6 +76,18 @@ class ProductReviewController extends Controller
         $pdf = \PDF::loadView('receipt', $data);
         return $pdf->download('SlimRiffReceipt.pdf');
     }
+    public function printOrderAsPDF(Request $request, $order_id)
+    {
+
+        $order = Orders::where('id', $order_id)->first();
+
+        $data = [
+            'order' => $order ?? "N/A",
+        ];
+
+        $pdf = \PDF::loadView('print_order', $data);
+        return $pdf->download('SlimRiffReceipt.pdf');
+    }
 
     /**
      * Display the specified resource.

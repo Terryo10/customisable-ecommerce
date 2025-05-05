@@ -249,11 +249,13 @@
                                                                     class="btn btn-success addedFields form-control"
                                                                     value="Add Shipping Address" />
                                                                     @else
-                                                                    <input data-bs-toggle="modal" data-bs-target="{{"
+                                                                    <a href={{"/login/".$product->id}}>
+                                                                    <input data-bs-toggle="modals" data-bs-target="{{"
                                                                         #quickViewModalShippingDetails".$product->id}}"
                                                                     type="button" name="address"
                                                                     class="btn btn-success addedFields form-control"
                                                                     value="Please Login To Add Shipping Address" />
+                                                                    </a>
                                                                     @endif
 
                                                                     @endif

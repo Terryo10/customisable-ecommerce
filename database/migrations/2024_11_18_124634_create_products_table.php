@@ -19,7 +19,7 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->longText('short_description')->nullable();
             $table->longText('location')->nullable();
-            $table->integer('quantity')->default(0);
+            $table->integer('quantity')->nullable();
             $table->integer('price')->default(0);
             $table->timestamps();
         });
